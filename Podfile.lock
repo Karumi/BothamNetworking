@@ -2,15 +2,18 @@ PODS:
   - BrightFutures (3.1.2):
     - Result (= 0.6.0-beta.6)
   - Nimble (3.0.0)
+  - Nocilla (0.10.0)
   - Result (0.6.0-beta.6)
 
 DEPENDENCIES:
   - BrightFutures
   - Nimble
+  - Nocilla
 
 SPEC CHECKSUMS:
   BrightFutures: 6b4b299decee4c3775a9e7188d1ecec55262e09c
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  Nocilla: ae0a2b05f3087b473624ac2b25903695df51246a
   Result: dc390d0b58f9ec43fcd536f1ebdd130803cc6cbc
 
 COCOAPODS: 0.39.0

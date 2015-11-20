@@ -6,4 +6,5 @@ pod "BrightFutures"
 
 target 'BothamNetworkingTests' do
     pod "Nimble"
+    pod "Nocilla"
 end

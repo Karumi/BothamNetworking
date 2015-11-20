@@ -10,7 +10,6 @@
 		D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18346BC8A4CC5BD56E0F20B /* Pods.framework */; };
 		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
 		EB8F442F1BFF442F00CC3AA5 /* BothamNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EBACCC571BFF463700F1CD7F /* BothamNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC561BFF463700F1CD7F /* BothamNetworkingTests.swift */; };
 		EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */; };
 		EBACCC601BFF465A00F1CD7F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = EBACCC5F1BFF465A00F1CD7F /* Podfile */; };
 		EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */; };
@@ -18,6 +17,10 @@
 		EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */; };
 		EBACCC691BFF737100F1CD7F /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC681BFF737100F1CD7F /* HTTPResponse.swift */; };
 		EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */; };
+		EBF359351BFF897500AD47C4 /* NSHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359341BFF897500AD47C4 /* NSHTTPClient.swift */; };
+		EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */; };
+		EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */; };
+		EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,14 +43,17 @@
 		EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BothamNetworking.h; sourceTree = "<group>"; };
 		EB8F44301BFF442F00CC3AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BothamNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EBACCC561BFF463700F1CD7F /* BothamNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothamNetworkingTests.swift; sourceTree = "<group>"; };
 		EBACCC581BFF463700F1CD7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBACCC5F1BFF465A00F1CD7F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		EBACCC5F1BFF465A00F1CD7F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		EBACCC681BFF737100F1CD7F /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
 		EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClient.swift; sourceTree = "<group>"; };
+		EBF359341BFF897500AD47C4 /* NSHTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSHTTPClient.swift; sourceTree = "<group>"; };
+		EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSHTTPClientTests.swift; sourceTree = "<group>"; };
+		EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NocillaTestCase.swift; sourceTree = "<group>"; };
+		EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureMatchers.swift; sourceTree = "<group>"; };
 		FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -127,8 +133,10 @@
 		EBACCC551BFF463700F1CD7F /* BothamNetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
-				EBACCC561BFF463700F1CD7F /* BothamNetworkingTests.swift */,
+				EBF3593B1BFF8F6300AD47C4 /* Matchers */,
+				EBF359361BFF8E6500AD47C4 /* Http */,
 				EBACCC581BFF463700F1CD7F /* Info.plist */,
+				EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */,
 			);
 			path = BothamNetworkingTests;
 			sourceTree = "<group>";
@@ -140,8 +148,25 @@
 				EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */,
 				EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */,
 				EBACCC681BFF737100F1CD7F /* HTTPResponse.swift */,
+				EBF359341BFF897500AD47C4 /* NSHTTPClient.swift */,
 			);
 			name = Http;
+			sourceTree = "<group>";
+		};
+		EBF359361BFF8E6500AD47C4 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */,
+			);
+			name = Http;
+			sourceTree = "<group>";
+		};
+		EBF3593B1BFF8F6300AD47C4 /* Matchers */ = {
+			isa = PBXGroup;
+			children = (
+				EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */,
+			);
+			name = Matchers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,6 +364,7 @@
 				EBACCC691BFF737100F1CD7F /* HTTPResponse.swift in Sources */,
 				EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */,
 				EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */,
+				EBF359351BFF897500AD47C4 /* NSHTTPClient.swift in Sources */,
 				EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */,
 				EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */,
 			);
@@ -348,7 +374,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBACCC571BFF463700F1CD7F /* BothamNetworkingTests.swift in Sources */,
+				EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */,
+				EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */,
+				EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,10 +521,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 518F57893A1AECCB8BE10DE0 /* Pods-BothamNetworkingTests.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BothamNetworkingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -504,6 +534,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BothamNetworkingTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworkingTests;
