@@ -7,13 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
 		EB8F442F1BFF442F00CC3AA5 /* BothamNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EBACCC571BFF463700F1CD7F /* BothamNetworkingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC561BFF463700F1CD7F /* BothamNetworkingTests.swift */; };
+		EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */; };
+		EBACCC601BFF465A00F1CD7F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = EBACCC5F1BFF465A00F1CD7F /* Podfile */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EBACCC5A1BFF463700F1CD7F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB8F44221BFF442F00CC3AA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB8F442A1BFF442F00CC3AA5;
+			remoteInfo = BothamNetworking;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		518F57893A1AECCB8BE10DE0 /* Pods-BothamNetworkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BothamNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BothamNetworking.h; sourceTree = "<group>"; };
 		EB8F44301BFF442F00CC3AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BothamNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBACCC561BFF463700F1CD7F /* BothamNetworkingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BothamNetworkingTests.swift; sourceTree = "<group>"; };
+		EBACCC581BFF463700F1CD7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBACCC5F1BFF465A00F1CD7F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,14 +45,44 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EBACCC511BFF463700F1CD7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */,
+				DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42E9C22008F67B81279A0BBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DCA94239E2FFDCED361BB4F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				518F57893A1AECCB8BE10DE0 /* Pods-BothamNetworkingTests.debug.xcconfig */,
+				E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB8F44211BFF442F00CC3AA5 = {
 			isa = PBXGroup;
 			children = (
+				EBACCC5F1BFF465A00F1CD7F /* Podfile */,
 				EB8F442D1BFF442F00CC3AA5 /* BothamNetworking */,
+				EBACCC551BFF463700F1CD7F /* BothamNetworkingTests */,
 				EB8F442C1BFF442F00CC3AA5 /* Products */,
+				DCA94239E2FFDCED361BB4F7 /* Pods */,
+				42E9C22008F67B81279A0BBB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -39,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */,
+				EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,6 +102,15 @@
 				EB8F44301BFF442F00CC3AA5 /* Info.plist */,
 			);
 			path = BothamNetworking;
+			sourceTree = "<group>";
+		};
+		EBACCC551BFF463700F1CD7F /* BothamNetworkingTests */ = {
+			isa = PBXGroup;
+			children = (
+				EBACCC561BFF463700F1CD7F /* BothamNetworkingTests.swift */,
+				EBACCC581BFF463700F1CD7F /* Info.plist */,
+			);
+			path = BothamNetworkingTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -84,16 +145,41 @@
 			productReference = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		EBACCC531BFF463700F1CD7F /* BothamNetworkingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBACCC5E1BFF463700F1CD7F /* Build configuration list for PBXNativeTarget "BothamNetworkingTests" */;
+			buildPhases = (
+				0237BBC3DB56910AD1A708D5 /* Check Pods Manifest.lock */,
+				EBACCC501BFF463700F1CD7F /* Sources */,
+				EBACCC511BFF463700F1CD7F /* Frameworks */,
+				EBACCC521BFF463700F1CD7F /* Resources */,
+				8CAE95E3E4D198D02C074BAC /* Embed Pods Frameworks */,
+				32E61A7FD5F391578A6F3DBD /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EBACCC5B1BFF463700F1CD7F /* PBXTargetDependency */,
+			);
+			name = BothamNetworkingTests;
+			productName = BothamNetworkingTests;
+			productReference = EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		EB8F44221BFF442F00CC3AA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "GoKarumi S.L.";
 				TargetAttributes = {
 					EB8F442A1BFF442F00CC3AA5 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					EBACCC531BFF463700F1CD7F = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
 				};
@@ -111,6 +197,7 @@
 			projectRoot = "";
 			targets = (
 				EB8F442A1BFF442F00CC3AA5 /* BothamNetworking */,
+				EBACCC531BFF463700F1CD7F /* BothamNetworkingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -120,10 +207,66 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBACCC601BFF465A00F1CD7F /* Podfile in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBACCC521BFF463700F1CD7F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0237BBC3DB56910AD1A708D5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		32E61A7FD5F391578A6F3DBD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CAE95E3E4D198D02C074BAC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB8F44261BFF442F00CC3AA5 /* Sources */ = {
@@ -133,7 +276,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EBACCC501BFF463700F1CD7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBACCC571BFF463700F1CD7F /* BothamNetworkingTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EBACCC5B1BFF463700F1CD7F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB8F442A1BFF442F00CC3AA5 /* BothamNetworking */;
+			targetProxy = EBACCC5A1BFF463700F1CD7F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		EB8F44311BFF442F00CC3AA5 /* Debug */ = {
@@ -257,6 +416,28 @@
 			};
 			name = Release;
 		};
+		EBACCC5C1BFF463700F1CD7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 518F57893A1AECCB8BE10DE0 /* Pods-BothamNetworkingTests.debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = BothamNetworkingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworkingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EBACCC5D1BFF463700F1CD7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = BothamNetworkingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworkingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -276,6 +457,16 @@
 				EB8F44351BFF442F00CC3AA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EBACCC5E1BFF463700F1CD7F /* Build configuration list for PBXNativeTarget "BothamNetworkingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBACCC5C1BFF463700F1CD7F /* Debug */,
+				EBACCC5D1BFF463700F1CD7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

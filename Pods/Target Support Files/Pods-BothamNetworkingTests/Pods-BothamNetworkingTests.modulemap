@@ -1,0 +1,6 @@
+framework module Pods_BothamNetworkingTests {
+  umbrella header "Pods-BothamNetworkingTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
