@@ -17,6 +17,7 @@
 		EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */; };
 		EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */; };
 		EBACCC691BFF737100F1CD7F /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC681BFF737100F1CD7F /* HTTPResponse.swift */; };
+		EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		EBACCC681BFF737100F1CD7F /* HTTPResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponse.swift; sourceTree = "<group>"; };
+		EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClient.swift; sourceTree = "<group>"; };
 		FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 		EB8F442D1BFF442F00CC3AA5 /* BothamNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */,
 				EBACCC611BFF729800F1CD7F /* Http */,
 				EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */,
 				EB8F44301BFF442F00CC3AA5 /* Info.plist */,
@@ -336,6 +339,7 @@
 				EBACCC691BFF737100F1CD7F /* HTTPResponse.swift in Sources */,
 				EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */,
 				EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */,
+				EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */,
 				EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
