@@ -62,6 +62,46 @@ class NSHTTPClientTests: NocillaTestCase {
         expect(result).toEventually(beSuccess())
     }
 
+    func testSendsOptionsRequestToAnyPath() {
+        stubRequest("OPTIONS", anyUrl)
+        let httpClient = NSHTTPClient()
+        let request = givenOneHttpRequest(.OPTIONS, url: anyUrl)
+
+        let result = httpClient.send(request)
+
+        expect(result).toEventually(beSuccess())
+    }
+
+    func testSendsHeadRequestToAnyPath() {
+        stubRequest("HEAD", anyUrl)
+        let httpClient = NSHTTPClient()
+        let request = givenOneHttpRequest(.HEAD, url: anyUrl)
+
+        let result = httpClient.send(request)
+
+        expect(result).toEventually(beSuccess())
+    }
+
+    func testSendsTraceRequestToAnyPath() {
+        stubRequest("TRACE", anyUrl)
+        let httpClient = NSHTTPClient()
+        let request = givenOneHttpRequest(.TRACE, url: anyUrl)
+
+        let result = httpClient.send(request)
+
+        expect(result).toEventually(beSuccess())
+    }
+
+    func testSendsConnectRequestToAnyPath() {
+        stubRequest("CONNECT", anyUrl)
+        let httpClient = NSHTTPClient()
+        let request = givenOneHttpRequest(.CONNECT, url: anyUrl)
+
+        let result = httpClient.send(request)
+
+        expect(result).toEventually(beSuccess())
+    }
+
     func testReceivesHttpStatusCodeInTheHttpResponse() {
         stubRequest("GET", anyUrl).andReturn(anyStatusCode)
         let httpClient = NSHTTPClient()
