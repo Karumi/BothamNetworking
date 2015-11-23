@@ -119,13 +119,13 @@ class NSHTTPClientTests: NocillaTestCase {
 
         let result = httpClient.send(request)
 
-        expect(result).toEventually(failWithError(BothamError.UnkownError(error: anyNSError)))
+        expect(result).toEventually(failWithError(anyNSError))
     }
 
     func testSendsParamsConfiguredInTheHttpRequest() {
-        stubRequest("GET", "http://www.any.com/?key=value")
+        stubRequest("GET", anyUrl + "?key=value")
         let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.GET, url: "http://www.any.com/", params: ["key" : "value"])
+        let request = givenOneHttpRequest(.GET, url: anyUrl, params: ["key" : "value"])
 
         let result = httpClient.send(request)
 

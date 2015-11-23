@@ -13,6 +13,6 @@ import BrightFutures
 
 protocol HTTPClient {
 
-    func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, BothamError>
+    func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError>
     
 }

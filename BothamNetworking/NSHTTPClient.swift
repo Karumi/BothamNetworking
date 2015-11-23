@@ -11,8 +11,8 @@ import BrightFutures
 
 class NSHTTPClient: HTTPClient {
 
-    func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, BothamError> {
-        let promise = Promise<HTTPResponse, BothamError>()
+    func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError> {
+        let promise = Promise<HTTPResponse, NSError>()
         let components = NSURLComponents(string: httpRequest.url)
         components?.queryItems = httpRequest.parameters?.map {
             NSURLQueryItem(name: $0.0, value: $0.1)
@@ -22,7 +22,7 @@ class NSHTTPClient: HTTPClient {
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
-                promise.failure(BothamError.UnkownError(error: error))
+                promise.failure(error)
             } else if let response = response as? NSHTTPURLResponse, let data = data {
                 let statusCode = response.statusCode
                 let response = HTTPResponse(statusCode: statusCode, body: data)

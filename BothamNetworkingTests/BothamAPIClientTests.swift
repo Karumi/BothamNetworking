@@ -35,6 +35,16 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(result).toEventually(beSuccess())
     }
 
+
+    func testReturns30XResponsesAsError() {
+        stubRequest("GET", anyPath).andReturn(300)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
+
+        expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 300, body: "")))
+    }
+
     private func givenABothamAPIClient() -> BothamAPIClient {
         return BothamAPIClient(baseEndpoint: "www.anyhost.com", httpClient: NSHTTPClient())
     }

@@ -27,6 +27,6 @@ public class BothamAPIClient {
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod)
-            return httpClient.send(request)
+            return httpClient.send(request).mapError { BothamError.UnkownError(error: $0) }
     }
 }
