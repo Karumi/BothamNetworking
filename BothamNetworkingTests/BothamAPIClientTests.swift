@@ -18,7 +18,7 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyHTTPMethod = HTTPMethod.GET
 
     func shouldSendARequestToTheURLPassedAsArgument() {
-        stubRequest("GET", anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
@@ -27,7 +27,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func shouldSendARequestToTheURLPassedUsingParams() {
-        stubRequest("GET", anyPath + "?k=v")
+        stubRequest(anyHTTPMethod.rawValue, anyPath + "?k=v")
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath, params: ["k": "v"])
