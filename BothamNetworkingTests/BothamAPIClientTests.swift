@@ -19,7 +19,7 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyHTTPMethod = HTTPMethod.GET
 
     func testSendsARequestToTheURLPassedAsArgument() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?")//TODO This ? Should not be needed
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
@@ -38,7 +38,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
 
     func testReturns40XResponsesAsError() {
-        stubRequest("GET", anyHost + anyPath + "?").andReturn(400)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(400)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
@@ -48,7 +48,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
 
     func testReturns50XResponsesAsError() {
-        stubRequest("GET", anyHost + anyPath + "?").andReturn(500)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(500)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
