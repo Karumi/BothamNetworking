@@ -14,5 +14,5 @@ import BrightFutures
 protocol HTTPClient {
 
     func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError>
-    
+
 }

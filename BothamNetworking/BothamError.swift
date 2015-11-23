@@ -16,9 +16,9 @@ public enum BothamError: ErrorType, Equatable {
 
 }
 
-public func ==(lhs: BothamError, rhs: BothamError) -> Bool {
+public func == (lhs: BothamError, rhs: BothamError) -> Bool {
     switch (lhs, rhs) {
-        case (let .HTTPResponseError(statusCode1,body1), let .HTTPResponseError(statusCode2,body2)):
+        case (let .HTTPResponseError(statusCode1, body1), let .HTTPResponseError(statusCode2, body2)):
             return statusCode1 == statusCode2 && body1 == body2
         case (let .UnkownError(error1), let .UnkownError(error2)):
             return error1 == error2

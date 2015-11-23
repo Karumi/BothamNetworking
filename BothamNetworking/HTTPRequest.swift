@@ -14,5 +14,5 @@ struct HTTPRequest {
     let parameters: [String : String]?
     let headers: [String : String]?
     let httpMethod: HTTPMethod
-    
+
 }

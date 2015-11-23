@@ -12,5 +12,5 @@ struct HTTPResponse {
 
     let statusCode: Int
     let body: NSData
-    
+
 }
