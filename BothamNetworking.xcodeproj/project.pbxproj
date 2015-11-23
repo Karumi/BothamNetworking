@@ -21,6 +21,7 @@
 		EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */; };
 		EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */; };
 		EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */; };
+		EBF3593F1C03081200AD47C4 /* BothamAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSHTTPClientTests.swift; sourceTree = "<group>"; };
 		EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NocillaTestCase.swift; sourceTree = "<group>"; };
 		EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureMatchers.swift; sourceTree = "<group>"; };
+		EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClientTests.swift; sourceTree = "<group>"; };
 		FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,6 +135,7 @@
 		EBACCC551BFF463700F1CD7F /* BothamNetworkingTests */ = {
 			isa = PBXGroup;
 			children = (
+				EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */,
 				EBF3593B1BFF8F6300AD47C4 /* Matchers */,
 				EBF359361BFF8E6500AD47C4 /* Http */,
 				EBACCC581BFF463700F1CD7F /* Info.plist */,
@@ -374,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBF3593F1C03081200AD47C4 /* BothamAPIClientTests.swift in Sources */,
 				EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */,
 				EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */,
 				EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */,
