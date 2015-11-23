@@ -21,7 +21,7 @@ public class BothamAPIClient {
 
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String]? = [String:String](),
-        headers: [String:String]? = [String:String]()) -> Future<HTTPResponse, NSError> {
+        headers: [String:String]? = [String:String]()) -> Future<HTTPResponse, BothamError> {
             let request = HTTPRequest(
                 url: baseEndpoint + path,
                 parameters: params,

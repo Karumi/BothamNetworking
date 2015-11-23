@@ -14,15 +14,15 @@ import BrightFutures
 func beSuccess<T>() -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be success"
-        let future = try actualExpression.evaluate() as! Future<HTTPResponse, NSError>
+        let future = try actualExpression.evaluate() as! Future<HTTPResponse, BothamError>
         return future.isSuccess
     }
 }
 
-func failWithError<T>(expectedError: NSError) -> MatcherFunc<T?> {
+func failWithError<T>(expectedError: BothamError) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"
-        let future = try actualExpression.evaluate() as! Future<HTTPResponse, NSError>
+        let future = try actualExpression.evaluate() as! Future<HTTPResponse, BothamError>
         if let error = future.error {
             return expectedError == error
         } else {

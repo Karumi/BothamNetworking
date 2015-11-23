@@ -20,7 +20,7 @@ class NSHTTPClientTests: NocillaTestCase {
     private let anyUrl = "http://www.any.com"
     private let anyStatusCode = 201
     private let anyBody = "{HttpResponseBody = true}"
-    private let anyError = NSError(domain: "DomainError", code: 123, userInfo: nil)
+    private let anyNSError = NSError(domain: "DomainError", code: 123, userInfo: nil)
 
     func testSendsGetRequestToAnyPath() {
         stubRequest("GET", anyUrl)
@@ -113,13 +113,13 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testPropagatesErrorsInTheFuture() {
-        stubRequest("GET", anyUrl).andFailWithError(anyError)
+        stubRequest("GET", anyUrl).andFailWithError(anyNSError)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
         let result = httpClient.send(request)
 
-        expect(result).toEventually(failWithError(anyError))
+        expect(result).toEventually(failWithError(BothamError.UnkownError(error: anyNSError)))
     }
 
     func testSendsParamsConfiguredInTheHttpRequest() {
