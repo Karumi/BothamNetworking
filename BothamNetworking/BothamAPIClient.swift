@@ -30,10 +30,12 @@ public class BothamAPIClient {
             return httpClient.send(request)
                 .mapError { return BothamError.UnkownError(error: $0) }
                 .flatMap{ (httpResponse) -> Future<HTTPResponse, BothamError> in
-                    if (httpResponse.statusCode == 400){
-                        return Future(error: BothamError.HTTPResponseError(statusCode: 400, body: ""))
-                    }else {
+                    if (200..<300).contains(httpResponse.statusCode){
                         return Future(value: httpResponse)
+                    }else {
+                        let statusCode = httpResponse.statusCode
+                        let body = httpResponse.body
+                        return Future(error: BothamError.HTTPResponseError(statusCode: statusCode, body: body))
                     }
             }
     }

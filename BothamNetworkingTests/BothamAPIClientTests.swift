@@ -43,7 +43,17 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
 
-        expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 400, body: "")))
+        expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 400, body: NSData())))
+    }
+
+
+    func testReturns50XResponsesAsError() {
+        stubRequest("GET", anyHost + anyPath + "?").andReturn(500)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
+
+        expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 500, body: NSData())))
     }
 
     private func givenABothamAPIClient() -> BothamAPIClient {

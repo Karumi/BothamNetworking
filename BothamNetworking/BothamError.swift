@@ -10,7 +10,7 @@ import Foundation
 
 public enum BothamError: ErrorType, Equatable {
 
-    case HTTPResponseError(statusCode: Int, body: String)
+    case HTTPResponseError(statusCode: Int, body: NSData)
     case NetworkError
     case UnkownError(error: NSError)
 
