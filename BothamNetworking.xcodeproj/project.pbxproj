@@ -22,6 +22,7 @@
 		EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */; };
 		EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */; };
 		EBF3593F1C03081200AD47C4 /* BothamAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */; };
+		EBF359421C0310DE00AD47C4 /* BothamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359411C0310DE00AD47C4 /* BothamError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NocillaTestCase.swift; sourceTree = "<group>"; };
 		EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureMatchers.swift; sourceTree = "<group>"; };
 		EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClientTests.swift; sourceTree = "<group>"; };
+		EBF359411C0310DE00AD47C4 /* BothamError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamError.swift; sourceTree = "<group>"; };
 		FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,6 +128,7 @@
 			children = (
 				EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */,
 				EBACCC611BFF729800F1CD7F /* Http */,
+				EBF359401C0310C500AD47C4 /* Error */,
 				EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */,
 				EB8F44301BFF442F00CC3AA5 /* Info.plist */,
 			);
@@ -170,6 +173,14 @@
 				EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */,
 			);
 			name = Matchers;
+			sourceTree = "<group>";
+		};
+		EBF359401C0310C500AD47C4 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				EBF359411C0310DE00AD47C4 /* BothamError.swift */,
+			);
+			name = Error;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,6 +380,7 @@
 				EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */,
 				EBF359351BFF897500AD47C4 /* NSHTTPClient.swift in Sources */,
 				EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */,
+				EBF359421C0310DE00AD47C4 /* BothamError.swift in Sources */,
 				EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
