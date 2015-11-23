@@ -27,6 +27,17 @@ public class BothamAPIClient {
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod)
-            return httpClient.send(request).mapError { BothamError.UnkownError(error: $0) }
+            return httpClient.send(request)
+                .mapError {
+                    print("-------------> \($0)")
+                    return BothamError.UnkownError(error: $0)
+                }
+                .flatMap{ (httpResponse) -> Future<HTTPResponse, BothamError> in
+                    if (httpResponse.statusCode == 400){
+                        return Future(error: BothamError.HTTPResponseError(statusCode: 400, body: ""))
+                    }else {
+                        return Future(value: httpResponse)
+                    }
+            }
     }
 }

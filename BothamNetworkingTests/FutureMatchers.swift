@@ -19,6 +19,14 @@ func beSuccess<T>() -> MatcherFunc<T?> {
     }
 }
 
+func beSuccess2<T>() -> MatcherFunc<T?> {
+    return MatcherFunc { actualExpression, failureMessage in
+        failureMessage.postfixMessage = "be success"
+        let future = try actualExpression.evaluate() as! Future<HTTPResponse, BothamError>
+        return future.isSuccess
+    }
+}
+
 func failWithError<T>(expectedError: BothamError) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"

@@ -14,39 +14,40 @@ import Nocilla
 
 class BothamAPIClientTests: NocillaTestCase {
 
+    private let anyHost = "http://www.anyhost.com/"
     private let anyPath = "path"
     private let anyHTTPMethod = HTTPMethod.GET
 
-    func shouldSendARequestToTheURLPassedAsArgument() {
-        stubRequest(anyHTTPMethod.rawValue, anyPath)
+    func testSendsARequestToTheURLPassedAsArgument() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?")//TODO This ? Should not be needed
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
 
-        expect(result).toEventually(beSuccess())
+        expect(result).toEventually(beSuccess2())
     }
 
-    func shouldSendARequestToTheURLPassedUsingParams() {
-        stubRequest(anyHTTPMethod.rawValue, anyPath + "?k=v")
+    func testSendsARequestToTheURLPassedUsingParams() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?k=v")
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath, params: ["k": "v"])
 
-        expect(result).toEventually(beSuccess())
+        expect(result).toEventually(beSuccess2())
     }
 
 
-    func testReturns30XResponsesAsError() {
-        stubRequest("GET", anyPath).andReturn(300)
+    func testReturns40XResponsesAsError() {
+        stubRequest("GET", anyHost + anyPath + "?").andReturn(400)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
 
-        expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 300, body: "")))
+        expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 400, body: "")))
     }
 
     private func givenABothamAPIClient() -> BothamAPIClient {
-        return BothamAPIClient(baseEndpoint: "www.anyhost.com", httpClient: NSHTTPClient())
+        return BothamAPIClient(baseEndpoint: anyHost, httpClient: NSHTTPClient())
     }
 
 }
