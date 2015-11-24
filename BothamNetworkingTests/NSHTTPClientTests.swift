@@ -125,6 +125,6 @@ class NSHTTPClientTests: NocillaTestCase {
                     print("Error encoding \(body) as JSON")
                 }
             }
-            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod,body: jsonBody)
+            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: jsonBody)
     }
 }
