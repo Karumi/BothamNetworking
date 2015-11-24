@@ -14,6 +14,6 @@ public struct HTTPRequest {
     public let parameters: [String:String]?
     public let headers: [String:String]?
     public let httpMethod: HTTPMethod
-    public let body: [String:AnyObject]?
+    public let body: NSData?
 
 }

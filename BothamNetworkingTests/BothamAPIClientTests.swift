@@ -81,7 +81,6 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(result).toEventually(beSuccess2())
     }
 
-
     func testReturns40XResponsesAsError() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(400)
         let bothamAPIClient = givenABothamAPIClient()
@@ -90,7 +89,6 @@ class BothamAPIClientTests: NocillaTestCase {
 
         expect(result).toEventually(failWithError(BothamError.HTTPResponseError(statusCode: 400, body: NSData())))
     }
-
 
     func testReturns50XResponsesAsError() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(500)

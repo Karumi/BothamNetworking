@@ -102,10 +102,29 @@ class NSHTTPClientTests: NocillaTestCase {
         expect(result).toEventually(beSuccess())
     }
 
+    func testSendsBodyConfiguredInTheHttpRequest() {
+        stubRequest("POST", anyUrl)
+            .withBody("{\"key\":\"value\"}");
+        let httpClient = NSHTTPClient()
+        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value"])
+
+        let result = httpClient.send(request)
+
+        expect(result).toEventually(beSuccess())
+    }
+
     private func givenOneHttpRequest(httpMethod: HTTPMethod,
         url: String, params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> HTTPRequest {
-            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod,body: body)
+            var jsonBody: NSData? = nil
+            if let body = body {
+                do {
+                    jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options:  NSJSONWritingOptions())
+                } catch {
+                    print("Error encoding \(body) as JSON")
+                }
+            }
+            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod,body: jsonBody)
     }
 }

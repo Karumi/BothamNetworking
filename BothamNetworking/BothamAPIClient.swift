@@ -48,7 +48,7 @@ public class BothamAPIClient {
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod,
-                body: body)
+                body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
             return httpClient.send(request)
                 .mapError { return BothamError.UnkownError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamError> in
