@@ -19,14 +19,36 @@ public class BothamAPIClient {
         self.httpClient = httpClient
     }
 
+    public func GET(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil) -> Future<HTTPResponse, BothamError> {
+        return sendRequest(.GET, path: path, params: parameters, headers: headers)
+    }
+
+    public func POST(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil, body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamError> {
+        return sendRequest(.POST, path: path, params: parameters, headers: headers, body: body)
+    }
+
+    public func PUT(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil, body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamError> {
+        return sendRequest(.PUT, path: path, params: parameters, headers: headers, body: body)
+    }
+
+    public func DELETE(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil, body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamError> {
+        return sendRequest(.DELETE, path: path, params: parameters, headers: headers, body: body)
+    }
+
+    public func PATCH(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil, body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamError> {
+        return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body)
+    }
+
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String]? = nil,
-        headers: [String:String]? = nil) -> Future<HTTPResponse, BothamError> {
+        headers: [String:String]? = nil,
+        body: [String:AnyObject]? = nil) -> Future<HTTPResponse, BothamError> {
             let request = HTTPRequest(
                 url: baseEndpoint + path,
                 parameters: params,
                 headers: headers,
-                httpMethod: httpMethod)
+                httpMethod: httpMethod,
+                body: body)
             return httpClient.send(request)
                 .mapError { return BothamError.UnkownError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamError> in

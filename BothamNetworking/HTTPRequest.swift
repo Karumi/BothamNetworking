@@ -8,11 +8,12 @@
 
 import Foundation
 
-struct HTTPRequest {
+public struct HTTPRequest {
 
-    let url: String
-    let parameters: [String : String]?
-    let headers: [String : String]?
-    let httpMethod: HTTPMethod
+    public let url: String
+    public let parameters: [String:String]?
+    public let headers: [String:String]?
+    public let httpMethod: HTTPMethod
+    public let body: [String:AnyObject]?
 
 }

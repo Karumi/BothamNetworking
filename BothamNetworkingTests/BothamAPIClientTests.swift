@@ -18,6 +18,51 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyPath = "path"
     private let anyHTTPMethod = HTTPMethod.GET
 
+    func testSendsGetRequestToAnyPath() {
+        stubRequest("GET", anyHost + anyPath)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(result).toEventually(beSuccess2())
+    }
+
+    func testSendsPostRequestToAnyPath() {
+        stubRequest("POST", anyHost + anyPath)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.POST(anyPath)
+
+        expect(result).toEventually(beSuccess2())
+    }
+
+    func testSendsPutRequestToAnyPath() {
+        stubRequest("PUT", anyHost + anyPath)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.PUT(anyPath)
+
+        expect(result).toEventually(beSuccess2())
+    }
+
+    func XtestSendsDeleteRequestToAnyPath() {
+        stubRequest("DELETE", anyHost + anyPath)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.DELETE(anyPath)
+
+        expect(result).toEventually(beSuccess2())
+    }
+
+    func testSendsPatchRequestToAnyPath() {
+        stubRequest("PATCH", anyHost + anyPath)
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.PATCH(anyPath)
+
+        expect(result).toEventually(beSuccess2())
+    }
+
     func testSendsARequestToTheURLPassedAsArgument() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()

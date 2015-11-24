@@ -62,40 +62,10 @@ class NSHTTPClientTests: NocillaTestCase {
         expect(result).toEventually(beSuccess())
     }
 
-    func testSendsOptionsRequestToAnyPath() {
-        stubRequest("OPTIONS", anyUrl)
-        let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.OPTIONS, url: anyUrl)
-
-        let result = httpClient.send(request)
-
-        expect(result).toEventually(beSuccess())
-    }
-
     func testSendsHeadRequestToAnyPath() {
         stubRequest("HEAD", anyUrl)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.HEAD, url: anyUrl)
-
-        let result = httpClient.send(request)
-
-        expect(result).toEventually(beSuccess())
-    }
-
-    func testSendsTraceRequestToAnyPath() {
-        stubRequest("TRACE", anyUrl)
-        let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.TRACE, url: anyUrl)
-
-        let result = httpClient.send(request)
-
-        expect(result).toEventually(beSuccess())
-    }
-
-    func testSendsConnectRequestToAnyPath() {
-        stubRequest("CONNECT", anyUrl)
-        let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.CONNECT, url: anyUrl)
 
         let result = httpClient.send(request)
 
@@ -134,7 +104,8 @@ class NSHTTPClientTests: NocillaTestCase {
 
     private func givenOneHttpRequest(httpMethod: HTTPMethod,
         url: String, params: [String:String]? = nil,
-        headers: [String:String]? = nil) -> HTTPRequest {
-            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod)
+        headers: [String:String]? = nil,
+        body: [String:AnyObject]? = nil) -> HTTPRequest {
+            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod,body: body)
     }
 }

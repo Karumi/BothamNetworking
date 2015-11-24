@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct HTTPResponse {
+public struct HTTPResponse {
 
-    let statusCode: Int
-    let body: NSData
+    public let statusCode: Int
+    public let body: NSData
 
 }
