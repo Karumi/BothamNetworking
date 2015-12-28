@@ -110,10 +110,29 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
     }
 
+    func testInterceptRequestUsingInterceptorsAddedGlobally() {
+        stubRequest("GET", anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
+
+        bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
+    }
+
     private func givenABothamAPIClientWithInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
         let bothamAPIClient = givenABothamAPIClient()
         if let interceptor = interceptor {
             bothamAPIClient.addRequestInterceptor(interceptor)
+        }
+        return bothamAPIClient
+    }
+
+    private func givenABothamAPIClientWithGlobalInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
+        let bothamAPIClient = givenABothamAPIClient()
+        if let interceptor = interceptor {
+            BothamAPIClient.addGlobalRequestInterceptor(interceptor)
         }
         return bothamAPIClient
     }

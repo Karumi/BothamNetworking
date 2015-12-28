@@ -11,10 +11,13 @@ import BrightFutures
 
 public class BothamAPIClient {
 
+    static var globalRequestInterceptors = [BothamRequestInterceptor]()
+
     let baseEndpoint: String
     let httpClient: HTTPClient
 
     var requestInterceptors: [BothamRequestInterceptor]
+
 
     init(baseEndpoint: String, httpClient: HTTPClient) {
         self.baseEndpoint = baseEndpoint
@@ -59,6 +62,18 @@ public class BothamAPIClient {
         requestInterceptors.removeAll()
     }
 
+    public static func addGlobalRequestInterceptor(interceptor: BothamRequestInterceptor) {
+        addGlobalRequestInterceptors([interceptor])
+    }
+
+    public static func addGlobalRequestInterceptors(interceptors: [BothamRequestInterceptor]) {
+        BothamAPIClient.globalRequestInterceptors.appendContentsOf(interceptors)
+    }
+
+    public static func removeGlobalRequestInterceptors() {
+        BothamAPIClient.globalRequestInterceptors.removeAll()
+    }
+
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
@@ -86,6 +101,9 @@ public class BothamAPIClient {
     private func notifyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
         requestInterceptors.forEach { interceptor in
+            interceptedRequest = interceptor.intercept(interceptedRequest)
+        }
+        BothamAPIClient.globalRequestInterceptors.forEach { interceptor in
             interceptedRequest = interceptor.intercept(interceptedRequest)
         }
         return interceptedRequest
