@@ -19,7 +19,7 @@ func beSuccess<T>() -> MatcherFunc<T?> {
     }
 }
 
-func beSuccess2<T>() -> MatcherFunc<T?> {
+func beBothamRequestSuccess<T>() -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be success"
         let future = try actualExpression.evaluate() as! Future<HTTPResponse, BothamAPIClientError>
