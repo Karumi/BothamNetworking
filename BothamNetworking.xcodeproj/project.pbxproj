@@ -11,7 +11,6 @@
 		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
 		EB8F442F1BFF442F00CC3AA5 /* BothamNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */; };
-		EBACCC601BFF465A00F1CD7F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = EBACCC5F1BFF465A00F1CD7F /* Podfile */; };
 		EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */; };
 		EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */; };
 		EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */; };
@@ -46,7 +45,6 @@
 		EB8F44301BFF442F00CC3AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BothamNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBACCC581BFF463700F1CD7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBACCC5F1BFF465A00F1CD7F /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
 		EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -105,7 +103,6 @@
 		EB8F44211BFF442F00CC3AA5 = {
 			isa = PBXGroup;
 			children = (
-				EBACCC5F1BFF465A00F1CD7F /* Podfile */,
 				EB8F442D1BFF442F00CC3AA5 /* BothamNetworking */,
 				EBACCC551BFF463700F1CD7F /* BothamNetworkingTests */,
 				EB8F442C1BFF442F00CC3AA5 /* Products */,
@@ -279,7 +276,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBACCC601BFF465A00F1CD7F /* Podfile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
