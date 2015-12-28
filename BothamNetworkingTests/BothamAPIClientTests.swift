@@ -99,6 +99,25 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(result).toEventually(failWithError(.HTTPResponseError(statusCode: 500, body: NSData())))
     }
 
+    func testInterceptRequestsUsingInterceptorsAddedLocally() {
+        stubRequest("GET", anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithInterceptor(spyInterceptor)
+
+        bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
+    }
+
+    private func givenABothamAPIClientWithInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
+        let bothamAPIClient = givenABothamAPIClient()
+        if let interceptor = interceptor {
+            bothamAPIClient.addRequestInterceptor(interceptor)
+        }
+        return bothamAPIClient
+    }
+
     private func givenABothamAPIClient() -> BothamAPIClient {
         return BothamAPIClient(baseEndpoint: anyHost, httpClient: NSHTTPClient())
     }
