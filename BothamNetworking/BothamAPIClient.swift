@@ -14,9 +14,12 @@ public class BothamAPIClient {
     let baseEndpoint: String
     let httpClient: HTTPClient
 
+    var requestInterceptors: [BothamRequestInterceptor]
+
     init(baseEndpoint: String, httpClient: HTTPClient) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
+        self.requestInterceptors = [BothamRequestInterceptor]()
     }
 
     public func GET(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil)
@@ -44,16 +47,25 @@ public class BothamAPIClient {
         return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body)
     }
 
+    public func addRequestInterceptor(interceptor: BothamRequestInterceptor) {
+        addRequestInterceptors([interceptor])
+    }
+
+    public func addRequestInterceptors(interceptors: [BothamRequestInterceptor]) {
+        requestInterceptors.appendContentsOf(interceptors)
+    }
+
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
-            let request = HTTPRequest(
+            var request = HTTPRequest(
                 url: baseEndpoint + path,
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod,
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
+            request = notifyRequestInterceptors(request)
             return httpClient.send(request)
                 .mapError { return .HTTPClientError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
@@ -65,5 +77,13 @@ public class BothamAPIClient {
                         return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
                     }
             }
+    }
+
+    private func notifyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
+        var interceptedRequest = request
+        requestInterceptors.forEach { interceptor in
+            interceptedRequest = interceptor.intercept(interceptedRequest)
+        }
+        return interceptedRequest
     }
 }
