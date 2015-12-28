@@ -105,7 +105,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testInterceptRequestsUsingInterceptorsAddedLocally() {
-        stubRequest("GET", anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithInterceptor(spyInterceptor)
 
@@ -116,7 +116,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testInterceptRequestUsingInterceptorsAddedGlobally() {
-        stubRequest("GET", anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
 
@@ -127,7 +127,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testDoesNotInterceptRequestOnceLocalInterceptorWasRemoved() {
-        stubRequest("GET", anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithInterceptor(spyInterceptor)
 
@@ -138,7 +138,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testDoesNotInterceptRequestOnceGlobalInterceptorWasRemoved() {
-        stubRequest("GET", anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
 
