@@ -18,6 +18,11 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyPath = "path"
     private let anyHTTPMethod = HTTPMethod.GET
 
+    override func tearDown() {
+        BothamAPIClient.removeGlobalRequestInterceptors()
+        super.tearDown()
+    }
+
     func testSendsGetRequestToAnyPath() {
         stubRequest("GET", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
@@ -119,6 +124,28 @@ class BothamAPIClientTests: NocillaTestCase {
 
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
+    }
+
+    func testDoesNotInterceptRequestOnceLocalInterceptorWasRemoved() {
+        stubRequest("GET", anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithInterceptor(spyInterceptor)
+
+        bothamAPIClient.removeRequestInterceptors()
+        bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+    }
+
+    func testDoesNotInterceptRequestOnceGlobalInterceptorWasRemoved() {
+        stubRequest("GET", anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
+
+        BothamAPIClient.removeGlobalRequestInterceptors()
+        bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
     private func givenABothamAPIClientWithInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
