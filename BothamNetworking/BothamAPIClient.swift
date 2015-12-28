@@ -55,6 +55,10 @@ public class BothamAPIClient {
         requestInterceptors.appendContentsOf(interceptors)
     }
 
+    public func removeRequestInterceptors() {
+        requestInterceptors.removeAll()
+    }
+
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
