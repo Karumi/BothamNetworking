@@ -12,17 +12,19 @@ import BrightFutures
 public class BothamAPIClient {
 
     static var globalRequestInterceptors = [BothamRequestInterceptor]()
+    static var globalResponseInterceptors = [BothamResponseInterceptor]()
 
     let baseEndpoint: String
     let httpClient: HTTPClient
 
     var requestInterceptors: [BothamRequestInterceptor]
-
+    var responseInterceptors: [BothamResponseInterceptor]
 
     init(baseEndpoint: String, httpClient: HTTPClient) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
         self.requestInterceptors = [BothamRequestInterceptor]()
+        self.responseInterceptors = [BothamResponseInterceptor]()
     }
 
     public func GET(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil)
@@ -74,6 +76,29 @@ public class BothamAPIClient {
         BothamAPIClient.globalRequestInterceptors.removeAll()
     }
 
+    public func addResponseInterceptor(interceptor: BothamResponseInterceptor) {
+        addResponseInterceptors([interceptor])
+    }
+
+    public func addResponseInterceptors(interceptors: [BothamResponseInterceptor]) {
+        responseInterceptors.appendContentsOf(interceptors)
+    }
+
+    public func removeResponseInterceptors() {
+        responseInterceptors.removeAll()
+    }
+    public static func addGlobalResponseInterceptor(interceptor: BothamResponseInterceptor) {
+        addGlobalResponseInterceptors([interceptor])
+    }
+
+    public static func addGlobalResponseInterceptors(interceptors: [BothamResponseInterceptor]) {
+        BothamAPIClient.globalResponseInterceptors.appendContentsOf(interceptors)
+    }
+
+    public static func removeGlobalResponseInterceptors() {
+        BothamAPIClient.globalResponseInterceptors.removeAll()
+    }
+
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
@@ -95,7 +120,10 @@ public class BothamAPIClient {
                         let body = httpResponse.body
                         return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
                     }
-            }
+                }
+                .map { response in
+                    return self.notifyResponseInterceptors(response)
+                }
     }
 
     private func notifyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
@@ -107,5 +135,16 @@ public class BothamAPIClient {
             interceptedRequest = interceptor.intercept(interceptedRequest)
         }
         return interceptedRequest
+    }
+
+    private func notifyResponseInterceptors(response: HTTPResponse) -> HTTPResponse {
+        var interceptedResponse = response
+        responseInterceptors.forEach { interceptor in
+            interceptedResponse = interceptor.intercept(interceptedResponse)
+        }
+        BothamAPIClient.globalResponseInterceptors.forEach { interceptor in
+            interceptedResponse = interceptor.intercept(interceptedResponse)
+        }
+        return interceptedResponse
     }
 }

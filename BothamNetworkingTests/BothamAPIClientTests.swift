@@ -116,7 +116,7 @@ class BothamAPIClientTests: NocillaTestCase {
         waitForRequestFinished(result)
     }
 
-    func testInterceptRequestUsingInterceptorsAddedGlobally() {
+    func testInterceptRequestsUsingInterceptorsAddedGlobally() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
@@ -128,7 +128,7 @@ class BothamAPIClientTests: NocillaTestCase {
         waitForRequestFinished(result)
     }
 
-    func testDoesNotInterceptRequestOnceLocalInterceptorWasRemoved() {
+    func testDoesNotInterceptRequestsOnceLocalInterceptorWasRemoved() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithInterceptor(spyInterceptor)
@@ -140,7 +140,7 @@ class BothamAPIClientTests: NocillaTestCase {
         waitForRequestFinished(result)
     }
 
-    func testDoesNotInterceptRequestOnceGlobalInterceptorWasRemoved() {
+    func testDoesNotInterceptRequestsOnceGlobalInterceptorWasRemoved() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
@@ -152,19 +152,76 @@ class BothamAPIClientTests: NocillaTestCase {
         waitForRequestFinished(result)
     }
 
-    private func givenABothamAPIClientWithInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
+    func testInterceptResponsesUsingInterceptorsAddedLocally() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithInterceptor(responseInterceptor: spyInterceptor)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
+        waitForRequestFinished(result)
+    }
+
+    func testInterceptResponsesUsingInterceptorsAddedGlobally() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(responseInterceptor: spyInterceptor)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
+        waitForRequestFinished(result)
+    }
+
+    func testDoesNotInterceptResponsesOnceLocalInterceptorWasRemoved() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithInterceptor(responseInterceptor: spyInterceptor)
+
+        bothamAPIClient.removeRequestInterceptors()
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+        waitForRequestFinished(result)
+    }
+
+    func testDoesNotInterceptResponseOnceGlobalInterceptorWasRemoved() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(responseInterceptor: spyInterceptor)
+
+        BothamAPIClient.removeGlobalRequestInterceptors()
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+        waitForRequestFinished(result)
+    }
+    private func givenABothamAPIClientWithInterceptor(
+        requestInterceptor: BothamRequestInterceptor? = nil,
+        responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
         let bothamAPIClient = givenABothamAPIClient()
-        if let interceptor = interceptor {
+        if let interceptor = requestInterceptor {
             bothamAPIClient.addRequestInterceptor(interceptor)
+        }
+        if let interceptor = responseInterceptor {
+            bothamAPIClient.addResponseInterceptor(interceptor)
         }
         return bothamAPIClient
     }
 
-    private func givenABothamAPIClientWithGlobalInterceptor(interceptor: BothamRequestInterceptor? = nil)
+    private func givenABothamAPIClientWithGlobalInterceptor(
+        requestInterceptor: BothamRequestInterceptor? = nil,
+        responseInterceptor: BothamResponseInterceptor? = nil)
         -> BothamAPIClient {
         let bothamAPIClient = givenABothamAPIClient()
-        if let interceptor = interceptor {
+        if let interceptor = requestInterceptor {
             BothamAPIClient.addGlobalRequestInterceptor(interceptor)
+        }
+        if let interceptor = responseInterceptor {
+            BothamAPIClient.addGlobalResponseInterceptor(interceptor)
         }
         return bothamAPIClient
     }

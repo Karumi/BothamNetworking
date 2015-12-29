@@ -14,6 +14,8 @@
 		EB5BD51E1C328AEA00C02CDA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */; };
 		EB5BD5201C328BC500C02CDA /* HTTPRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51F1C328BC500C02CDA /* HTTPRequestTests.swift */; };
 		EB5BD5221C32A00A00C02CDA /* HTTPResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5211C32A00A00C02CDA /* HTTPResponseTests.swift */; };
+		EB5BD5241C32A10A00C02CDA /* BothamResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5231C32A10A00C02CDA /* BothamResponseInterceptor.swift */; };
+		EB5BD5261C32A32A00C02CDA /* SpyResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5251C32A32A00C02CDA /* SpyResponseInterceptor.swift */; };
 		EB8F442F1BFF442F00CC3AA5 /* BothamNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */; };
 		EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */; };
@@ -50,6 +52,8 @@
 		EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		EB5BD51F1C328BC500C02CDA /* HTTPRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestTests.swift; sourceTree = "<group>"; };
 		EB5BD5211C32A00A00C02CDA /* HTTPResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseTests.swift; sourceTree = "<group>"; };
+		EB5BD5231C32A10A00C02CDA /* BothamResponseInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamResponseInterceptor.swift; sourceTree = "<group>"; };
+		EB5BD5251C32A32A00C02CDA /* SpyResponseInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpyResponseInterceptor.swift; sourceTree = "<group>"; };
 		EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BothamNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BothamNetworking.h; sourceTree = "<group>"; };
 		EB8F44301BFF442F00CC3AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				EB5BD5171C31A00800C02CDA /* BothamRequestInterceptor.swift */,
+				EB5BD5231C32A10A00C02CDA /* BothamResponseInterceptor.swift */,
 			);
 			name = Interceptor;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				EB5BD51A1C31A60500C02CDA /* SpyRequestInterceptor.swift */,
+				EB5BD5251C32A32A00C02CDA /* SpyResponseInterceptor.swift */,
 			);
 			name = "Test Doubles";
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 				EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */,
 				EBF359351BFF897500AD47C4 /* NSHTTPClient.swift in Sources */,
 				EB5BD5181C31A00800C02CDA /* BothamRequestInterceptor.swift in Sources */,
+				EB5BD5241C32A10A00C02CDA /* BothamResponseInterceptor.swift in Sources */,
 				EB5BD51E1C328AEA00C02CDA /* Dictionary.swift in Sources */,
 				EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */,
 				EBF359421C0310DE00AD47C4 /* BothamAPIClientError.swift in Sources */,
@@ -427,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBF3593F1C03081200AD47C4 /* BothamAPIClientTests.swift in Sources */,
+				EB5BD5261C32A32A00C02CDA /* SpyResponseInterceptor.swift in Sources */,
 				EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */,
 				EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */,
 				EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */,

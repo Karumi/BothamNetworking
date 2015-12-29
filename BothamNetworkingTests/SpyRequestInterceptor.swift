@@ -9,7 +9,6 @@
 import Foundation
 @testable import BothamNetworking
 
-
 class SpyRequestInterceptor: BothamRequestInterceptor {
 
     var intercepted: Bool = false
