@@ -21,9 +21,9 @@ class HTTPRequestTests: XCTestCase {
     func testShouldReplaceRequestURL() {
         var request = givenAnHTTPRequest("http://www.karumi.com")
 
-        request = request.withURL("http://www.blog.karumi.com")
+        request = request.withURL("http://blog.karumi.com")
 
-        expect(request.url).to(equal("http://www.blog.karumi.com"))
+        expect(request.url).to(equal("http://blog.karumi.com"))
     }
 
     func testShouldReplaceRequestParameters() {
