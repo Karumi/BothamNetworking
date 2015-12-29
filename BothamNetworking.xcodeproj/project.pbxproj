@@ -13,6 +13,7 @@
 		EB5BD51B1C31A60500C02CDA /* SpyRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51A1C31A60500C02CDA /* SpyRequestInterceptor.swift */; };
 		EB5BD51E1C328AEA00C02CDA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */; };
 		EB5BD5201C328BC500C02CDA /* HTTPRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51F1C328BC500C02CDA /* HTTPRequestTests.swift */; };
+		EB5BD5221C32A00A00C02CDA /* HTTPResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5211C32A00A00C02CDA /* HTTPResponseTests.swift */; };
 		EB8F442F1BFF442F00CC3AA5 /* BothamNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */; };
 		EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */; };
@@ -48,6 +49,7 @@
 		EB5BD51A1C31A60500C02CDA /* SpyRequestInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpyRequestInterceptor.swift; sourceTree = "<group>"; };
 		EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		EB5BD51F1C328BC500C02CDA /* HTTPRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequestTests.swift; sourceTree = "<group>"; };
+		EB5BD5211C32A00A00C02CDA /* HTTPResponseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPResponseTests.swift; sourceTree = "<group>"; };
 		EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BothamNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BothamNetworking.h; sourceTree = "<group>"; };
 		EB8F44301BFF442F00CC3AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */,
 				EB5BD51F1C328BC500C02CDA /* HTTPRequestTests.swift */,
+				EB5BD5211C32A00A00C02CDA /* HTTPResponseTests.swift */,
 			);
 			name = Http;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */,
 				EBF3593D1BFF8F7600AD47C4 /* FutureMatchers.swift in Sources */,
 				EB5BD51B1C31A60500C02CDA /* SpyRequestInterceptor.swift in Sources */,
+				EB5BD5221C32A00A00C02CDA /* HTTPResponseTests.swift in Sources */,
 				EB5BD5201C328BC500C02CDA /* HTTPRequestTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
