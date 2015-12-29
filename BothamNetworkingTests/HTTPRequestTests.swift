@@ -19,7 +19,7 @@ class HTTPRequestTests : XCTestCase {
     func testShouldAddHeadersWhenTheOriginalRequestIsEmpty() {
         var request = givenAnEmptyHTTPRequest()
 
-        request = request.addHeaders(["a":"b"])
+        request = request.appendHeaders(["a":"b"])
 
         expect(request.headers?.count).to(equal(1))
         expect(request.headers?["a"]).to(equal("b"))
@@ -28,7 +28,7 @@ class HTTPRequestTests : XCTestCase {
     func testShouldAddHeadersWhenTheRequestAlreadyHaveRequests() {
         var request = givenAnHTTPRequest(["key":"value"])
 
-        request = request.addHeaders(["a":"b"])
+        request = request.appendHeaders(["a":"b"])
 
         expect(request.headers?.count).to(equal(2))
         expect(request.headers?["key"]).to(equal("value"))
