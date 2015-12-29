@@ -11,5 +11,5 @@ import Foundation
 public protocol BothamResponseInterceptor {
 
     func intercept(response: HTTPResponse) -> HTTPResponse
-    
+
 }
