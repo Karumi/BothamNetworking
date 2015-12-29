@@ -57,16 +57,16 @@ public class BothamAPIClient {
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
 
-            var request = HTTPRequest(
+            let initialRequest = HTTPRequest(
                 url: baseEndpoint + path,
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod,
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
 
-            request = notifyRequestInterceptors(request)
+            let interceptedRequest = notifyRequestInterceptors(initialRequest)
 
-            return httpClient.send(request)
+            return httpClient.send(interceptedRequest)
                 .mapError { return .HTTPClientError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
                     return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
