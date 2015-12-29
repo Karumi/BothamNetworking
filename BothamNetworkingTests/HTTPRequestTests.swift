@@ -11,7 +11,7 @@ import XCTest
 import Nimble
 @testable import BothamNetworking
 
-class HTTPRequestTests : XCTestCase {
+class HTTPRequestTests: XCTestCase {
 
     private let anyURL = "http://www.karumi.com"
     private let anyHTTPMethod = HTTPMethod.GET

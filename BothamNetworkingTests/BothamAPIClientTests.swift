@@ -160,7 +160,8 @@ class BothamAPIClientTests: NocillaTestCase {
         return bothamAPIClient
     }
 
-    private func givenABothamAPIClientWithGlobalInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
+    private func givenABothamAPIClientWithGlobalInterceptor(interceptor: BothamRequestInterceptor? = nil)
+        -> BothamAPIClient {
         let bothamAPIClient = givenABothamAPIClient()
         if let interceptor = interceptor {
             BothamAPIClient.addGlobalRequestInterceptor(interceptor)
