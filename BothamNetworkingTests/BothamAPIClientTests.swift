@@ -113,7 +113,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
-        expect(result).toEventually(beBothamRequestSuccess())
+        waitForRequestFinished(result)
     }
 
     func testInterceptRequestUsingInterceptorsAddedGlobally() {
@@ -125,7 +125,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
-        expect(result).toEventually(beBothamRequestSuccess())
+        waitForRequestFinished(result)
     }
 
     func testDoesNotInterceptRequestOnceLocalInterceptorWasRemoved() {
@@ -137,7 +137,7 @@ class BothamAPIClientTests: NocillaTestCase {
         let result = bothamAPIClient.GET(anyPath)
 
         expect(spyInterceptor.intercepted).toEventually(beFalse())
-        expect(result).toEventually(beBothamRequestSuccess())
+        waitForRequestFinished(result)
     }
 
     func testDoesNotInterceptRequestOnceGlobalInterceptorWasRemoved() {
@@ -149,7 +149,7 @@ class BothamAPIClientTests: NocillaTestCase {
         let result = bothamAPIClient.GET(anyPath)
 
         expect(spyInterceptor.intercepted).toEventually(beFalse())
-        expect(result).toEventually(beBothamRequestSuccess())
+        waitForRequestFinished(result)
     }
 
     private func givenABothamAPIClientWithInterceptor(interceptor: BothamRequestInterceptor? = nil) -> BothamAPIClient {
@@ -172,4 +172,7 @@ class BothamAPIClientTests: NocillaTestCase {
         return BothamAPIClient(baseEndpoint: anyHost, httpClient: NSHTTPClient())
     }
 
+    private func waitForRequestFinished(result: Future<HTTPResponse, BothamAPIClientError>) {
+        expect(result).toEventually(beBothamRequestSuccess())
+    }
 }
