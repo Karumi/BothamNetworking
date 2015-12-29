@@ -19,7 +19,7 @@ class NSHTTPClient: HTTPClient {
         }
         let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())
         request.HTTPMethod = httpRequest.httpMethod.rawValue
-        request.HTTPBody = httpRequest.body
+        //request.HTTPBody = httpRequest.body //TODO perform encoding here.
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
