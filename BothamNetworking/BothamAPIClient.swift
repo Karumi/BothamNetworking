@@ -64,17 +64,17 @@ public class BothamAPIClient {
                 httpMethod: httpMethod,
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
 
-            let interceptedRequest = notifyRequestInterceptors(initialRequest)
+            let interceptedRequest = applyRequestInterceptors(initialRequest)
 
             return httpClient.send(interceptedRequest)
                 .mapError { return .HTTPClientError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
                     return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                 }
-                .map { self.notifyResponseInterceptors($0) }
+                .map { self.applyResponseInterceptors($0) }
     }
 
-    private func notifyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
+    private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
         requestInterceptors.forEach { interceptor in
             interceptedRequest = interceptor.intercept(interceptedRequest)
@@ -85,7 +85,7 @@ public class BothamAPIClient {
         return interceptedRequest
     }
 
-    private func notifyResponseInterceptors(response: HTTPResponse) -> HTTPResponse {
+    private func applyResponseInterceptors(response: HTTPResponse) -> HTTPResponse {
         var interceptedResponse = response
         responseInterceptors.forEach { interceptor in
             interceptedResponse = interceptor.intercept(interceptedResponse)
