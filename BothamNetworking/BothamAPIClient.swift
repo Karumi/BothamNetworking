@@ -11,14 +11,14 @@ import BrightFutures
 
 public class BothamAPIClient {
 
-    static var globalRequestInterceptors = [BothamRequestInterceptor]()
-    static var globalResponseInterceptors = [BothamResponseInterceptor]()
+    public static var globalRequestInterceptors = [BothamRequestInterceptor]()
+    public static var globalResponseInterceptors = [BothamResponseInterceptor]()
+
+    public var requestInterceptors: [BothamRequestInterceptor]
+    public var responseInterceptors: [BothamResponseInterceptor]
 
     let baseEndpoint: String
     let httpClient: HTTPClient
-
-    var requestInterceptors: [BothamRequestInterceptor]
-    var responseInterceptors: [BothamResponseInterceptor]
 
     init(baseEndpoint: String, httpClient: HTTPClient) {
         self.baseEndpoint = baseEndpoint
@@ -50,53 +50,6 @@ public class BothamAPIClient {
     public func PATCH(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
         return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body)
-    }
-
-    public func addRequestInterceptor(interceptor: BothamRequestInterceptor) {
-        addRequestInterceptors([interceptor])
-    }
-
-    public func addRequestInterceptors(interceptors: [BothamRequestInterceptor]) {
-        requestInterceptors.appendContentsOf(interceptors)
-    }
-
-    public func removeRequestInterceptors() {
-        requestInterceptors.removeAll()
-    }
-
-    public static func addGlobalRequestInterceptor(interceptor: BothamRequestInterceptor) {
-        addGlobalRequestInterceptors([interceptor])
-    }
-
-    public static func addGlobalRequestInterceptors(interceptors: [BothamRequestInterceptor]) {
-        BothamAPIClient.globalRequestInterceptors.appendContentsOf(interceptors)
-    }
-
-    public static func removeGlobalRequestInterceptors() {
-        BothamAPIClient.globalRequestInterceptors.removeAll()
-    }
-
-    public func addResponseInterceptor(interceptor: BothamResponseInterceptor) {
-        addResponseInterceptors([interceptor])
-    }
-
-    public func addResponseInterceptors(interceptors: [BothamResponseInterceptor]) {
-        responseInterceptors.appendContentsOf(interceptors)
-    }
-
-    public func removeResponseInterceptors() {
-        responseInterceptors.removeAll()
-    }
-    public static func addGlobalResponseInterceptor(interceptor: BothamResponseInterceptor) {
-        addGlobalResponseInterceptors([interceptor])
-    }
-
-    public static func addGlobalResponseInterceptors(interceptors: [BothamResponseInterceptor]) {
-        BothamAPIClient.globalResponseInterceptors.appendContentsOf(interceptors)
-    }
-
-    public static func removeGlobalResponseInterceptors() {
-        BothamAPIClient.globalResponseInterceptors.removeAll()
     }
 
     func sendRequest(httpMethod: HTTPMethod, path: String,

@@ -19,7 +19,7 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyHTTPMethod = HTTPMethod.GET
 
     override func tearDown() {
-        BothamAPIClient.removeGlobalRequestInterceptors()
+        BothamAPIClient.globalResponseInterceptors.removeAll()
         super.tearDown()
     }
 
@@ -133,7 +133,7 @@ class BothamAPIClientTests: NocillaTestCase {
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithInterceptor(spyInterceptor)
 
-        bothamAPIClient.removeRequestInterceptors()
+        bothamAPIClient.requestInterceptors.removeAll()
         let result = bothamAPIClient.GET(anyPath)
 
         expect(spyInterceptor.intercepted).toEventually(beFalse())
@@ -145,7 +145,7 @@ class BothamAPIClientTests: NocillaTestCase {
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(spyInterceptor)
 
-        BothamAPIClient.removeGlobalRequestInterceptors()
+        BothamAPIClient.globalRequestInterceptors.removeAll()
         let result = bothamAPIClient.GET(anyPath)
 
         expect(spyInterceptor.intercepted).toEventually(beFalse())
@@ -181,7 +181,7 @@ class BothamAPIClientTests: NocillaTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithInterceptor(responseInterceptor: spyInterceptor)
 
-        bothamAPIClient.removeRequestInterceptors()
+        bothamAPIClient.requestInterceptors.removeAll()
         let result = bothamAPIClient.GET(anyPath)
 
         expect(spyInterceptor.intercepted).toEventually(beFalse())
@@ -193,7 +193,7 @@ class BothamAPIClientTests: NocillaTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobalInterceptor(responseInterceptor: spyInterceptor)
 
-        BothamAPIClient.removeGlobalRequestInterceptors()
+        BothamAPIClient.globalRequestInterceptors.removeAll()
         let result = bothamAPIClient.GET(anyPath)
 
         expect(spyInterceptor.intercepted).toEventually(beFalse())
@@ -204,10 +204,10 @@ class BothamAPIClientTests: NocillaTestCase {
         responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
         let bothamAPIClient = givenABothamAPIClient()
         if let interceptor = requestInterceptor {
-            bothamAPIClient.addRequestInterceptor(interceptor)
+            bothamAPIClient.requestInterceptors.append(interceptor)
         }
         if let interceptor = responseInterceptor {
-            bothamAPIClient.addResponseInterceptor(interceptor)
+            bothamAPIClient.responseInterceptors.append(interceptor)
         }
         return bothamAPIClient
     }
@@ -218,10 +218,10 @@ class BothamAPIClientTests: NocillaTestCase {
         -> BothamAPIClient {
         let bothamAPIClient = givenABothamAPIClient()
         if let interceptor = requestInterceptor {
-            BothamAPIClient.addGlobalRequestInterceptor(interceptor)
+            BothamAPIClient.globalRequestInterceptors.append(interceptor)
         }
         if let interceptor = responseInterceptor {
-            BothamAPIClient.addGlobalResponseInterceptor(interceptor)
+            BothamAPIClient.globalResponseInterceptors.append(interceptor)
         }
         return bothamAPIClient
     }
