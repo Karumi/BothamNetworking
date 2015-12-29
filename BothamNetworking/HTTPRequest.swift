@@ -16,4 +16,15 @@ public struct HTTPRequest {
     public let httpMethod: HTTPMethod
     public let body: NSData?
 
+    public func addHeaders(headers: [String:String]) -> HTTPRequest {
+        var newHeaders = self.headers
+        newHeaders += headers
+        return HTTPRequest(
+            url: url,
+            parameters: parameters,
+            headers: newHeaders,
+            httpMethod: httpMethod,
+            body: body)
+    }
+
 }
