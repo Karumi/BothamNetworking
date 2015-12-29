@@ -103,27 +103,22 @@ public class BothamAPIClient {
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
+
             var request = HTTPRequest(
                 url: baseEndpoint + path,
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod,
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
+
             request = notifyRequestInterceptors(request)
+
             return httpClient.send(request)
                 .mapError { return .HTTPClientError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
-                    if 200..<300 ~= httpResponse.statusCode {
-                        return Future(value: httpResponse)
-                    } else {
-                        let statusCode = httpResponse.statusCode
-                        let body = httpResponse.body
-                        return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
-                    }
+                    return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                 }
-                .map { response in
-                    return self.notifyResponseInterceptors(response)
-                }
+                .map { self.notifyResponseInterceptors($0) }
     }
 
     private func notifyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
@@ -146,5 +141,16 @@ public class BothamAPIClient {
             interceptedResponse = interceptor.intercept(interceptedResponse)
         }
         return interceptedResponse
+    }
+
+    private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
+        -> Future<HTTPResponse, BothamAPIClientError> {
+        if 200..<300 ~= httpResponse.statusCode {
+            return Future(value: httpResponse)
+        } else {
+            let statusCode = httpResponse.statusCode
+            let body = httpResponse.body
+            return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
+        }
     }
 }
