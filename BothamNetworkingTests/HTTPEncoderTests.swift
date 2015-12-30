@@ -33,7 +33,7 @@ class HTTPEncoderTests: XCTestCase {
 
     func testEncodesParamsUsingFormEncodingIfTheRequestContainsFormContentTypeHeader() {
         let request = givenAHTTPRequestWith(headers: ["Content-Type":"application/x-www-form-urlencoded"],
-            parameters: ["a":"b","c":3])
+            parameters: ["a":"b","c":"3"])
 
         let bodyNSData = try! HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: NSUTF8StringEncoding)
@@ -43,7 +43,7 @@ class HTTPEncoderTests: XCTestCase {
 
     private func givenAHTTPRequestWith(
         headers headers: [String:String]? = nil,
-        parameters: [String: AnyObject]? = nil,
+        parameters: [String: String]? = nil,
         body: [String: AnyObject]? = nil) -> HTTPRequest {
         return HTTPRequest(
             url: "http://www.karumi.com",
