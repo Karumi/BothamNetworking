@@ -25,14 +25,18 @@ class NSHTTPClient: HTTPClient {
             if let error = error {
                 promise.failure(error)
             } else if let response = response as? NSHTTPURLResponse, let data = data {
-                let statusCode = response.statusCode
-                let headers = response.allHeaderFields.map {
-                    (key, value) in (key as! String, value as! String)
-                }
-                let response = HTTPResponse(statusCode: statusCode, headers: Dictionary(headers), body: data)
+                let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
                 promise.success(response)
             }
         }.resume()
         return promise.future
+    }
+
+    private func mapNSHTTPURlResponseToHTTPResponse(response: NSHTTPURLResponse, data: NSData) -> HTTPResponse {
+        let statusCode = response.statusCode
+        let headers = response.allHeaderFields.map {
+            (key, value) in (key as! String, value as! String)
+        }
+        return HTTPResponse(statusCode: statusCode, headers: Dictionary(headers), body: data)
     }
 }
