@@ -31,10 +31,6 @@ public class NSHTTPClient: HTTPClient {
         return promise.future
     }
 
-    public func encodeRequestBody(request: HTTPRequest) throws -> NSData? {
-        return try HTTPEncoder.encodeBody(request)
-    }
-
     private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) throws -> NSURLRequest {
         let components = NSURLComponents(string: httpRequest.url)
         if let params = httpRequest.parameters {
@@ -44,7 +40,7 @@ public class NSHTTPClient: HTTPClient {
         }
         let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())
         request.HTTPMethod = httpRequest.httpMethod.rawValue
-        let encodedBody = try encodeRequestBody(httpRequest)
+        let encodedBody = try HTTPEncoder.encodeBody(httpRequest)
         request.HTTPBody = encodedBody
         return request
     }
