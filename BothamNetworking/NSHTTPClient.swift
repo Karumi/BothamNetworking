@@ -32,6 +32,16 @@ class NSHTTPClient: HTTPClient {
         return promise.future
     }
 
+    func hasValidScheme(request: HTTPRequest) -> Bool {
+        return request.url.hasPrefix("http") || request.url.hasPrefix("https")
+    }
+
+    func isValidResponse(response: HTTPResponse) -> Bool {
+        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
+        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
+        return containsValidHTTPStatusCode && containsJsonContentType
+    }
+
     private func mapNSHTTPURlResponseToHTTPResponse(response: NSHTTPURLResponse,
         data: NSData) -> HTTPResponse {
         let statusCode = response.statusCode

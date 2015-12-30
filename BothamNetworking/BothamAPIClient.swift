@@ -111,13 +111,11 @@ public class BothamAPIClient {
     }
 
     private func isValidResponse(response: HTTPResponse) -> Bool {
-        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
-        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
-        return containsValidHTTPStatusCode && containsJsonContentType
+        return httpClient.isValidResponse(response)
     }
 
     private func hasValidScheme(request: HTTPRequest) -> Bool {
-        return request.url.hasPrefix("http") || request.url.hasPrefix("https")
+        return httpClient.hasValidScheme(request)
 
     }
 }
