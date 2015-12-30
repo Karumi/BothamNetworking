@@ -26,7 +26,10 @@ class NSHTTPClient: HTTPClient {
                 promise.failure(error)
             } else if let response = response as? NSHTTPURLResponse, let data = data {
                 let statusCode = response.statusCode
-                let response = HTTPResponse(statusCode: statusCode, body: data)
+                let headers = response.allHeaderFields.map {
+                    (key, value) in (key as! String, value as! String)
+                }
+                let response = HTTPResponse(statusCode: statusCode, headers: Dictionary(headers), body: data)
                 promise.success(response)
             }
         }.resume()

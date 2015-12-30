@@ -98,12 +98,18 @@ public class BothamAPIClient {
 
     private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
         -> Future<HTTPResponse, BothamAPIClientError> {
-        if 200..<300 ~= httpResponse.statusCode {
+        if isValidResponse(httpResponse) {
             return Future(value: httpResponse)
         } else {
             let statusCode = httpResponse.statusCode
             let body = httpResponse.body
             return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
         }
+    }
+
+    private func isValidResponse(response: HTTPResponse) -> Bool {
+        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
+        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
+        return containsValidHTTPStatusCode && containsJsonContentType
     }
 }

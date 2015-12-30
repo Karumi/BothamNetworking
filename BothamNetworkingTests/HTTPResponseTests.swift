@@ -30,8 +30,10 @@ class HTTPResponseTests: XCTestCase {
         expect(response.body).to(equal(newBody))
     }
 
-    private func givenAResponse(statusCode: Int = 200, body: NSData = NSData()) -> HTTPResponse {
-        return HTTPResponse(statusCode: statusCode, body: body)
+    private func givenAResponse(statusCode: Int = 200,
+        headers: [String:String]? = nil,
+        body: NSData = NSData()) -> HTTPResponse {
+        return HTTPResponse(statusCode: statusCode, headers: headers, body: body)
     }
 
 }
