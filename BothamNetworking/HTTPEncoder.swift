@@ -10,11 +10,25 @@ import Foundation
 
 class HTTPEncoder {
 
+    /*
+        Given a HTTPRequest instance performs the body encoding based on a Content-Type request header.
+
+        This class only supports two different encodings: "application/x-www-form-urlencoded"
+        and "application/json".
+
+        If the request does not contain any "Content-Type" header the body is not encoded and the return
+        value is nil.
+        
+        @param request to encode
+    
+        @return encoded body based on the request headers or nil if there is no any valid Content-Type 
+        configured.
+    */
     static func encodeBody(request: HTTPRequest) throws -> NSData? {
         let contentType = request.headers?["Content-Type"] ?? ""
         switch contentType {
             case "application/x-www-form-urlencoded":
-                return query(request.parameters).dataUsingEncoding(
+                return query(request.body).dataUsingEncoding(
                     NSUTF8StringEncoding,
                     allowLossyConversion: false)
             case "application/json":

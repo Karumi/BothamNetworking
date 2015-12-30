@@ -32,7 +32,7 @@ class HTTPEncoderTests: XCTestCase {
 
     func testEncodesParamsUsingFormEncodingIfTheRequestContainsFormContentTypeHeader() {
         let request = givenAHTTPRequestWith(headers: ["Content-Type":"application/x-www-form-urlencoded"],
-            parameters: ["a":"b","c":"3"])
+            body: ["a":"b","c":3])
 
         let bodyNSData = try! HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: NSUTF8StringEncoding)
