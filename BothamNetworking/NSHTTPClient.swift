@@ -24,10 +24,9 @@ class NSHTTPClient: HTTPClient {
                     let response = HTTPResponse(statusCode: statusCode, body: data)
                     promise.success(response)
                 }
-                }.resume()
+            }.resume()
         } catch {
-            let encodingError = error as NSError
-            promise.failure(encodingError)
+            promise.failure(error as NSError)
         }
         return promise.future
     }
