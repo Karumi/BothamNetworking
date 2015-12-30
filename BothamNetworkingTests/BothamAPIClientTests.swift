@@ -17,6 +17,7 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyHost = "http://www.anyhost.com/"
     private let anyPath = "path"
     private let anyHTTPMethod = HTTPMethod.GET
+    private let anyStatusCode = 200
 
     override func tearDown() {
         BothamAPIClient.globalResponseInterceptors.removeAll()
@@ -199,6 +200,20 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(spyInterceptor.intercepted).toEventually(beFalse())
         waitForRequestFinished(result)
     }
+
+    func testParseHTTPResponsHeaders() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+            .andReturn(anyStatusCode)
+            .withHeaders(["Content-Type":"application/json", "Server": "KarumiServer"])
+        let bothamAPIClient = givenABothamAPIClient()
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(result.value?.headers?["Content-Type"]).toEventually(equal("application/json"))
+        expect(result.value?.headers?["Server"]).toEventually(equal("KarumiServer"))
+        expect(result.value?.headers?.count).toEventually(equal(2))
+    }
+
     private func givenABothamAPIClientWithLocal(
         requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
