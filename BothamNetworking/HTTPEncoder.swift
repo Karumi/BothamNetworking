@@ -11,13 +11,13 @@ import Foundation
 class HTTPEncoder {
 
     static func encodeBody(request: HTTPRequest) throws -> NSData? {
-        let contentType = request.headers?["Content-Type"] ?? "application/json"
+        let contentType = request.headers?["Content-Type"] ?? ""
         switch contentType {
             case "application/x-www-form-urlencoded":
                 return query(request.parameters).dataUsingEncoding(
                     NSUTF8StringEncoding,
                     allowLossyConversion: false)
-            default:
+            case "application/json":
                 if let body = request.body {
                     let options = NSJSONWritingOptions()
                     let data = try NSJSONSerialization.dataWithJSONObject(body, options: options)
@@ -25,6 +25,8 @@ class HTTPEncoder {
                 } else {
                     return nil
                 }
+            default:
+                return nil
         }
     }
 

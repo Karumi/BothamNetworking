@@ -13,13 +13,12 @@ import Nimble
 
 class HTTPEncoderTests: XCTestCase {
 
-    func testEncodesBodyUsingJsonEncodingByDefaultIfTheRequestDoesNotContainsContentTypeHeader() {
+    func testDoesNotEncodesBodyIfTheRequestDoesNotContainsContentTypeHeader() {
         let request = givenAHTTPRequestWith(body: ["a":"b"])
 
         let bodyNSData = try! HTTPEncoder.encodeBody(request)
-        let bodyString = String(data: bodyNSData!, encoding: NSUTF8StringEncoding)
 
-        expect(bodyString).to(equal("{\"a\":\"b\"}"))
+        expect(bodyNSData).to(beNil())
     }
 
     func testEncodesBodyUsingJsonEncodingIfTheRequestContainsJsonContentTypeHeader() {
