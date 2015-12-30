@@ -40,8 +40,7 @@ public class NSHTTPClient: HTTPClient {
         }
         let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())
         request.HTTPMethod = httpRequest.httpMethod.rawValue
-        let encodedBody = try HTTPEncoder.encodeBody(httpRequest)
-        request.HTTPBody = encodedBody
+        request.HTTPBody = httpRequest.encodedBody
         return request
     }
 }

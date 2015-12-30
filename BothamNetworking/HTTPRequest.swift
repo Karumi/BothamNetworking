@@ -16,6 +16,16 @@ public struct HTTPRequest {
     public let httpMethod: HTTPMethod
     public let body: [String:AnyObject]?
 
+    public var encodedBody: NSData? {
+        get {
+            do {
+                return try HTTPEncoder.encodeBody(self)
+            } catch {
+                return nil
+            }
+        }
+    }
+
     public func withURL(url: String) -> HTTPRequest {
         return HTTPRequest(
             url: url,
