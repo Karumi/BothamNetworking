@@ -20,7 +20,7 @@ public class BothamAPIClient {
     let baseEndpoint: String
     let httpClient: HTTPClient
 
-    init(baseEndpoint: String, httpClient: HTTPClient) {
+    init(baseEndpoint: String, httpClient: HTTPClient = NSHTTPClient()) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
         self.requestInterceptors = [BothamRequestInterceptor]()
@@ -65,13 +65,16 @@ public class BothamAPIClient {
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
 
             let interceptedRequest = applyRequestInterceptors(initialRequest)
-
-            return httpClient.send(interceptedRequest)
-                .mapError { return .HTTPClientError(error: $0) }
-                .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
-                    return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
-                }
-                .map { self.applyResponseInterceptors($0) }
+            if !hasValidScheme(interceptedRequest) {
+                return Future(error: BothamAPIClientError.UnsupportedURLScheme)
+            } else {
+                return httpClient.send(interceptedRequest)
+                    .mapError { return .HTTPClientError(error: $0) }
+                    .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
+                        return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                    }
+                    .map { self.applyResponseInterceptors($0) }
+            }
     }
 
     private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
@@ -98,12 +101,21 @@ public class BothamAPIClient {
 
     private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
         -> Future<HTTPResponse, BothamAPIClientError> {
-        if 200..<300 ~= httpResponse.statusCode {
+        if isValidResponse(httpResponse) {
             return Future(value: httpResponse)
         } else {
             let statusCode = httpResponse.statusCode
             let body = httpResponse.body
             return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
         }
+    }
+
+    private func isValidResponse(response: HTTPResponse) -> Bool {
+        return httpClient.isValidResponse(response)
+    }
+
+    private func hasValidScheme(request: HTTPRequest) -> Bool {
+        return httpClient.hasValidScheme(request)
+
     }
 }

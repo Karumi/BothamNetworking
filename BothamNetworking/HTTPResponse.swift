@@ -11,17 +11,36 @@ import Foundation
 public struct HTTPResponse {
 
     public let statusCode: Int
+    public let headers: [String:String]?
     public let body: NSData
 
     public func withStatusCode(statusCode: Int) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
+            headers: headers,
+            body: body)
+    }
+
+    public func withHeaders(headers: [String:String]?) -> HTTPResponse {
+        return HTTPResponse(
+            statusCode: statusCode,
+            headers: headers,
+            body: body)
+    }
+
+    public func appendHeaders(headers: [String:String]) -> HTTPResponse {
+        var newHeaders = self.headers
+        newHeaders += headers
+        return HTTPResponse(
+            statusCode: statusCode,
+            headers: newHeaders,
             body: body)
     }
 
     public func withBody(body: NSData) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
+            headers: headers,
             body: body)
     }
 

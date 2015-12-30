@@ -61,6 +61,8 @@ public func == (lhs: BothamAPIClientError, rhs: BothamAPIClientError) -> Bool {
         return error1 == error2
     case (.NetworkError, .NetworkError):
         return true
+    case (.UnsupportedURLScheme, .UnsupportedURLScheme):
+        return true
     default:
         return false
     }

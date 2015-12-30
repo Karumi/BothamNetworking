@@ -15,4 +15,8 @@ protocol HTTPClient {
 
     func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError>
 
+    func hasValidScheme(httpRequest: HTTPRequest) -> Bool
+
+    func isValidResponse(httpRespone: HTTPResponse) -> Bool
+
 }
