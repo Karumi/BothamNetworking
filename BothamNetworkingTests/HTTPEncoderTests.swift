@@ -42,7 +42,7 @@ class HTTPEncoderTests: XCTestCase {
 
     private func givenAHTTPRequestWith(
         headers headers: [String:String]? = nil,
-        parameters: [String: String]? = nil,
+        parameters: [String: String?]? = nil,
         body: [String: AnyObject]? = nil) -> HTTPRequest {
         return HTTPRequest(
             url: "http://www.karumi.com",

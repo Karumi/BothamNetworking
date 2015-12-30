@@ -46,7 +46,7 @@ class HTTPEncoder {
 
     // The x-www-form-urlencoded code comes from this repository https://github.com/Alamofire/Alamofire
 
-    private static func query(parameters: [String: AnyObject]?) -> String {
+    private static func query(parameters: [String: String?]?) -> String {
         guard let parameters = parameters else {
             return ""
         }
@@ -60,21 +60,13 @@ class HTTPEncoder {
         return (components.map { "\($0)=\($1)" } ).joinWithSeparator("&")
     }
 
-    private static func queryComponents(key: String, _ value: AnyObject) -> [(String, String)] {
+    private static func queryComponents(key: String, _ value: String?) -> [(String, String)] {
         var components: [(String, String)] = []
-
-        if let dictionary = value as? [String: AnyObject] {
-            for (nestedKey, value) in dictionary {
-                components += queryComponents("\(key)[\(nestedKey)]", value)
-            }
-        } else if let array = value as? [AnyObject] {
-            for value in array {
-                components += queryComponents("\(key)[]", value)
-            }
-        } else {
+        if let value = value {
             components.append((escape(key), escape("\(value)")))
+        } else {
+            components.append((escape(key), ""))
         }
-
         return components
     }
 

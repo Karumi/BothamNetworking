@@ -114,7 +114,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     private func givenOneHttpRequest(httpMethod: HTTPMethod,
-        url: String, params: [String:String]? = nil,
+        url: String, params: [String:String?]? = nil,
         var headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> HTTPRequest {
             headers += ["Content-Type":"application/json"]

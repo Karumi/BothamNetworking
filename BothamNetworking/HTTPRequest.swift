@@ -11,7 +11,7 @@ import Foundation
 public struct HTTPRequest {
 
     public let url: String
-    public let parameters: [String:String]?
+    public let parameters: [String:String?]?
     public let headers: [String:String]?
     public let httpMethod: HTTPMethod
     public let body: AnyObject?
@@ -25,7 +25,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    public func withParameters(parameters: [String:String]?) -> HTTPRequest {
+    public func withParameters(parameters: [String:String?]) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -72,7 +72,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    public func appendParameters(parameters: [String:String]) -> HTTPRequest {
+    public func appendParameters(parameters: [String:String?]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(
