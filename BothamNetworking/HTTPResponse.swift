@@ -28,6 +28,15 @@ public struct HTTPResponse {
             body: body)
     }
 
+    public func appendHeaders(headers: [String:String]) -> HTTPResponse {
+        var newHeaders = self.headers
+        newHeaders += headers
+        return HTTPResponse(
+            statusCode: statusCode,
+            headers: newHeaders,
+            body: body)
+    }
+
     public func withBody(body: NSData) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,

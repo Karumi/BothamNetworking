@@ -13,6 +13,8 @@ import Nimble
 
 class HTTPResponseTests: XCTestCase {
 
+    private let anyHeaders = ["x":"y"]
+
     func testShouldReplaceResponseStatusCode() {
         var response = givenAResponse(200)
 
@@ -28,6 +30,34 @@ class HTTPResponseTests: XCTestCase {
         response = response.withBody(newBody)
 
         expect(response.body).to(equal(newBody))
+    }
+
+    func testShouldReplaceResponseHeaders() {
+        var response = givenAResponse(headers: anyHeaders)
+
+        response = response.withHeaders(["a":"b"])
+
+        expect(response.headers?.count).to(equal(1))
+        expect(response.headers?["a"]).to(equal("b"))
+    }
+
+    func testShouldAppendHeadersWhenTheOriginalResponseIsEmpty() {
+        var response = givenAResponse()
+
+        response = response.appendHeaders(["a":"b"])
+
+        expect(response.headers?.count).to(equal(1))
+        expect(response.headers?["a"]).to(equal("b"))
+    }
+
+    func testShouldAppendHeadersWhenTheResponseAlreadyHaveHeaders() {
+        var response = givenAResponse(headers:["key":"value"])
+
+        response = response.appendHeaders(["a":"b"])
+
+        expect(response.headers?.count).to(equal(2))
+        expect(response.headers?["key"]).to(equal("value"))
+        expect(response.headers?["a"]).to(equal("b"))
     }
 
     private func givenAResponse(statusCode: Int = 200,
