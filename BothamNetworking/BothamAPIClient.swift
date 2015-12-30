@@ -11,12 +11,20 @@ import BrightFutures
 
 public class BothamAPIClient {
 
+    public static var globalRequestInterceptors = [BothamRequestInterceptor]()
+    public static var globalResponseInterceptors = [BothamResponseInterceptor]()
+
+    public var requestInterceptors: [BothamRequestInterceptor]
+    public var responseInterceptors: [BothamResponseInterceptor]
+
     let baseEndpoint: String
     let httpClient: HTTPClient
 
     init(baseEndpoint: String, httpClient: HTTPClient) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
+        self.requestInterceptors = [BothamRequestInterceptor]()
+        self.responseInterceptors = [BothamResponseInterceptor]()
     }
 
     public func GET(path: String, parameters: [String:String]? = nil, headers: [String:String]? = nil)
@@ -48,22 +56,54 @@ public class BothamAPIClient {
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
-            let request = HTTPRequest(
+
+            let initialRequest = HTTPRequest(
                 url: baseEndpoint + path,
                 parameters: params,
                 headers: headers,
                 httpMethod: httpMethod,
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
-            return httpClient.send(request)
+
+            let interceptedRequest = applyRequestInterceptors(initialRequest)
+
+            return httpClient.send(interceptedRequest)
                 .mapError { return .HTTPClientError(error: $0) }
                 .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
-                    if 200..<300 ~= httpResponse.statusCode {
-                        return Future(value: httpResponse)
-                    } else {
-                        let statusCode = httpResponse.statusCode
-                        let body = httpResponse.body
-                        return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
-                    }
-            }
+                    return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                }
+                .map { self.applyResponseInterceptors($0) }
+    }
+
+    private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
+        var interceptedRequest = request
+        requestInterceptors.forEach { interceptor in
+            interceptedRequest = interceptor.intercept(interceptedRequest)
+        }
+        BothamAPIClient.globalRequestInterceptors.forEach { interceptor in
+            interceptedRequest = interceptor.intercept(interceptedRequest)
+        }
+        return interceptedRequest
+    }
+
+    private func applyResponseInterceptors(response: HTTPResponse) -> HTTPResponse {
+        var interceptedResponse = response
+        responseInterceptors.forEach { interceptor in
+            interceptedResponse = interceptor.intercept(interceptedResponse)
+        }
+        BothamAPIClient.globalResponseInterceptors.forEach { interceptor in
+            interceptedResponse = interceptor.intercept(interceptedResponse)
+        }
+        return interceptedResponse
+    }
+
+    private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
+        -> Future<HTTPResponse, BothamAPIClientError> {
+        if 200..<300 ~= httpResponse.statusCode {
+            return Future(value: httpResponse)
+        } else {
+            let statusCode = httpResponse.statusCode
+            let body = httpResponse.body
+            return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
+        }
     }
 }

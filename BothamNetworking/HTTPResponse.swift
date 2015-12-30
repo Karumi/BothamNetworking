@@ -13,4 +13,16 @@ public struct HTTPResponse {
     public let statusCode: Int
     public let body: NSData
 
+    public func withStatusCode(statusCode: Int) -> HTTPResponse {
+        return HTTPResponse(
+            statusCode: statusCode,
+            body: body)
+    }
+
+    public func withBody(body: NSData) -> HTTPResponse {
+        return HTTPResponse(
+            statusCode: statusCode,
+            body: body)
+    }
+
 }

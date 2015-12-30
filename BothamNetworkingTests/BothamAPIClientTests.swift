@@ -18,13 +18,18 @@ class BothamAPIClientTests: NocillaTestCase {
     private let anyPath = "path"
     private let anyHTTPMethod = HTTPMethod.GET
 
+    override func tearDown() {
+        BothamAPIClient.globalResponseInterceptors.removeAll()
+        super.tearDown()
+    }
+
     func testSendsGetRequestToAnyPath() {
         stubRequest("GET", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.GET(anyPath)
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsPostRequestToAnyPath() {
@@ -33,7 +38,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.POST(anyPath)
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsPutRequestToAnyPath() {
@@ -42,7 +47,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.PUT(anyPath)
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func XtestSendsDeleteRequestToAnyPath() {
@@ -51,7 +56,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.DELETE(anyPath)
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsPatchRequestToAnyPath() {
@@ -60,7 +65,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.PATCH(anyPath)
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsARequestToTheURLPassedAsArgument() {
@@ -69,7 +74,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsARequestToTheURLPassedUsingParams() {
@@ -78,7 +83,7 @@ class BothamAPIClientTests: NocillaTestCase {
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath, params: ["k": "v"])
 
-        expect(result).toEventually(beSuccess2())
+        expect(result).toEventually(beBothamRequestSuccess())
     }
 
     func testReturns40XResponsesAsError() {
@@ -99,8 +104,133 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(result).toEventually(failWithError(.HTTPResponseError(statusCode: 500, body: NSData())))
     }
 
+    func testInterceptRequestsUsingInterceptorsAddedLocally() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
+        waitForRequestFinished(result)
+    }
+
+    func testInterceptRequestsUsingInterceptorsAddedGlobally() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
+        waitForRequestFinished(result)
+    }
+
+    func testDoesNotInterceptRequestsOnceLocalInterceptorWasRemoved() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
+
+        bothamAPIClient.requestInterceptors.removeAll()
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+        waitForRequestFinished(result)
+    }
+
+    func testDoesNotInterceptRequestsOnceGlobalInterceptorWasRemoved() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyRequestInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
+
+        BothamAPIClient.globalRequestInterceptors.removeAll()
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+        waitForRequestFinished(result)
+    }
+
+    func testInterceptResponsesUsingInterceptorsAddedLocally() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
+        waitForRequestFinished(result)
+    }
+
+    func testInterceptResponsesUsingInterceptorsAddedGlobally() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beTrue())
+        expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
+        waitForRequestFinished(result)
+    }
+
+    func testDoesNotInterceptResponsesOnceLocalInterceptorWasRemoved() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
+
+        bothamAPIClient.requestInterceptors.removeAll()
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+        waitForRequestFinished(result)
+    }
+
+    func testDoesNotInterceptResponseOnceGlobalInterceptorWasRemoved() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let spyInterceptor = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
+
+        BothamAPIClient.globalRequestInterceptors.removeAll()
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
+        waitForRequestFinished(result)
+    }
+    private func givenABothamAPIClientWithLocal(
+        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
+        responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
+        let bothamAPIClient = givenABothamAPIClient()
+        if let interceptor = requestInterceptor {
+            bothamAPIClient.requestInterceptors.append(interceptor)
+        }
+        if let interceptor = responseInterceptor {
+            bothamAPIClient.responseInterceptors.append(interceptor)
+        }
+        return bothamAPIClient
+    }
+
+    private func givenABothamAPIClientWithGlobal(
+        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
+        responseInterceptor: BothamResponseInterceptor? = nil)
+        -> BothamAPIClient {
+        let bothamAPIClient = givenABothamAPIClient()
+        if let interceptor = requestInterceptor {
+            BothamAPIClient.globalRequestInterceptors.append(interceptor)
+        }
+        if let interceptor = responseInterceptor {
+            BothamAPIClient.globalResponseInterceptors.append(interceptor)
+        }
+        return bothamAPIClient
+    }
+
     private func givenABothamAPIClient() -> BothamAPIClient {
         return BothamAPIClient(baseEndpoint: anyHost, httpClient: NSHTTPClient())
     }
 
+    private func waitForRequestFinished(result: Future<HTTPResponse, BothamAPIClientError>) {
+        expect(result).toEventually(beBothamRequestSuccess())
+    }
 }
