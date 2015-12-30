@@ -18,10 +18,10 @@ class HTTPEncoder {
 
         If the request does not contain any "Content-Type" header the body is not encoded and the return
         value is nil.
-        
+
         @param request to encode
-    
-        @return encoded body based on the request headers or nil if there is no any valid Content-Type 
+
+        @return encoded body based on the request headers or nil if there is no any valid Content-Type
         configured.
     */
     static func encodeBody(request: HTTPRequest) throws -> NSData? {
@@ -84,7 +84,6 @@ class HTTPEncoder {
 
         let allowedCharacterSet = NSCharacterSet.URLQueryAllowedCharacterSet().mutableCopy() as! NSMutableCharacterSet
         allowedCharacterSet.removeCharactersInString(generalDelimitersToEncode + subDelimitersToEncode)
-
         var escaped = ""
 
         //===================================================================================================
