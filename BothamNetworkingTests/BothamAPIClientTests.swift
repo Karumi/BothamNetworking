@@ -24,7 +24,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testSendsGetRequestToAnyPath() {
-        stubRequest("GET", anyHost + anyPath)
+        stubDefaultRequest("GET", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.GET(anyPath)
@@ -33,7 +33,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testSendsPostRequestToAnyPath() {
-        stubRequest("POST", anyHost + anyPath)
+        stubDefaultRequest("POST", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.POST(anyPath)
@@ -42,7 +42,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testSendsPutRequestToAnyPath() {
-        stubRequest("PUT", anyHost + anyPath)
+        stubDefaultRequest("PUT", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.PUT(anyPath)
@@ -51,7 +51,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func XtestSendsDeleteRequestToAnyPath() {
-        stubRequest("DELETE", anyHost + anyPath)
+        stubDefaultRequest("DELETE", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.DELETE(anyPath)
@@ -60,7 +60,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testSendsPatchRequestToAnyPath() {
-        stubRequest("PATCH", anyHost + anyPath)
+        stubDefaultRequest("PATCH", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.PATCH(anyPath)
@@ -69,7 +69,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testSendsARequestToTheURLPassedAsArgument() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
@@ -78,7 +78,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testSendsARequestToTheURLPassedUsingParams() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?k=v")
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?k=v")
         let bothamAPIClient = givenABothamAPIClient()
 
         let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath, params: ["k": "v"])
@@ -105,7 +105,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testInterceptRequestsUsingInterceptorsAddedLocally() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
@@ -117,7 +117,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testInterceptRequestsUsingInterceptorsAddedGlobally() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
@@ -129,7 +129,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testDoesNotInterceptRequestsOnceLocalInterceptorWasRemoved() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
@@ -141,7 +141,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testDoesNotInterceptRequestsOnceGlobalInterceptorWasRemoved() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
@@ -153,7 +153,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testInterceptResponsesUsingInterceptorsAddedLocally() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
@@ -165,7 +165,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testInterceptResponsesUsingInterceptorsAddedGlobally() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
@@ -177,7 +177,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testDoesNotInterceptResponsesOnceLocalInterceptorWasRemoved() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
@@ -189,7 +189,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     func testDoesNotInterceptResponseOnceGlobalInterceptorWasRemoved() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 

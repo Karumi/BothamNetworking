@@ -32,7 +32,8 @@ class NSHTTPClient: HTTPClient {
         return promise.future
     }
 
-    private func mapNSHTTPURlResponseToHTTPResponse(response: NSHTTPURLResponse, data: NSData) -> HTTPResponse {
+    private func mapNSHTTPURlResponseToHTTPResponse(response: NSHTTPURLResponse,
+        data: NSData) -> HTTPResponse {
         let statusCode = response.statusCode
         let headers = response.allHeaderFields.map {
             (key, value) in (key as! String, value as! String)
