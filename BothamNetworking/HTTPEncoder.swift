@@ -10,7 +10,7 @@ import Foundation
 
 class HTTPEncoder {
 
-    static func encodeBody(request: HTTPRequest) throws -> NSData?  {
+    static func encodeBody(request: HTTPRequest) throws -> NSData? {
         let contentType = request.headers?["Content-Type"] ?? "application/json"
         switch contentType {
             case "application/x-www-form-urlencoded":
@@ -22,7 +22,7 @@ class HTTPEncoder {
                     let options = NSJSONWritingOptions()
                     let data = try NSJSONSerialization.dataWithJSONObject(body, options: options)
                     return data
-                } else  {
+                } else {
                     return nil
                 }
         }
@@ -95,12 +95,13 @@ class HTTPEncoder {
 
                 let substring = string.substringWithRange(range)
 
-                escaped += substring.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet) ?? substring
+                escaped += substring.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacterSet)
+                    ?? substring
 
                 index = endIndex
             }
         }
-        
+
         return escaped
     }
 
