@@ -214,6 +214,14 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(result.value?.headers?.count).toEventually(equal(2))
     }
 
+    func testShouldReturnUnsupportedSchemeErrorIfTheRequestDoesNotUseHttp() {
+        let bothamAPIClient = BothamAPIClient(baseEndpoint: "ftp://www.karumi.com")
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(result.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
+    }
+
     private func givenABothamAPIClientWithLocal(
         requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
@@ -242,7 +250,7 @@ class BothamAPIClientTests: NocillaTestCase {
     }
 
     private func givenABothamAPIClient() -> BothamAPIClient {
-        return BothamAPIClient(baseEndpoint: anyHost, httpClient: NSHTTPClient())
+        return BothamAPIClient(baseEndpoint: anyHost)
     }
 
     private func waitForRequestFinished(result: Future<HTTPResponse, BothamAPIClientError>) {

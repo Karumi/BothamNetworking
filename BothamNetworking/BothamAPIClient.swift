@@ -20,7 +20,7 @@ public class BothamAPIClient {
     let baseEndpoint: String
     let httpClient: HTTPClient
 
-    init(baseEndpoint: String, httpClient: HTTPClient) {
+    init(baseEndpoint: String, httpClient: HTTPClient = NSHTTPClient()) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
         self.requestInterceptors = [BothamRequestInterceptor]()
@@ -65,13 +65,16 @@ public class BothamAPIClient {
                 body: NSKeyedArchiver.archivedDataWithRootObject(body ?? NSData()))
 
             let interceptedRequest = applyRequestInterceptors(initialRequest)
-
-            return httpClient.send(interceptedRequest)
-                .mapError { return .HTTPClientError(error: $0) }
-                .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
-                    return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
-                }
-                .map { self.applyResponseInterceptors($0) }
+            if !hasValidScheme(interceptedRequest) {
+                return Future(error: BothamAPIClientError.UnsupportedURLScheme)
+            }else {
+                return httpClient.send(interceptedRequest)
+                    .mapError { return .HTTPClientError(error: $0) }
+                    .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
+                        return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                    }
+                    .map { self.applyResponseInterceptors($0) }
+            }
     }
 
     private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
@@ -111,5 +114,10 @@ public class BothamAPIClient {
         let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
         let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
         return containsValidHTTPStatusCode && containsJsonContentType
+    }
+
+    private func hasValidScheme(request: HTTPRequest) -> Bool {
+        return request.url.hasPrefix("http") || request.url.hasPrefix("https")
+
     }
 }
