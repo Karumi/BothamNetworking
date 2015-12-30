@@ -67,7 +67,7 @@ public class BothamAPIClient {
             let interceptedRequest = applyRequestInterceptors(initialRequest)
             if !hasValidScheme(interceptedRequest) {
                 return Future(error: BothamAPIClientError.UnsupportedURLScheme)
-            }else {
+            } else {
                 return httpClient.send(interceptedRequest)
                     .mapError { return .HTTPClientError(error: $0) }
                     .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
