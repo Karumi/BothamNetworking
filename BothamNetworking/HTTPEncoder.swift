@@ -10,7 +10,7 @@ import Foundation
 
 class HTTPEncoder {
 
-    /*
+    /**
         Given a HTTPRequest instance performs the body encoding based on a Content-Type request header.
 
         This class only supports two different encodings: "application/x-www-form-urlencoded"
