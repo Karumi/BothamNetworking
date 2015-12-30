@@ -28,7 +28,7 @@ class HTTPEncoder {
         let contentType = request.headers?["Content-Type"] ?? ""
         switch contentType {
             case "application/x-www-form-urlencoded":
-                return query(request.parameters).dataUsingEncoding(
+                return query(request.body).dataUsingEncoding(
                     NSUTF8StringEncoding,
                     allowLossyConversion: false)
             case "application/json":

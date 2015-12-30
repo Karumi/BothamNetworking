@@ -53,11 +53,11 @@ class HTTPRequestTests: XCTestCase {
     }
 
     func testShouldReplaceRequestBody() {
-        let request = givenAnHTTPRequest(body: NSData())
+        var request = givenAnHTTPRequest(body: NSData())
 
-        let requestBody = request.withBody(["a":"b"]).body as? [String:String]
+        request = request.withBody(["a":"b"])
 
-        expect(requestBody?["a"]).to(equal("b"))
+        expect(request.body?["a"] as? String).to(equal("b"))
     }
 
     private func givenAnEmptyHTTPRequest() -> HTTPRequest {
