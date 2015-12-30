@@ -9,9 +9,9 @@
 import Foundation
 import BrightFutures
 
-class NSHTTPClient: HTTPClient {
+public class NSHTTPClient: HTTPClient {
 
-    func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError> {
+    public func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError> {
         let promise = Promise<HTTPResponse, NSError>()
         do {
             let request = try mapHTTPRequestToNSURLRequest(httpRequest)
