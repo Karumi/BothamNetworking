@@ -20,8 +20,7 @@ public class NSHTTPClient: HTTPClient {
                 if let error = error {
                     promise.failure(error)
                 } else if let response = response as? NSHTTPURLResponse, let data = data {
-                    let statusCode = response.statusCode
-                    let response = HTTPResponse(statusCode: statusCode, body: data)
+                    let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
                     promise.success(response)
                 }
             }.resume()
@@ -29,6 +28,16 @@ public class NSHTTPClient: HTTPClient {
             promise.failure(error as NSError)
         }
         return promise.future
+    }
+
+    func hasValidScheme(request: HTTPRequest) -> Bool {
+        return request.url.hasPrefix("http") || request.url.hasPrefix("https")
+    }
+
+    func isValidResponse(response: HTTPResponse) -> Bool {
+        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
+        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
+        return containsValidHTTPStatusCode && containsJsonContentType
     }
 
     private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) throws -> NSURLRequest {
@@ -42,5 +51,14 @@ public class NSHTTPClient: HTTPClient {
         request.HTTPMethod = httpRequest.httpMethod.rawValue
         request.HTTPBody = httpRequest.encodedBody
         return request
+    }
+
+    private func mapNSHTTPURlResponseToHTTPResponse(response: NSHTTPURLResponse,
+        data: NSData) -> HTTPResponse {
+        let statusCode = response.statusCode
+        let headers = response.allHeaderFields.map {
+            (key, value) in (key as! String, value as! String)
+        }
+        return HTTPResponse(statusCode: statusCode, headers: Dictionary(headers), body: data)
     }
 }
