@@ -31,10 +31,10 @@ class AuthenticationTests: BothamNetworkingTestCase {
                 return ("Aladdin", "open sesame")
             }
         }
-        class SpyBasicAuthentication: BasicAuthentication {
+        class DummyBasicAuthentication: BasicAuthentication {
             var credentialsProvider:CredentialsProvider = FakeCredentialsProvider()
         }
 
-        return givenABothamAPIClientWithLocal(requestInterceptor: SpyBasicAuthentication())
+        return givenABothamAPIClientWithLocal(requestInterceptor: DummyBasicAuthentication())
     }
 }
