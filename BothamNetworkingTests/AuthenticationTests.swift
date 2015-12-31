@@ -12,12 +12,7 @@ import BrightFutures
 import Nocilla
 import BothamNetworking
 
-class AuthenticationTests: NocillaTestCase {
-    private let anyHost = "http://www.anyhost.com/"
-    private let anyPath = "path"
-    private let anyHTTPMethod = HTTPMethod.GET
-    private let anyStatusCode = 200
-
+class AuthenticationTests: BothamNetworkingTestCase {
     func testSendsGetRequestWithBasicAuthentication() {
         stubRequest("GET", anyHost + anyPath)
             .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
@@ -41,22 +36,5 @@ class AuthenticationTests: NocillaTestCase {
         }
 
         return givenABothamAPIClientWithLocal(requestInterceptor: SpyBasicAuthentication())
-    }
-
-    private func givenABothamAPIClientWithLocal(
-        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
-        responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
-            let bothamAPIClient = givenABothamAPIClient()
-            if let interceptor = requestInterceptor {
-                bothamAPIClient.requestInterceptors.append(interceptor)
-            }
-            if let interceptor = responseInterceptor {
-                bothamAPIClient.responseInterceptors.append(interceptor)
-            }
-            return bothamAPIClient
-    }
-
-    private func givenABothamAPIClient() -> BothamAPIClient {
-        return BothamAPIClient(baseEndpoint: anyHost)
     }
 }
