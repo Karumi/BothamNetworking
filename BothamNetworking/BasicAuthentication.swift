@@ -7,19 +7,19 @@
 //
 
 import Foundation
-protocol CredentialsProvider {
+public protocol CredentialsProvider {
     var credentials: (username: String, password: String) { get }
 }
 
 /**
  * Basic Authentication http://tools.ietf.org/html/rfc2617
  */
-protocol BasicAuthentication: BothamRequestInterceptor {
+public protocol BasicAuthentication: BothamRequestInterceptor {
     var credentialsProvider: CredentialsProvider { get }
 }
 
 extension BasicAuthentication {
-    func intercept(request: HTTPRequest) -> HTTPRequest {
+    public func intercept(request: HTTPRequest) -> HTTPRequest {
 
         let (username, password) = credentialsProvider.credentials
         let userPass = "\(username):\(password)"
@@ -28,8 +28,7 @@ extension BasicAuthentication {
         let base64UserPass = userPassData.base64EncodedStringWithOptions([])
 
         let header = ["Authorization" : "Basic \(base64UserPass)"]
-        request.appendHeaders(header)
 
-        return request
+        return request.appendHeaders(header)
     }
 }

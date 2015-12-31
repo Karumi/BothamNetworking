@@ -19,6 +19,7 @@ class NSHTTPClient: HTTPClient {
         }
         let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())
         request.HTTPMethod = httpRequest.httpMethod.rawValue
+        request.allHTTPHeaderFields = httpRequest.headers
         request.HTTPBody = httpRequest.body
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in

@@ -20,7 +20,7 @@ public class BothamAPIClient {
     let baseEndpoint: String
     let httpClient: HTTPClient
 
-    init(baseEndpoint: String, httpClient: HTTPClient = NSHTTPClient()) {
+    public init(baseEndpoint: String, httpClient: HTTPClient = NSHTTPClient()) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
         self.requestInterceptors = [BothamRequestInterceptor]()
