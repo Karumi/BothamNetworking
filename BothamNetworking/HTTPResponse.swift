@@ -11,7 +11,7 @@ import Foundation
 public struct HTTPResponse {
 
     public let statusCode: Int
-    public let headers: [String:String]?
+    public let headers: CaseInsensitiveDictionary<String>?
     public let body: NSData
 
     @warn_unused_result
@@ -26,7 +26,7 @@ public struct HTTPResponse {
     public func withHeaders(headers: [String:String]?) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
-            headers: headers,
+            headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),
             body: body)
     }
 

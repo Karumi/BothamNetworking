@@ -33,6 +33,14 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
         keyMap = Dictionary(minimumCapacity: minimumCapacity)
     }
 
+    public init(dictionary: [Key: Value]) {
+        self.init()
+        data = dictionary
+        for (key, _) in dictionary {
+            keyMap["\(key)".lowercaseString] = key
+        }
+    }
+
     /// The position of the first element in a non-empty dictionary.
     ///
     /// Identical to `endIndex` in an empty dictionary.
@@ -166,5 +174,14 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     /// `true` iff `count == 0`.
     public var isEmpty: Bool {
         return data.isEmpty
+    }
+}
+
+func += <ValueType> (inout left: CaseInsensitiveDictionary<ValueType>?, right: Dictionary<String, ValueType>) {
+    if left == nil {
+        left = CaseInsensitiveDictionary()
+    }
+    for (k, v) in right {
+        left?.updateValue(v, forKey: k)
     }
 }
