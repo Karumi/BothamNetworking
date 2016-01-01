@@ -49,6 +49,6 @@ class NSHTTPClient: HTTPClient {
         let headers = response.allHeaderFields.map {
             (key, value) in (key as! String, value as! String)
         }
-            return HTTPResponse(statusCode: statusCode, headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers)), body: data)
+        return HTTPResponse(statusCode: statusCode, headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers)), body: data)
     }
 }
