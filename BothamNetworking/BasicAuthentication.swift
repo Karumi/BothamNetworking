@@ -7,22 +7,19 @@
 //
 
 import Foundation
-public protocol CredentialsProvider {
-    var credentials: (username: String, password: String) { get }
-}
 
 /**
  * Basic Authentication http://tools.ietf.org/html/rfc2617
  */
 public protocol BasicAuthentication: BothamRequestInterceptor, BothamResponseInterceptor {
-    var credentialsProvider: CredentialsProvider { get }
-    var onAuthenticationError: (realm: String) -> () { get }
+    func credentials() -> (username: String, password: String)
+    func onAuthenticationError(realm: String) -> Void
 }
 
 extension BasicAuthentication {
     public func intercept(request: HTTPRequest) -> HTTPRequest {
 
-        let (username, password) = credentialsProvider.credentials
+        let (username, password) = credentials()
         let userPass = "\(username):\(password)"
 
         let userPassData = userPass.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -39,7 +36,7 @@ extension BasicAuthentication {
             let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
             if let match = regex.firstMatchInString(unauthorizedHeader, options: [], range: range) {
                 let realm = (unauthorizedHeader as NSString).substringWithRange(match.rangeAtIndex(1))
-                onAuthenticationError(realm: realm)
+                onAuthenticationError(realm)
             }
         }
         return response
