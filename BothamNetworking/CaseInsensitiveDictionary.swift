@@ -102,6 +102,8 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     public mutating func updateValue(value: Value, forKey key: Key) -> Value? {
         if let realKey = keyMap["\(key)".lowercaseString] {
             return data.updateValue(value, forKey: realKey)
+        } else {
+            self[key] = value
         }
         return nil
     }
