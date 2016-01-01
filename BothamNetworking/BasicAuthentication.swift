@@ -31,7 +31,7 @@ extension BasicAuthentication {
     }
 
     public func intercept(response: HTTPResponse) -> HTTPResponse {
-        if let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
+        if response.statusCode == 401, let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
             let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: [])
             let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
             if let match = regex.firstMatchInString(unauthorizedHeader, options: [], range: range) {

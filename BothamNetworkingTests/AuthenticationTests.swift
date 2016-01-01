@@ -36,4 +36,22 @@ class AuthenticationTests: BothamNetworkingTestCase {
 
         expect(result).toEventually(beBothamRequestSuccess())
     }
+
+    func testSendsGetRequestWithAuthenticationError() {
+        stubRequest("GET", anyHost + anyPath)
+            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
+            .andReturn(401)
+            .withHeaders([
+                "Content-Type":"application/json",
+                "WWW-Authenticate":"Basic realm=\"WallyWorld\"",
+                ])
+
+        let basicAuthentication = SpyBasicAuthentication()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication, responseInterceptor: basicAuthentication)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(result).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401, body: NSData())))
+        expect(basicAuthentication.authenticationError).toEventually(beTrue())
+    }
 }
