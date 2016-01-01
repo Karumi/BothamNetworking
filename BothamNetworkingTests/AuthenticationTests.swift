@@ -32,7 +32,8 @@ class AuthenticationTests: BothamNetworkingTestCase {
             }
         }
         class DummyBasicAuthentication: BasicAuthentication {
-            var credentialsProvider:CredentialsProvider = FakeCredentialsProvider()
+            let credentialsProvider:CredentialsProvider = FakeCredentialsProvider()
+            let onAuthenticationError: () -> () = { }
         }
 
         return givenABothamAPIClientWithLocal(requestInterceptor: DummyBasicAuthentication())
