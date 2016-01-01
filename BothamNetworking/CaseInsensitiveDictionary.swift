@@ -7,65 +7,6 @@
 //
 
 import Foundation
-/*
-public struct CaseInsensitiveDictionary<Value>: CollectionType, DictionaryLiteralConvertible {
-    public typealias Key = String
-
-    private var _data:[Key: Value] = [:]
-    private var _keyMap: [String: Key] = [:]
-
-    typealias Element = (Key, Value)
-    public typealias Index = DictionaryIndex<Key, Value>
-    public var startIndex: Index
-    public var endIndex: Index
-
-    public var count: Int {
-        assert(_data.count == _keyMap.count, "internal keys out of sync")
-        return _data.count
-    }
-
-    public var isEmpty: Bool {
-        return _data.isEmpty
-    }
-
-    init() {
-        startIndex = _data.startIndex
-        endIndex = _data.endIndex
-    }
-
-    public init(dictionaryLiteral elements: (Key, Value)...) {
-        for (key, value) in elements {
-            _keyMap["\(key)".lowercaseString] = key
-            _data[key] = value
-        }
-        startIndex = _data.startIndex
-        endIndex = _data.endIndex
-    }
-
-    public subscript (position: Index) -> Element {
-        return _data[position]
-    }
-
-    subscript (key: Key) -> Value? {
-        get {
-            if let realKey = _keyMap["\(key)".lowercaseString] {
-                return _data[realKey]
-            }
-            return nil
-        }
-        set(newValue) {
-            let lowerKey = "\(key)".lowercaseString
-            if _keyMap[lowerKey] == nil {
-                _keyMap[lowerKey] = key
-            }
-            _data[_keyMap[lowerKey]!] = newValue
-        }
-    }
-
-    public func generate() -> DictionaryGenerator<Key, Value> {
-        return _data.generate()
-    }
-}*/
 
 /// A hash-based mapping from `Key` to `Value` instances.  Also a
 /// collection of key-value pairs with no defined ordering.
@@ -118,7 +59,10 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     /// present in the dictionary.
     @warn_unused_result
     public func indexForKey(key: Key) -> DictionaryIndex<Key, Value>? {
-        return data.indexForKey(key)
+        if let realKey = keyMap["\(key)".lowercaseString] {
+            return data.indexForKey(realKey)
+        }
+        return nil
     }
 
     public subscript (position: DictionaryIndex<Key, Value>) -> (Key, Value) {
@@ -126,8 +70,21 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     }
 
     public subscript (key: Key) -> Value? {
-        return data[key]
+        get {
+            if let realKey = keyMap["\(key)".lowercaseString] {
+                return data[realKey]
+            }
+            return nil
+        }
+        set(newValue) {
+            let lowerKey = "\(key)".lowercaseString
+            if keyMap[lowerKey] == nil {
+                keyMap[lowerKey] = key
+            }
+            data[keyMap[lowerKey]!] = newValue
+        }
     }
+
 
     /// Update the value stored in the dictionary for the given key, or, if they
     /// key does not exist, add a new key-value pair to the dictionary.
@@ -135,23 +92,21 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     /// Returns the value that was replaced, or `nil` if a new key-value pair
     /// was added.
     public mutating func updateValue(value: Value, forKey key: Key) -> Value? {
-        return data.updateValue(value, forKey: key)
-    }
-
-    /// Remove the key-value pair at `index`.
-    ///
-    /// Invalidates all indices with respect to `self`.
-    ///
-    /// - Complexity: O(`count`).
-    public mutating func removeAtIndex(index: DictionaryIndex<Key, Value>) -> (Key, Value) {
-        return data.removeAtIndex(index)
+        if let realKey = keyMap["\(key)".lowercaseString] {
+            return data.updateValue(value, forKey: realKey)
+        }
+        return nil
     }
 
     /// Remove a given key and the associated value from the dictionary.
     /// Returns the value that was removed, or `nil` if the key was not present
     /// in the dictionary.
     public mutating func removeValueForKey(key: Key) -> Value? {
-        return data.removeValueForKey(key)
+        if let realKey = keyMap["\(key)".lowercaseString] {
+            keyMap.removeValueForKey(key)
+            return data.removeValueForKey(realKey)
+        }
+        return nil
     }
 
     /// Remove all elements.
@@ -167,6 +122,7 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     ///
     /// Complexity: O(`count`).
     public mutating func removeAll(keepCapacity keepCapacity: Bool = false) {
+        keyMap.removeAll()
         return data.removeAll(keepCapacity: keepCapacity)
     }
 
@@ -185,6 +141,9 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     /// Create an instance initialized with `elements`.
     public init(dictionaryLiteral elements: (Key, Value)...) {
         data = Dictionary(elements)
+        for (key, _) in elements {
+            keyMap["\(key)".lowercaseString] = key
+        }
     }
 
     /// A collection containing just the keys of `self`.
