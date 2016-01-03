@@ -73,7 +73,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldAddHeadersWhenTheOriginalRequestIsEmpty() {
         var request = givenAnEmptyHTTPRequest()
 
-        request = request.appendHeaders(["a":"b"])
+        request = request.appendingHeaders(["a":"b"])
 
         expect(request.headers?.count).to(equal(1))
         expect(request.headers?["a"]).to(equal("b"))
@@ -82,7 +82,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldAddHeadersWhenTheRequestAlreadyHaveRequests() {
         var request = givenAnHTTPRequest(headers:["key":"value"])
 
-        request = request.appendHeaders(["a":"b"])
+        request = request.appendingHeaders(["a":"b"])
 
         expect(request.headers?.count).to(equal(2))
         expect(request.headers?["key"]).to(equal("value"))
@@ -92,7 +92,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldAddParametersWhenTheOriginalRequestIsEmpty() {
         var request = givenAnEmptyHTTPRequest()
 
-        request = request.appendParameters(["a":"b"])
+        request = request.appendingParameters(["a":"b"])
 
         expect(request.parameters?.count).to(equal(1))
         expect(request.parameters?["a"]).to(equal("b"))
@@ -101,7 +101,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldAddParametersWhenTheRequestAlreadyHaveRequests() {
         var request = givenAnHTTPRequest(parameters:["key":"value"])
 
-        request = request.appendParameters(["a":"b"])
+        request = request.appendingParameters(["a":"b"])
 
         expect(request.parameters?.count).to(equal(2))
         expect(request.parameters?["key"]).to(equal("value"))

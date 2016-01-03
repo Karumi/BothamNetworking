@@ -31,7 +31,7 @@ public struct HTTPResponse {
     }
 
     @warn_unused_result
-    public func appendHeaders(headers: [String:String]) -> HTTPResponse {
+    public func appendingHeaders(headers: [String:String]) -> HTTPResponse {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPResponse(

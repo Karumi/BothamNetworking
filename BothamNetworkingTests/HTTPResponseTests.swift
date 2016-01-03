@@ -44,7 +44,7 @@ class HTTPResponseTests: XCTestCase {
     func testShouldAppendHeadersWhenTheOriginalResponseIsEmpty() {
         var response = givenAResponse()
 
-        response = response.appendHeaders(["a":"b"])
+        response = response.appendingHeaders(["a":"b"])
 
         expect(response.headers?.count).to(equal(1))
         expect(response.headers?["a"]).to(equal("b"))
@@ -53,7 +53,7 @@ class HTTPResponseTests: XCTestCase {
     func testShouldAppendHeadersWhenTheResponseAlreadyHaveHeaders() {
         var response = givenAResponse(headers:["key":"value"])
 
-        response = response.appendHeaders(["a":"b"])
+        response = response.appendingHeaders(["a":"b"])
 
         expect(response.headers?.count).to(equal(2))
         expect(response.headers?["key"]).to(equal("value"))

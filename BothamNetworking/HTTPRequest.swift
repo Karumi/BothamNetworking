@@ -67,7 +67,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func appendHeaders(headers: [String:String]) -> HTTPRequest {
+    public func appendingHeaders(headers: [String:String]) -> HTTPRequest {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPRequest(
@@ -79,7 +79,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func appendParameters(parameters: [String:String]) -> HTTPRequest {
+    public func appendingParameters(parameters: [String:String]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(

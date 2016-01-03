@@ -26,7 +26,7 @@ extension BasicAuthentication {
 
         let header = ["Authorization" : "Basic \(base64UserPass)"]
 
-        return request.appendHeaders(header)
+        return request.appendingHeaders(header)
     }
 
     public func intercept(response: HTTPResponse) -> HTTPResponse {
