@@ -12,15 +12,14 @@ import Foundation
  * Basic Authentication http://tools.ietf.org/html/rfc2617
  */
 public protocol BasicAuthentication: BothamRequestInterceptor, BothamResponseInterceptor {
-    func credentials() -> (username: String, password: String)
+    var credentials: (username: String, password: String) { get }
     func onAuthenticationError(realm: String) -> Void
 }
 
 extension BasicAuthentication {
     public func intercept(request: HTTPRequest) -> HTTPRequest {
 
-        let (username, password) = credentials()
-        let userPass = "\(username):\(password)"
+        let userPass = "\(credentials.username):\(credentials.password)"
 
         let userPassData = userPass.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64UserPass = userPassData.base64EncodedStringWithOptions([])

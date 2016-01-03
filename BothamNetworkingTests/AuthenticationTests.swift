@@ -16,7 +16,7 @@ class AuthenticationTests: BothamNetworkingTestCase {
     private class SpyBasicAuthentication: BasicAuthentication {
         var authenticationError: Bool = false
 
-        private func credentials() -> (username: String, password: String) {
+        var credentials: (username: String, password: String) {
             return ("Aladdin", "open sesame")
         }
 
