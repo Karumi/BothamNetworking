@@ -120,11 +120,11 @@ extension HTTPRequest: CustomDebugStringConvertible {
             let parameters = self.parameters?.map {
                 (key, value) in "\(key): \(value)\n"
                 }.joinWithSeparator("\n") ?? ""
-            let body = self.body ?? [String:AnyObject]()
+            let encodedBody = String(data: self.encodedBody ?? NSData(), encoding: NSUTF8StringEncoding)!
             return "\(httpMethod.rawValue) \(url)"
             + "\(parameters)\n"
             + "\(headers)\n"
-            + "\(body)\n"
+            + "\(encodedBody)\n"
         }
     }
 
