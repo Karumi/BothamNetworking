@@ -8,7 +8,7 @@
 
 import Foundation
 import Nimble
-import BrightFutures
+import Result
 import Nocilla
 import BothamNetworking
 
@@ -21,9 +21,12 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
             .withHeaders(["Content-Type":"application/json"])
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: SpyBasicAuthentication())
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>!
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsAnyHttpMethodRequestWithAuthenticationError() {
@@ -39,9 +42,12 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication,
             responseInterceptor: basicAuthentication)
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>!
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401,
+        expect(response).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401,
             body: NSData())))
         expect(basicAuthentication.authenticationError).toEventually(beTrue())
     }

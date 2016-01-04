@@ -12,7 +12,7 @@ import Foundation
 import XCTest
 import Nocilla
 import Nimble
-import BrightFutures
+import Result
 @testable import BothamNetworking
 
 class NSHTTPClientTests: NocillaTestCase {
@@ -27,9 +27,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsPostRequestToAnyPath() {
@@ -37,9 +40,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.POST, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsPutRequestToAnyPath() {
@@ -47,9 +53,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.PUT, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsDeleteRequestToAnyPath() {
@@ -57,9 +66,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.DELETE, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsHeadRequestToAnyPath() {
@@ -67,9 +79,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.HEAD, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testReceivesHttpStatusCodeInTheHttpResponse() {
@@ -77,9 +92,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testPropagatesErrorsInTheFuture() {
@@ -87,9 +105,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(failWithError(anyNSError))
+        expect(response).toEventually(failWithError(anyNSError))
     }
 
     func testSendsParamsConfiguredInTheHttpRequest() {
@@ -97,9 +118,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl, params: ["key" : "value"])
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsBodyConfiguredInTheHttpRequest() {
@@ -108,9 +132,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value"])
 
-        let result = httpClient.send(request)
+        var response: Result<HTTPResponse, NSError>?
+        httpClient.send(request) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     private func givenOneHttpRequest(httpMethod: HTTPMethod,
