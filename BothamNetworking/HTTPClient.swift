@@ -13,7 +13,7 @@ import Result
 
 public protocol HTTPClient {
 
-    func send(httpRequest: HTTPRequest, completition: (Result<HTTPResponse, NSError>) -> ())
+    func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, NSError>) -> ())
 
     func hasValidScheme(httpRequest: HTTPRequest) -> Bool
 
