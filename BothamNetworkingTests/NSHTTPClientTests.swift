@@ -104,14 +104,13 @@ class NSHTTPClientTests: NocillaTestCase {
 
     func testSendsBodyConfiguredInTheHttpRequest() {
         stubRequest("POST", anyUrl)
-            .withBody("{\"key\":\"value\"}");
+            .withBody("{\"key\":\"value\"}")
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value"])
 
         let result = httpClient.send(request)
 
         expect(result).toEventually(beSuccess())
-        print(request)
     }
 
     private func givenOneHttpRequest(httpMethod: HTTPMethod,

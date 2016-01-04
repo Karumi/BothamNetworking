@@ -114,13 +114,17 @@ extension HTTPRequest: CustomDebugStringConvertible {
 
     public var debugDescription: String {
         get {
-            let headers = self.headers ?? [String:String]()
-            let parameters = self.parameters ?? [String:String?]()
+            let headers = self.headers?.map {
+                (key, value) in "\(key): \(value)\n"
+                }.joinWithSeparator("\n") ?? ""
+            let parameters = self.parameters?.map {
+                (key, value) in "\(key): \(value)\n"
+                }.joinWithSeparator("\n") ?? ""
             let body = self.body ?? [String:AnyObject]()
-            return "\(httpMethod.rawValue) \(url)\n"
-            + "Headers: \(headers)\n"
-            + "Parameters: \(parameters)\n"
-            + "Body: \(body)\n"
+            return "\(httpMethod.rawValue) \(url)"
+            + "\(parameters)\n"
+            + "\(headers)\n"
+            + "\(body)\n"
         }
     }
 
