@@ -15,7 +15,7 @@ public struct CaseInsensitiveDictionary<Value> : CollectionType, DictionaryLiter
     public typealias Element = (Key, Value)
     public typealias Index = DictionaryIndex<Key, Value>
 
-    private var data:[Key: Value] = [:]
+    private var data: [Key: Value] = [:]
     private var keyMap: [String: Key] = [:]
 
 

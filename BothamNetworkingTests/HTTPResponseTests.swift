@@ -63,7 +63,9 @@ class HTTPResponseTests: XCTestCase {
     private func givenAResponse(statusCode: Int = 200,
         headers: [String:String]? = nil,
         body: NSData = NSData()) -> HTTPResponse {
-        return HTTPResponse(statusCode: statusCode, headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]), body: body)
+        return HTTPResponse(statusCode: statusCode,
+            headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),
+            body: body)
     }
 
 }
