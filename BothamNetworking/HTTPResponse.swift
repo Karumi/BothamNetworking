@@ -14,6 +14,14 @@ public struct HTTPResponse {
     public let headers: [String:String]?
     public let body: NSData
 
+    public init(statusCode: Int,
+        headers: [String:String]?,
+        body: NSData) {
+            self.statusCode = statusCode
+            self.headers = headers
+            self.body = body
+    }
+
     public func withStatusCode(statusCode: Int) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,

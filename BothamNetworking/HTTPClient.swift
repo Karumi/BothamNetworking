@@ -11,7 +11,7 @@ import Foundation
 import Foundation
 import BrightFutures
 
-protocol HTTPClient {
+public protocol HTTPClient {
 
     func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError>
 
