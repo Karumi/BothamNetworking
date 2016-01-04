@@ -11,12 +11,26 @@ import Foundation
 import Foundation
 import BrightFutures
 
-protocol HTTPClient {
+public protocol HTTPClient {
 
     func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError>
 
     func hasValidScheme(httpRequest: HTTPRequest) -> Bool
 
     func isValidResponse(httpRespone: HTTPResponse) -> Bool
+
+}
+
+extension HTTPClient {
+
+    public func hasValidScheme(request: HTTPRequest) -> Bool {
+        return request.url.hasPrefix("http") || request.url.hasPrefix("https")
+    }
+
+    public func isValidResponse(response: HTTPResponse) -> Bool {
+        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
+        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
+        return containsValidHTTPStatusCode && containsJsonContentType
+    }
 
 }

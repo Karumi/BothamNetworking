@@ -11,11 +11,30 @@ import Foundation
 public struct HTTPRequest {
 
     public let url: String
-    public let parameters: [String:String]?
+    public let parameters: [String:String?]?
     public let headers: [String:String]?
     public let httpMethod: HTTPMethod
-    public let body: NSData?
+    public let body: [String:AnyObject]?
 
+    public var encodedBody: NSData? {
+        get {
+            return HTTPEncoder.encodeBody(self)
+        }
+    }
+
+    public init(url: String,
+        parameters: [String:String?]?,
+        headers: [String:String]?,
+        httpMethod: HTTPMethod,
+        body: [String:AnyObject]?) {
+            self.url = url
+            self.parameters = parameters
+            self.headers = headers
+            self.httpMethod = httpMethod
+            self.body = body
+    }
+
+    @warn_unused_result
     public func withURL(url: String) -> HTTPRequest {
         return HTTPRequest(
             url: url,
@@ -25,7 +44,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    public func withParameters(parameters: [String:String]?) -> HTTPRequest {
+    @warn_unused_result
+    public func withParameters(parameters: [String:String?]) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -34,6 +54,7 @@ public struct HTTPRequest {
             body: body)
     }
 
+    @warn_unused_result
     public func withHeaders(headers: [String:String]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
@@ -43,6 +64,7 @@ public struct HTTPRequest {
             body: body)
     }
 
+    @warn_unused_result
     public func withHTTPMethod(httpMethod: HTTPMethod) -> HTTPRequest {
         return HTTPRequest(
             url: url,
@@ -52,7 +74,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    public func withBody(body: NSData?) -> HTTPRequest {
+    @warn_unused_result
+    public func withBody(body: [String:AnyObject]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -61,7 +84,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    public func appendHeaders(headers: [String:String]) -> HTTPRequest {
+    @warn_unused_result
+    public func appendingHeaders(headers: [String:String]) -> HTTPRequest {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPRequest(
@@ -72,7 +96,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    public func appendParameters(parameters: [String:String]) -> HTTPRequest {
+    @warn_unused_result
+    public func appendingParameters(parameters: [String:String?]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(
