@@ -28,9 +28,8 @@ public class BothamAPIClient {
     }
 
     public func GET(path: String, parameters: [String:String?]? = nil,
-        headers: [String:String]? = nil,
-        callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-            return sendRequest(.GET, path: path, params: parameters, headers: headers, callback: callback)
+        headers: [String:String]? = nil, callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.GET, path: path, params: parameters, headers: headers, callback: callback)
     }
 
     public func POST(path: String, parameters: [String:String?]? = nil,
