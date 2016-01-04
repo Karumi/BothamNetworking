@@ -84,3 +84,16 @@ public struct HTTPRequest {
     }
 
 }
+
+extension HTTPRequest: CustomDebugStringConvertible {
+
+    public var debugDescription: String {
+        get {
+            return "\(httpMethod.rawValue) \(url)\n"
+            + "Headers: \(headers)\n"
+            + "Parameters: \(parameters)\n"
+            + "Body: \(body)\n"
+        }
+    }
+
+}

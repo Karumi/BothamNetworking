@@ -45,3 +45,15 @@ public struct HTTPResponse {
     }
 
 }
+
+extension HTTPResponse: CustomDebugStringConvertible {
+
+    public var debugDescription: String {
+        get {
+            return "\(statusCode)\n"
+                + "Headers: \(headers)\n"
+                + "Body: \(body)\n"
+        }
+    }
+
+}
