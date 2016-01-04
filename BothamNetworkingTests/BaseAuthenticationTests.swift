@@ -1,5 +1,5 @@
 //
-//  AuthenticationTests.swift
+//  BaseAuthenticationTests.swift
 //  BothamNetworking
 //
 //  Created by Davide Mendolia on 31/12/15.
@@ -12,20 +12,9 @@ import BrightFutures
 import Nocilla
 import BothamNetworking
 
-class AuthenticationTests: BothamNetworkingTestCase {
-    private class SpyBasicAuthentication: BasicAuthentication {
-        var authenticationError: Bool = false
+class BaseAuthenticationTests: BothamNetworkingTestCase {
 
-        var credentials: (username: String, password: String) {
-            return ("Aladdin", "open sesame")
-        }
-
-        private func onAuthenticationError(realm: String) {
-            authenticationError = true
-        }
-    }
-
-    func testSendsGetRequestWithBasicAuthentication() {
+    func testSendsAnyHttpMethodRequestWithBasicAuthentication() {
         stubRequest("GET", anyHost + anyPath)
             .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
             .andReturn(200)
@@ -37,7 +26,7 @@ class AuthenticationTests: BothamNetworkingTestCase {
         expect(result).toEventually(beBothamRequestSuccess())
     }
 
-    func testSendsGetRequestWithAuthenticationError() {
+    func testSendsAnyHttpMethodRequestWithAuthenticationError() {
         stubRequest("GET", anyHost + anyPath)
             .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
             .andReturn(401)
@@ -53,5 +42,17 @@ class AuthenticationTests: BothamNetworkingTestCase {
 
         expect(result).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401, body: NSData())))
         expect(basicAuthentication.authenticationError).toEventually(beTrue())
+    }
+}
+
+private class SpyBasicAuthentication: BasicAuthentication {
+    var authenticationError: Bool = false
+
+    var credentials: (username: String, password: String) {
+        return ("Aladdin", "open sesame")
+    }
+
+    private func onAuthenticationError(realm: String) {
+        authenticationError = true
     }
 }
