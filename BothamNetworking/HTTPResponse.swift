@@ -62,9 +62,10 @@ extension HTTPResponse: CustomDebugStringConvertible {
 
     public var debugDescription: String {
         get {
+            let headers = self.headers ?? CaseInsensitiveDictionary()
             return "\(statusCode)\n"
                 + "Headers: \(headers)\n"
-                + "Body: \(body)\n"
+                + "Body: \(String(data: body, encoding: NSUTF8StringEncoding)!)\n"
         }
     }
 

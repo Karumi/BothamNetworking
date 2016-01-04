@@ -111,6 +111,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let result = httpClient.send(request)
 
         expect(result).toEventually(beSuccess())
+        print(request)
     }
 
     private func givenOneHttpRequest(httpMethod: HTTPMethod,

@@ -114,6 +114,9 @@ extension HTTPRequest: CustomDebugStringConvertible {
 
     public var debugDescription: String {
         get {
+            let headers = self.headers ?? [String:String]()
+            let parameters = self.parameters ?? [String:String?]()
+            let body = self.body ?? [String:AnyObject]()
             return "\(httpMethod.rawValue) \(url)\n"
             + "Headers: \(headers)\n"
             + "Parameters: \(parameters)\n"
