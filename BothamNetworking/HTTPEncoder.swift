@@ -24,7 +24,7 @@ class HTTPEncoder {
         @return encoded body based on the request headers or nil if there is no any valid Content-Type
         configured.
     */
-    static func encodeBody(request: HTTPRequest) throws -> NSData? {
+    static func encodeBody(request: HTTPRequest) -> NSData? {
         let contentType = request.headers?["Content-Type"] ?? ""
         switch contentType {
             case "application/x-www-form-urlencoded":
@@ -34,8 +34,7 @@ class HTTPEncoder {
             case "application/json":
                 if let body = request.body {
                     let options = NSJSONWritingOptions()
-                    let data = try NSJSONSerialization.dataWithJSONObject(body, options: options)
-                    return data
+                    return try? NSJSONSerialization.dataWithJSONObject(body, options: options)
                 } else {
                     return nil
                 }

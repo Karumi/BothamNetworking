@@ -13,20 +13,17 @@ public class NSHTTPClient: HTTPClient {
 
     public func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError> {
         let promise = Promise<HTTPResponse, NSError>()
-        do {
-            let request = try mapHTTPRequestToNSURLRequest(httpRequest)
-            let session = NSURLSession.sharedSession()
-            session.dataTaskWithRequest(request) { data, response, error in
-                if let error = error {
-                    promise.failure(error)
-                } else if let response = response as? NSHTTPURLResponse, let data = data {
-                    let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
-                    promise.success(response)
-                }
-            }.resume()
-        } catch {
-            promise.failure(error as NSError)
-        }
+
+        let request = try mapHTTPRequestToNSURLRequest(httpRequest)
+        let session = NSURLSession.sharedSession()
+        session.dataTaskWithRequest(request) { data, response, error in
+            if let error = error {
+                promise.failure(error)
+            } else if let response = response as? NSHTTPURLResponse, let data = data {
+                let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
+                promise.success(response)
+            }
+        }.resume()
         return promise.future
     }
 
@@ -40,7 +37,7 @@ public class NSHTTPClient: HTTPClient {
         return containsValidHTTPStatusCode && containsJsonContentType
     }
 
-    private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) throws -> NSURLRequest {
+    private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) -> NSURLRequest {
         let components = NSURLComponents(string: httpRequest.url)
         if let params = httpRequest.parameters {
             components?.queryItems = params.map {
