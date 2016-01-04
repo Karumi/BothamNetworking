@@ -114,17 +114,10 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     private func givenOneHttpRequest(httpMethod: HTTPMethod,
-        url: String, params: [String:String]? = nil,
-        headers: [String:String]? = nil,
+        url: String, params: [String:String?]? = nil,
+        var headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> HTTPRequest {
-            var jsonBody: NSData? = nil
-            if let body = body {
-                do {
-                    jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options:  NSJSONWritingOptions())
-                } catch {
-                    print("Error encoding \(body) as JSON")
-                }
-            }
-            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: jsonBody)
+            headers += ["Content-Type":"application/json"]
+            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: body)
     }
 }

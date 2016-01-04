@@ -12,7 +12,7 @@ import BrightFutures
 import Nocilla
 import BothamNetworking
 
-class BaseAuthenticationTests: BothamNetworkingTestCase {
+class BasicAuthenticationTests: BothamNetworkingTestCase {
 
     func testSendsAnyHttpMethodRequestWithBasicAuthentication() {
         stubRequest("GET", anyHost + anyPath)
@@ -36,11 +36,13 @@ class BaseAuthenticationTests: BothamNetworkingTestCase {
                 ])
 
         let basicAuthentication = SpyBasicAuthentication()
-        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication, responseInterceptor: basicAuthentication)
+        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication,
+            responseInterceptor: basicAuthentication)
 
         let result = bothamAPIClient.GET(anyPath)
 
-        expect(result).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401, body: NSData())))
+        expect(result).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401,
+            body: NSData())))
         expect(basicAuthentication.authenticationError).toEventually(beTrue())
     }
 }

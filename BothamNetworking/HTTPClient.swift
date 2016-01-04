@@ -20,3 +20,17 @@ public protocol HTTPClient {
     func isValidResponse(httpRespone: HTTPResponse) -> Bool
 
 }
+
+extension HTTPClient {
+
+    public func hasValidScheme(request: HTTPRequest) -> Bool {
+        return request.url.hasPrefix("http") || request.url.hasPrefix("https")
+    }
+
+    public func isValidResponse(response: HTTPResponse) -> Bool {
+        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
+        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
+        return containsValidHTTPStatusCode && containsJsonContentType
+    }
+
+}

@@ -11,16 +11,22 @@ import Foundation
 public struct HTTPRequest {
 
     public let url: String
-    public let parameters: [String:String]?
+    public let parameters: [String:String?]?
     public let headers: [String:String]?
     public let httpMethod: HTTPMethod
-    public let body: NSData?
+    public let body: [String:AnyObject]?
+
+    public var encodedBody: NSData? {
+        get {
+            return HTTPEncoder.encodeBody(self)
+        }
+    }
 
     public init(url: String,
-        parameters: [String:String]?,
+        parameters: [String:String?]?,
         headers: [String:String]?,
         httpMethod: HTTPMethod,
-        body: NSData?) {
+        body: [String:AnyObject]?) {
             self.url = url
             self.parameters = parameters
             self.headers = headers
@@ -39,7 +45,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func withParameters(parameters: [String:String]?) -> HTTPRequest {
+    public func withParameters(parameters: [String:String?]) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -69,7 +75,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func withBody(body: NSData?) -> HTTPRequest {
+    public func withBody(body: [String:AnyObject]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -91,7 +97,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func appendingParameters(parameters: [String:String]) -> HTTPRequest {
+    public func appendingParameters(parameters: [String:String?]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(
