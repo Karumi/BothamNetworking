@@ -16,6 +16,18 @@ public struct HTTPRequest {
     public let httpMethod: HTTPMethod
     public let body: NSData?
 
+    public init(url: String,
+        parameters: [String:String]?,
+        headers: [String:String]?,
+        httpMethod: HTTPMethod,
+        body: NSData?) {
+            self.url = url
+            self.parameters = parameters
+            self.headers = headers
+            self.httpMethod = httpMethod
+            self.body = body
+    }
+
     @warn_unused_result
     public func withURL(url: String) -> HTTPRequest {
         return HTTPRequest(

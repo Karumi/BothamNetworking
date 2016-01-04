@@ -14,6 +14,14 @@ public struct HTTPResponse {
     public let headers: CaseInsensitiveDictionary<String>?
     public let body: NSData
 
+    public init(statusCode: Int,
+        headers: CaseInsensitiveDictionary<String>?,
+        body: NSData) {
+            self.statusCode = statusCode
+            self.headers = headers
+            self.body = body
+    }
+
     @warn_unused_result
     public func withStatusCode(statusCode: Int) -> HTTPResponse {
         return HTTPResponse(
