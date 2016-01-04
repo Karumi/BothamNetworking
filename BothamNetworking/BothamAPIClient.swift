@@ -36,28 +36,32 @@ public class BothamAPIClient {
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.POST, path: path, params: parameters, headers: headers, body: body, completition: completition)
+        return sendRequest(.POST, path: path, params: parameters, headers: headers,
+            body: body, completition: completition)
     }
 
     public func PUT(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.PUT, path: path, params: parameters, headers: headers, body: body, completition: completition)
+        return sendRequest(.PUT, path: path, params: parameters, headers: headers,
+            body: body, completition: completition)
     }
 
     public func DELETE(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.DELETE, path: path, params: parameters, headers: headers, body: body, completition: completition)
+        return sendRequest(.DELETE, path: path, params: parameters, headers: headers,
+            body: body, completition: completition)
     }
 
     public func PATCH(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body, completition: completition)
+        return sendRequest(.PATCH, path: path, params: parameters, headers: headers,
+            body: body, completition: completition)
     }
 
     func sendRequest(httpMethod: HTTPMethod, path: String,
