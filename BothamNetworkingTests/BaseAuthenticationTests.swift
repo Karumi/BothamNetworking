@@ -1,0 +1,58 @@
+//
+//  BaseAuthenticationTests.swift
+//  BothamNetworking
+//
+//  Created by Davide Mendolia on 31/12/15.
+//  Copyright © 2015 GoKarumi S.L. All rights reserved.
+//
+
+import Foundation
+import Nimble
+import BrightFutures
+import Nocilla
+import BothamNetworking
+
+class BaseAuthenticationTests: BothamNetworkingTestCase {
+
+    func testSendsAnyHttpMethodRequestWithBasicAuthentication() {
+        stubRequest("GET", anyHost + anyPath)
+            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
+            .andReturn(200)
+            .withHeaders(["Content-Type":"application/json"])
+        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: SpyBasicAuthentication())
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(result).toEventually(beBothamRequestSuccess())
+    }
+
+    func testSendsAnyHttpMethodRequestWithAuthenticationError() {
+        stubRequest("GET", anyHost + anyPath)
+            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
+            .andReturn(401)
+            .withHeaders([
+                "Content-Type":"application/json",
+                "WWW-Authenticate":"Basic realm=\"WallyWorld\"",
+                ])
+
+        let basicAuthentication = SpyBasicAuthentication()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication, responseInterceptor: basicAuthentication)
+
+        let result = bothamAPIClient.GET(anyPath)
+
+        expect(result).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401, body: NSData())))
+        expect(basicAuthentication.authenticationError).toEventually(beTrue())
+    }
+}
+
+private class SpyBasicAuthentication: BasicAuthentication {
+    var authenticationError: Bool = false
+
+    var credentials: (username: String, password: String) {
+        return ("Aladdin", "open sesame")
+    }
+
+    private func onAuthenticationError(realm: String) {
+        authenticationError = true
+    }
+}

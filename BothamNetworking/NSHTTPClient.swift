@@ -19,6 +19,7 @@ class NSHTTPClient: HTTPClient {
         }
         let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())
         request.HTTPMethod = httpRequest.httpMethod.rawValue
+        request.allHTTPHeaderFields = httpRequest.headers
         request.HTTPBody = httpRequest.body
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in
@@ -48,6 +49,6 @@ class NSHTTPClient: HTTPClient {
         let headers = response.allHeaderFields.map {
             (key, value) in (key as! String, value as! String)
         }
-        return HTTPResponse(statusCode: statusCode, headers: Dictionary(headers), body: data)
+        return HTTPResponse(statusCode: statusCode, headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers)), body: data)
     }
 }

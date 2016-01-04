@@ -70,10 +70,10 @@ public class BothamAPIClient {
             } else {
                 return httpClient.send(interceptedRequest)
                     .mapError { return .HTTPClientError(error: $0) }
+                    .map { self.applyResponseInterceptors($0) }
                     .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
                         return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                     }
-                    .map { self.applyResponseInterceptors($0) }
             }
     }
 
