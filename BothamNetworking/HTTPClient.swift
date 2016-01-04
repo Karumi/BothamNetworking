@@ -9,11 +9,11 @@
 import Foundation
 
 import Foundation
-import BrightFutures
+import Result
 
 public protocol HTTPClient {
 
-    func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError>
+    func send(httpRequest: HTTPRequest, callback: (Result<HTTPResponse, NSError>) -> ())
 
     func hasValidScheme(httpRequest: HTTPRequest) -> Bool
 
