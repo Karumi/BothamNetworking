@@ -16,7 +16,7 @@ class HTTPEncoderTests: XCTestCase {
     func testDoesNotEncodesBodyIfTheRequestDoesNotContainsContentTypeHeader() {
         let request = givenAHTTPRequestWith(body: ["a":"b"])
 
-        let bodyNSData = try! HTTPEncoder.encodeBody(request)
+        let bodyNSData = HTTPEncoder.encodeBody(request)
 
         expect(bodyNSData).to(beNil())
     }
@@ -24,7 +24,7 @@ class HTTPEncoderTests: XCTestCase {
     func testEncodesBodyUsingJsonEncodingIfTheRequestContainsJsonContentTypeHeader() {
         let request = givenAHTTPRequestWith(headers: ["Content-Type":"application/json"], body: ["a":"b"])
 
-        let bodyNSData = try! HTTPEncoder.encodeBody(request)
+        let bodyNSData = HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: NSUTF8StringEncoding)
 
         expect(bodyString).to(equal("{\"a\":\"b\"}"))
@@ -34,7 +34,7 @@ class HTTPEncoderTests: XCTestCase {
         let request = givenAHTTPRequestWith(headers: ["Content-Type":"application/x-www-form-urlencoded"],
             body: ["a":"b","c":3])
 
-        let bodyNSData = try! HTTPEncoder.encodeBody(request)
+        let bodyNSData = HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: NSUTF8StringEncoding)
 
         expect(bodyString).to(equal("a=b&c=3"))

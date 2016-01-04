@@ -20,7 +20,7 @@ public class BothamAPIClient {
     let baseEndpoint: String
     let httpClient: HTTPClient
 
-    init(baseEndpoint: String, httpClient: HTTPClient = NSHTTPClient()) {
+    public init(baseEndpoint: String, httpClient: HTTPClient = NSHTTPClient()) {
         self.baseEndpoint = baseEndpoint
         self.httpClient = httpClient
         self.requestInterceptors = [BothamRequestInterceptor]()
@@ -75,10 +75,10 @@ public class BothamAPIClient {
             } else {
                 return httpClient.send(interceptedRequest)
                     .mapError { return .HTTPClientError(error: $0) }
+                    .map { self.applyResponseInterceptors($0) }
                     .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
                         return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                     }
-                    .map { self.applyResponseInterceptors($0) }
             }
     }
 

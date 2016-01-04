@@ -11,9 +11,18 @@ import Foundation
 public struct HTTPResponse {
 
     public let statusCode: Int
-    public let headers: [String:String]?
+    public let headers: CaseInsensitiveDictionary<String>?
     public let body: NSData
 
+    public init(statusCode: Int,
+        headers: CaseInsensitiveDictionary<String>?,
+        body: NSData) {
+            self.statusCode = statusCode
+            self.headers = headers
+            self.body = body
+    }
+
+    @warn_unused_result
     public func withStatusCode(statusCode: Int) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
@@ -21,14 +30,16 @@ public struct HTTPResponse {
             body: body)
     }
 
+    @warn_unused_result
     public func withHeaders(headers: [String:String]?) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
-            headers: headers,
+            headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),
             body: body)
     }
 
-    public func appendHeaders(headers: [String:String]) -> HTTPResponse {
+    @warn_unused_result
+    public func appendingHeaders(headers: [String:String]) -> HTTPResponse {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPResponse(
@@ -37,6 +48,7 @@ public struct HTTPResponse {
             body: body)
     }
 
+    @warn_unused_result
     public func withBody(body: NSData) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,

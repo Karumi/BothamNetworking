@@ -12,12 +12,7 @@ import BrightFutures
 import Nocilla
 @testable import BothamNetworking
 
-class BothamAPIClientTests: NocillaTestCase {
-
-    private let anyHost = "http://www.anyhost.com/"
-    private let anyPath = "path"
-    private let anyHTTPMethod = HTTPMethod.GET
-    private let anyStatusCode = 200
+class BothamAPIClientTests: BothamNetworkingTestCase {
 
     override func tearDown() {
         BothamAPIClient.globalResponseInterceptors.removeAll()
@@ -222,19 +217,6 @@ class BothamAPIClientTests: NocillaTestCase {
         expect(result.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
     }
 
-    private func givenABothamAPIClientWithLocal(
-        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
-        responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
-        let bothamAPIClient = givenABothamAPIClient()
-        if let interceptor = requestInterceptor {
-            bothamAPIClient.requestInterceptors.append(interceptor)
-        }
-        if let interceptor = responseInterceptor {
-            bothamAPIClient.responseInterceptors.append(interceptor)
-        }
-        return bothamAPIClient
-    }
-
     private func givenABothamAPIClientWithGlobal(
         requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil)
@@ -247,10 +229,6 @@ class BothamAPIClientTests: NocillaTestCase {
             BothamAPIClient.globalResponseInterceptors.append(interceptor)
         }
         return bothamAPIClient
-    }
-
-    private func givenABothamAPIClient() -> BothamAPIClient {
-        return BothamAPIClient(baseEndpoint: anyHost)
     }
 
     private func waitForRequestFinished(result: Future<HTTPResponse, BothamAPIClientError>) {
