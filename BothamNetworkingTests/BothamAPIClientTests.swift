@@ -8,7 +8,7 @@
 
 import Foundation
 import Nimble
-import BrightFutures
+import Result
 import Nocilla
 @testable import BothamNetworking
 
@@ -23,81 +23,108 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         stubDefaultRequest("GET", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsPostRequestToAnyPath() {
         stubDefaultRequest("POST", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.POST(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.POST(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsPutRequestToAnyPath() {
         stubDefaultRequest("PUT", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.PUT(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.PUT(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func XtestSendsDeleteRequestToAnyPath() {
         stubDefaultRequest("DELETE", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.DELETE(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.DELETE(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsPatchRequestToAnyPath() {
         stubDefaultRequest("PATCH", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.PATCH(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.PATCH(anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsARequestToTheURLPassedAsArgument() {
         stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testSendsARequestToTheURLPassedUsingParams() {
         stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?k=v")
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath, params: ["k": "v"])
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath, params: ["k": "v"]) { result in
+            response = result
+        }
 
-        expect(result).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testReturns40XResponsesAsError() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(400)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(failWithError(.HTTPResponseError(statusCode: 400, body: NSData())))
+        expect(response).toEventually(failWithError(.HTTPResponseError(statusCode: 400, body: NSData())))
     }
 
     func testReturns50XResponsesAsError() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(500)
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.sendRequest(anyHTTPMethod, path: anyPath) { result in
+            response = result
+        }
 
-        expect(result).toEventually(failWithError(.HTTPResponseError(statusCode: 500, body: NSData())))
+        expect(response).toEventually(failWithError(.HTTPResponseError(statusCode: 500, body: NSData())))
     }
 
     func testInterceptRequestsUsingInterceptorsAddedLocally() {
@@ -105,11 +132,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
-        waitForRequestFinished(result)
     }
 
     func testInterceptRequestsUsingInterceptorsAddedGlobally() {
@@ -117,11 +147,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
-        waitForRequestFinished(result)
     }
 
     func testDoesNotInterceptRequestsOnceLocalInterceptorWasRemoved() {
@@ -130,10 +163,13 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
         bothamAPIClient.requestInterceptors.removeAll()
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
-        waitForRequestFinished(result)
     }
 
     func testDoesNotInterceptRequestsOnceGlobalInterceptorWasRemoved() {
@@ -142,10 +178,13 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
         BothamAPIClient.globalRequestInterceptors.removeAll()
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
-        waitForRequestFinished(result)
     }
 
     func testInterceptResponsesUsingInterceptorsAddedLocally() {
@@ -153,11 +192,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
-        waitForRequestFinished(result)
     }
 
     func testInterceptResponsesUsingInterceptorsAddedGlobally() {
@@ -165,11 +207,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
-        waitForRequestFinished(result)
     }
 
     func testDoesNotInterceptResponsesOnceLocalInterceptorWasRemoved() {
@@ -177,11 +222,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
-        bothamAPIClient.requestInterceptors.removeAll()
-        let result = bothamAPIClient.GET(anyPath)
+        bothamAPIClient.responseInterceptors.removeAll()
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
-        waitForRequestFinished(result)
     }
 
     func testDoesNotInterceptResponseOnceGlobalInterceptorWasRemoved() {
@@ -189,11 +237,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
-        BothamAPIClient.globalRequestInterceptors.removeAll()
-        let result = bothamAPIClient.GET(anyPath)
+        BothamAPIClient.globalResponseInterceptors.removeAll()
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
-        waitForRequestFinished(result)
     }
 
     func testParseHTTPResponsHeaders() {
@@ -202,19 +253,25 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             .withHeaders(["Content-Type":"application/json", "Server": "KarumiServer"])
         let bothamAPIClient = givenABothamAPIClient()
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
-        expect(result.value?.headers?["Content-Type"]).toEventually(equal("application/json"))
-        expect(result.value?.headers?["Server"]).toEventually(equal("KarumiServer"))
-        expect(result.value?.headers?.count).toEventually(equal(2))
+        expect(response?.value?.headers?["Content-Type"]).toEventually(equal("application/json"))
+        expect(response?.value?.headers?["Server"]).toEventually(equal("KarumiServer"))
+        expect(response?.value?.headers?.count).toEventually(equal(2))
     }
 
     func testShouldReturnUnsupportedSchemeErrorIfTheRequestDoesNotUseHttp() {
         let bothamAPIClient = BothamAPIClient(baseEndpoint: "ftp://www.karumi.com")
 
-        let result = bothamAPIClient.GET(anyPath)
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
 
-        expect(result.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
+        expect(response?.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
     }
 
     private func givenABothamAPIClientWithGlobal(
@@ -231,7 +288,4 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         return bothamAPIClient
     }
 
-    private func waitForRequestFinished(result: Future<HTTPResponse, BothamAPIClientError>) {
-        expect(result).toEventually(beBothamRequestSuccess())
-    }
 }

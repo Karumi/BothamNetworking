@@ -7,24 +7,21 @@
 //
 
 import Foundation
-import BrightFutures
+import Result
 
 public class NSHTTPClient: HTTPClient {
 
-    public func send(httpRequest: HTTPRequest) -> Future<HTTPResponse, NSError> {
-        let promise = Promise<HTTPResponse, NSError>()
-
+    public func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, NSError>) -> ()) {
         let request = mapHTTPRequestToNSURLRequest(httpRequest)
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
-                promise.failure(error)
+                completion(Result.Failure(error))
             } else if let response = response as? NSHTTPURLResponse, let data = data {
                 let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
-                promise.success(response)
+                completion(Result.Success(response))
             }
         }.resume()
-        return promise.future
     }
 
     private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) -> NSURLRequest {

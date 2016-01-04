@@ -2,7 +2,7 @@ workspace 'BothamNetworking.xcworkspace'
 xcodeproj 'BothamNetworking.xcodeproj'
 use_frameworks!
 
-pod "BrightFutures"
+pod "Result"
 
 target 'BothamNetworkingTests' do
     pod "Nimble"

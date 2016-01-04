@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import BrightFutures
+import Result
 
 public class BothamAPIClient {
 
@@ -28,39 +28,47 @@ public class BothamAPIClient {
     }
 
     public func GET(path: String, parameters: [String:String?]? = nil,
-        headers: [String:String]? = nil)
-        -> Future<HTTPResponse, BothamAPIClientError> {
-        return sendRequest(.GET, path: path, params: parameters, headers: headers)
+        headers: [String:String]? = nil, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.GET, path: path, params: parameters, headers: headers, completion: completion)
     }
 
     public func POST(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
-        body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
-        return sendRequest(.POST, path: path, params: parameters, headers: headers, body: body)
+        body: [String: AnyObject]? = nil,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.POST, path: path, params: parameters, headers: headers,
+            body: body, completion: completion)
     }
 
     public func PUT(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
-        body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
-        return sendRequest(.PUT, path: path, params: parameters, headers: headers, body: body)
+        body: [String: AnyObject]? = nil,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.PUT, path: path, params: parameters, headers: headers,
+            body: body, completion: completion)
     }
 
     public func DELETE(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
-        body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
-        return sendRequest(.DELETE, path: path, params: parameters, headers: headers, body: body)
+        body: [String: AnyObject]? = nil,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.DELETE, path: path, params: parameters, headers: headers,
+            body: body, completion: completion)
     }
 
     public func PATCH(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
-        body: [String: AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
-        return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body)
+        body: [String: AnyObject]? = nil,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.PATCH, path: path, params: parameters, headers: headers,
+                body: body, completion: completion)
     }
 
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String?]? = nil,
         headers: [String:String]? = nil,
-        body: [String:AnyObject]? = nil) -> Future<HTTPResponse, BothamAPIClientError> {
+        body: [String:AnyObject]? = nil,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
 
             let initialRequest = HTTPRequest(
                 url: baseEndpoint + path,
@@ -71,16 +79,19 @@ public class BothamAPIClient {
 
             let interceptedRequest = applyRequestInterceptors(initialRequest)
             if !hasValidScheme(interceptedRequest) {
-                return Future(error: BothamAPIClientError.UnsupportedURLScheme)
+                completion(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
-                return httpClient.send(interceptedRequest)
-                    .mapError { return .HTTPClientError(error: $0) }
-                    .map { self.applyResponseInterceptors($0) }
-                    .flatMap { httpResponse -> Future<HTTPResponse, BothamAPIClientError> in
-                        return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                httpClient.send(interceptedRequest) { result in
+                    let response = result.mapError { BothamAPIClientError.HTTPClientError(error: $0) }
+                        .map { return self.applyResponseInterceptors($0) }
+                        .flatMap { httpResponse -> Result<HTTPResponse, BothamAPIClientError> in
+                            return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                     }
+                    completion(response)
+                }
             }
     }
+
 
     private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
@@ -105,14 +116,14 @@ public class BothamAPIClient {
     }
 
     private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
-        -> Future<HTTPResponse, BothamAPIClientError> {
-        if isValidResponse(httpResponse) {
-            return Future(value: httpResponse)
-        } else {
-            let statusCode = httpResponse.statusCode
-            let body = httpResponse.body
-            return Future(error: .HTTPResponseError(statusCode: statusCode, body: body))
-        }
+        -> Result<HTTPResponse, BothamAPIClientError> {
+            if isValidResponse(httpResponse) {
+                return Result.Success(httpResponse)
+            } else {
+                let statusCode = httpResponse.statusCode
+                let body = httpResponse.body
+                return Result.Failure(.HTTPResponseError(statusCode: statusCode, body: body))
+            }
     }
 
     private func isValidResponse(response: HTTPResponse) -> Bool {
