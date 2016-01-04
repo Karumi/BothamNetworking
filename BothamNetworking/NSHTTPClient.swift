@@ -11,15 +11,15 @@ import Result
 
 public class NSHTTPClient: HTTPClient {
 
-    public func send(httpRequest: HTTPRequest, callback: (Result<HTTPResponse, NSError>) -> ()) {
+    public func send(httpRequest: HTTPRequest, completition: (Result<HTTPResponse, NSError>) -> ()) {
         let request = mapHTTPRequestToNSURLRequest(httpRequest)
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
-                callback(Result.Failure(error))
+                completition(Result.Failure(error))
             } else if let response = response as? NSHTTPURLResponse, let data = data {
                 let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
-                callback(Result.Success(response))
+                completition(Result.Success(response))
             }
         }.resume()
     }

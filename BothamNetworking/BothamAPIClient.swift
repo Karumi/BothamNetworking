@@ -28,43 +28,43 @@ public class BothamAPIClient {
     }
 
     public func GET(path: String, parameters: [String:String?]? = nil,
-        headers: [String:String]? = nil, callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.GET, path: path, params: parameters, headers: headers, callback: callback)
+        headers: [String:String]? = nil, completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.GET, path: path, params: parameters, headers: headers, completition: completition)
     }
 
     public func POST(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.POST, path: path, params: parameters, headers: headers, body: body, callback: callback)
+        completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.POST, path: path, params: parameters, headers: headers, body: body, completition: completition)
     }
 
     public func PUT(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.PUT, path: path, params: parameters, headers: headers, body: body, callback: callback)
+        completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.PUT, path: path, params: parameters, headers: headers, body: body, completition: completition)
     }
 
     public func DELETE(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.DELETE, path: path, params: parameters, headers: headers, body: body, callback: callback)
+        completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.DELETE, path: path, params: parameters, headers: headers, body: body, completition: completition)
     }
 
     public func PATCH(path: String, parameters: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body, callback: callback)
+        completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        return sendRequest(.PATCH, path: path, params: parameters, headers: headers, body: body, completition: completition)
     }
 
     func sendRequest(httpMethod: HTTPMethod, path: String,
         params: [String:String?]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil,
-        callback: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        completition: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
 
             let initialRequest = HTTPRequest(
                 url: baseEndpoint + path,
@@ -75,7 +75,7 @@ public class BothamAPIClient {
 
             let interceptedRequest = applyRequestInterceptors(initialRequest)
             if !hasValidScheme(interceptedRequest) {
-                callback(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
+                completition(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
                 return httpClient.send(interceptedRequest) { result in
                     result.mapError { BothamAPIClientError.HTTPClientError(error: $0) }
