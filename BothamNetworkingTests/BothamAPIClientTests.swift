@@ -137,9 +137,9 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
-        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testInterceptRequestsUsingInterceptorsAddedGlobally() {
@@ -152,9 +152,9 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
-        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testDoesNotInterceptRequestsOnceLocalInterceptorWasRemoved() {
@@ -168,8 +168,8 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(spyInterceptor.intercepted).toEventually(beFalse())
         expect(response).toEventually(beBothamRequestSuccess())
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
     func testDoesNotInterceptRequestsOnceGlobalInterceptorWasRemoved() {
@@ -183,8 +183,8 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(spyInterceptor.intercepted).toEventually(beFalse())
         expect(response).toEventually(beBothamRequestSuccess())
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
     func testInterceptResponsesUsingInterceptorsAddedLocally() {
@@ -197,9 +197,9 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
-        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testInterceptResponsesUsingInterceptorsAddedGlobally() {
@@ -212,9 +212,9 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
+        expect(response).toEventually(beBothamRequestSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
-        expect(response).toEventually(beBothamRequestSuccess())
     }
 
     func testDoesNotInterceptResponsesOnceLocalInterceptorWasRemoved() {
@@ -222,14 +222,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
-        bothamAPIClient.requestInterceptors.removeAll()
+        bothamAPIClient.responseInterceptors.removeAll()
         var response: Result<HTTPResponse, BothamAPIClientError>? = nil
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
 
-        expect(spyInterceptor.intercepted).toEventually(beFalse())
         expect(response).toEventually(beBothamRequestSuccess())
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
     func testDoesNotInterceptResponseOnceGlobalInterceptorWasRemoved() {
@@ -237,14 +237,14 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
-        BothamAPIClient.globalRequestInterceptors.removeAll()
+        BothamAPIClient.globalResponseInterceptors.removeAll()
         var response: Result<HTTPResponse, BothamAPIClientError>? = nil
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
 
-        expect(spyInterceptor.intercepted).toEventually(beFalse())
         expect(response).toEventually(beBothamRequestSuccess())
+        expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
     func testParseHTTPResponsHeaders() {
