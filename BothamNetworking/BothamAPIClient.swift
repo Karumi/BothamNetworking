@@ -79,15 +79,10 @@ public class BothamAPIClient {
                 callback(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
                 return httpClient.send(interceptedRequest) { result in
-                    if let error = result.error {
-                        callback(Result.Failure(.HTTPClientError(error: error)))
-                    } else if let response = result.value {
-                        self.applyResponseInterceptors(response)
-                        if self.httpClient.isValidResponse(response) {
-                            callback(Result.Success(response))
-                        } else {
-                            callback(Result.Failure(self.mapHTTPResponseToBothamAPIClientError(response)))
-                        }
+                    result.mapError { BothamAPIClientError.HTTPClientError(error: $0) }
+                        .map { return self.applyResponseInterceptors($0) }
+                        .flatMap { httpResponse -> Result<HTTPResponse, BothamAPIClientError> in
+                            return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                     }
                 }
             }
@@ -117,10 +112,14 @@ public class BothamAPIClient {
     }
 
     private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
-        -> BothamAPIClientError {
-            let statusCode = httpResponse.statusCode
-            let body = httpResponse.body
-            return .HTTPResponseError(statusCode: statusCode, body: body)
+        -> Result<HTTPResponse, BothamAPIClientError> {
+            if isValidResponse(httpResponse) {
+                return Result.Success(httpResponse)
+            } else {
+                let statusCode = httpResponse.statusCode
+                let body = httpResponse.body
+                return Result.Failure(.HTTPResponseError(statusCode: statusCode, body: body))
+            }
     }
 
     private func isValidResponse(response: HTTPResponse) -> Bool {
