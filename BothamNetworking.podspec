@@ -14,6 +14,5 @@ Pod::Spec.new do |s|
 	s.resources = ['BothamNetworking/*.xib']
     s.requires_arc = true
 
-    s.dependency 'BrightFutures'
     s.dependency 'Result'
 end
