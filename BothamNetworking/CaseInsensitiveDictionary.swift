@@ -187,3 +187,9 @@ func += <ValueType> (inout left: CaseInsensitiveDictionary<ValueType>?, right: D
         left?.updateValue(v, forKey: k)
     }
 }
+
+extension CaseInsensitiveDictionary : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        get { return "\(data)" }
+    }
+}
