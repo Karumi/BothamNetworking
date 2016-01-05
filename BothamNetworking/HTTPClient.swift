@@ -28,8 +28,7 @@ extension HTTPClient {
     }
 
     public func isValidResponse(response: HTTPResponse) -> Bool {
-        let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
-        return containsValidHTTPStatusCode
+        return 200..<300 ~= response.statusCode
     }
 
 }
