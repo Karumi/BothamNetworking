@@ -29,8 +29,12 @@ extension HTTPClient {
 
     public func isValidResponse(response: HTTPResponse) -> Bool {
         let containsValidHTTPStatusCode = 200..<300 ~= response.statusCode
-        let containsJsonContentType = response.headers?["Content-Type"] == "application/json"
-        return containsValidHTTPStatusCode && containsJsonContentType
+        return containsValidHTTPStatusCode && containsJSONContentType(response.headers)
+    }
+
+    private func containsJSONContentType(headers: CaseInsensitiveDictionary<String>?) -> Bool {
+        let contentTypeHeader = headers?["Content-Type"]
+        return contentTypeHeader == "application/json" || contentTypeHeader == "application/json; charset=utf-8"
     }
 
 }
