@@ -13,6 +13,7 @@ public enum BothamAPIClientError: ErrorType {
     case HTTPResponseError(statusCode: Int, body: NSData)
     case NetworkError
     case HTTPClientError(error: NSError)
+    case ParsingError(error: NSError)
     case UnsupportedURLScheme
 
 }
