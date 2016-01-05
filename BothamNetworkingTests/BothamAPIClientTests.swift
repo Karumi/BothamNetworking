@@ -20,7 +20,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testSendsGetRequestToAnyPath() {
-        stubDefaultRequest("GET", anyHost + anyPath)
+        stubRequest("GET", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -32,7 +32,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testSendsPostRequestToAnyPath() {
-        stubDefaultRequest("POST", anyHost + anyPath)
+        stubRequest("POST", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -44,7 +44,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testSendsPutRequestToAnyPath() {
-        stubDefaultRequest("PUT", anyHost + anyPath)
+        stubRequest("PUT", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -56,7 +56,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func XtestSendsDeleteRequestToAnyPath() {
-        stubDefaultRequest("DELETE", anyHost + anyPath)
+        stubRequest("DELETE", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -68,7 +68,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testSendsPatchRequestToAnyPath() {
-        stubDefaultRequest("PATCH", anyHost + anyPath)
+        stubRequest("PATCH", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -80,7 +80,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testSendsARequestToTheURLPassedAsArgument() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -92,7 +92,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testSendsARequestToTheURLPassedUsingParams() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?k=v")
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?k=v")
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -128,7 +128,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testInterceptRequestsUsingInterceptorsAddedLocally() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
@@ -143,7 +143,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testInterceptRequestsUsingInterceptorsAddedGlobally() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
@@ -158,7 +158,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testDoesNotInterceptRequestsOnceLocalInterceptorWasRemoved() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
@@ -173,7 +173,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testDoesNotInterceptRequestsOnceGlobalInterceptorWasRemoved() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
@@ -188,7 +188,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testInterceptResponsesUsingInterceptorsAddedLocally() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
@@ -203,7 +203,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testInterceptResponsesUsingInterceptorsAddedGlobally() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
@@ -218,7 +218,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testDoesNotInterceptResponsesOnceLocalInterceptorWasRemoved() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
@@ -233,7 +233,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testDoesNotInterceptResponseOnceGlobalInterceptorWasRemoved() {
-        stubDefaultRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 

@@ -17,8 +17,6 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
     func testSendsAnyHttpMethodRequestWithBasicAuthentication() {
         stubRequest("GET", anyHost + anyPath)
             .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
-            .andReturn(200)
-            .withHeaders(["Content-Type":"application/json"])
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: SpyBasicAuthentication())
 
         var response: Result<HTTPResponse, BothamAPIClientError>!
@@ -33,10 +31,7 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
         stubRequest("GET", anyHost + anyPath)
             .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
             .andReturn(401)
-            .withHeaders([
-                "Content-Type":"application/json",
-                "WWW-Authenticate":"Basic realm=\"WallyWorld\"",
-                ])
+            .withHeader("WWW-Authenticate","Basic realm=\"WallyWorld\"")
 
         let basicAuthentication = SpyBasicAuthentication()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication,
