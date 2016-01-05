@@ -37,10 +37,4 @@ class NocillaTestCase: XCTestCase {
         }
     }
 
-    func stubDefaultRequest(method: String!, _ url: LSMatcheable!) {
-        stubRequest(method, url)
-            .andReturn(200)
-            .withHeaders(["Content-Type":"application/json"])
-    }
-
 }
