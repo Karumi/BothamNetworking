@@ -274,6 +274,17 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         expect(response?.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
     }
 
+    func testShouldReturNetworkErrorIfThereIsNoConnection() {
+        let bothamAPIClient = BothamAPIClient(baseEndpoint: anyHost, httpClient: ConnectionErrorHTTPClient())
+
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
+        }
+
+        expect(response?.error).toEventually(equal(BothamAPIClientError.NetworkError))
+    }
+
     private func givenABothamAPIClientWithGlobal(
         requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil)
