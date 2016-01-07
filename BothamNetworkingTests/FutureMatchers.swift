@@ -31,18 +31,6 @@ func failWithError<T>(expectedError: BothamAPIClientError) -> MatcherFunc<T?> {
     }
 }
 
-func failWithError<T>(expectedError: NSError) -> MatcherFunc<T?> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "has error"
-        let result = try actualExpression.evaluate() as? Result<HTTPResponse, NSError>
-        if let error = result?.error {
-            return expectedError == error
-        } else {
-            return false
-        }
-    }
-}
-
 extension BothamAPIClientError: Equatable { }
 
 public func == (lhs: BothamAPIClientError, rhs: BothamAPIClientError) -> Bool {

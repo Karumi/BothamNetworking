@@ -140,6 +140,19 @@ class NSHTTPClientTests: NocillaTestCase {
         expect(response).toEventually(beSuccess())
     }
 
+    func testReturnsNSConnectionErrorsAsABothamAPIClientNetworkError() {
+        stubRequest("GET", anyUrl).andFailWithError(NSError.anyConnectionError())
+        let httpClient = NSHTTPClient()
+        let request = givenOneHttpRequest(.GET, url: anyUrl)
+
+        var response: Result<HTTPResponse, BothamAPIClientError>?
+        httpClient.send(request) { result in
+            response = result
+        }
+
+        expect(response).toEventually(failWithError(.NetworkError))
+    }
+
     private func givenOneHttpRequest(httpMethod: HTTPMethod,
         url: String, params: [String:String?]? = nil,
         var headers: [String:String]? = nil,
@@ -147,4 +160,13 @@ class NSHTTPClientTests: NocillaTestCase {
             headers += ["Content-Type":"application/json"]
             return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: body)
     }
+
+}
+
+extension NSError {
+
+    static func anyConnectionError() -> NSError {
+        return NSError(domain: NSURLErrorDomain, code: NSURLErrorNetworkConnectionLost, userInfo: nil)
+    }
+
 }
