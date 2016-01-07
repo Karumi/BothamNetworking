@@ -6,7 +6,6 @@
 //  Copyright © 2016 GoKarumi S.L. All rights reserved.
 //
 
-
 import Foundation
 import XCTest
 import Nimble
