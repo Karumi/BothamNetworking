@@ -11,7 +11,7 @@ import Foundation
 public struct HTTPRequest {
 
     public let url: String
-    public let parameters: [String:String?]?
+    public let parameters: [String:String]?
     public let headers: [String:String]?
     public let httpMethod: HTTPMethod
     public let body: [String:AnyObject]?
@@ -23,7 +23,7 @@ public struct HTTPRequest {
     }
 
     public init(url: String,
-        parameters: [String:String?]?,
+        parameters: [String:String]?,
         headers: [String:String]?,
         httpMethod: HTTPMethod,
         body: [String:AnyObject]?) {
@@ -45,7 +45,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func withParameters(parameters: [String:String?]) -> HTTPRequest {
+    public func withParameters(parameters: [String:String]) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -97,7 +97,7 @@ public struct HTTPRequest {
     }
 
     @warn_unused_result
-    public func appendingParameters(parameters: [String:String?]) -> HTTPRequest {
+    public func appendingParameters(parameters: [String:String]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(
