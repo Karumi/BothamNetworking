@@ -28,7 +28,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsPostRequestToAnyPath() {
@@ -40,7 +40,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsPutRequestToAnyPath() {
@@ -52,7 +52,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func XtestSendsDeleteRequestToAnyPath() {
@@ -64,7 +64,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsPatchRequestToAnyPath() {
@@ -76,7 +76,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsARequestToTheURLPassedAsArgument() {
@@ -88,7 +88,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsARequestToTheURLPassedUsingParams() {
@@ -100,7 +100,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testReturns40XResponsesAsError() {
@@ -137,7 +137,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
     }
@@ -152,7 +152,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedRequest.url).toEventually(equal(anyHost + anyPath))
     }
@@ -168,7 +168,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
@@ -183,7 +183,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
@@ -197,7 +197,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
     }
@@ -212,7 +212,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beTrue())
         expect(spyInterceptor.interceptedResponse.statusCode).toEventually(equal(200))
     }
@@ -228,7 +228,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
@@ -243,7 +243,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
         expect(spyInterceptor.intercepted).toEventually(beFalse())
     }
 
@@ -283,7 +283,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     private func givenABothamAPIClientWithGlobal(

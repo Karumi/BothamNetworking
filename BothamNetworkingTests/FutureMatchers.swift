@@ -14,14 +14,6 @@ import Result
 func beSuccess<T>() -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be success"
-        let result = try actualExpression.evaluate() as? Result<HTTPResponse, NSError>
-        return result?.value != nil
-    }
-}
-
-func beBothamRequestSuccess<T>() -> MatcherFunc<T?> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "be success"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
         return result?.value != nil
     }
@@ -31,18 +23,6 @@ func failWithError<T>(expectedError: BothamAPIClientError) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
-        if let error = result?.error {
-            return expectedError == error
-        } else {
-            return false
-        }
-    }
-}
-
-func failWithError<T>(expectedError: NSError) -> MatcherFunc<T?> {
-    return MatcherFunc { actualExpression, failureMessage in
-        failureMessage.postfixMessage = "has error"
-        let result = try actualExpression.evaluate() as? Result<HTTPResponse, NSError>
         if let error = result?.error {
             return expectedError == error
         } else {

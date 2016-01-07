@@ -13,9 +13,9 @@
 		6B7BCF021C355BE500147FBD /* BothamNetworkingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCF011C355BE500147FBD /* BothamNetworkingTestCase.swift */; };
 		D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18346BC8A4CC5BD56E0F20B /* Pods.framework */; };
 		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
-		EB3973191C3A671000AF37CD /* NSLogInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */; };
 		EB355DC81C33FD80003411DA /* HTTPEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DC71C33FD80003411DA /* HTTPEncoder.swift */; };
 		EB355DCB1C33FDE4003411DA /* HTTPEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DCA1C33FDE4003411DA /* HTTPEncoderTests.swift */; };
+		EB3973191C3A671000AF37CD /* NSLogInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */; };
 		EB5BD5181C31A00800C02CDA /* BothamRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5171C31A00800C02CDA /* BothamRequestInterceptor.swift */; };
 		EB5BD51B1C31A60500C02CDA /* SpyRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51A1C31A60500C02CDA /* SpyRequestInterceptor.swift */; };
 		EB5BD51E1C328AEA00C02CDA /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */; };
@@ -58,9 +58,9 @@
 		A18346BC8A4CC5BD56E0F20B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74D9F63C2D03CEA7DEAAA3F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.release.xcconfig"; sourceTree = "<group>"; };
-		EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLogInterceptor.swift; sourceTree = "<group>"; };
 		EB355DC71C33FD80003411DA /* HTTPEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPEncoder.swift; sourceTree = "<group>"; };
 		EB355DCA1C33FDE4003411DA /* HTTPEncoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPEncoderTests.swift; sourceTree = "<group>"; };
+		EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLogInterceptor.swift; sourceTree = "<group>"; };
 		EB5BD5171C31A00800C02CDA /* BothamRequestInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamRequestInterceptor.swift; sourceTree = "<group>"; };
 		EB5BD51A1C31A60500C02CDA /* SpyRequestInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpyRequestInterceptor.swift; sourceTree = "<group>"; };
 		EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
