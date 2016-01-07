@@ -15,7 +15,7 @@ class HTTPRequestTests: XCTestCase {
 
     private let anyURL = "http://www.karumi.com"
     private let anyHTTPMethod = HTTPMethod.GET
-    private let anyParams: [String:String?] = ["x":"y"]
+    private let anyParams = ["x":"y"]
     private let anyHeaders = ["x":"y"]
 
     func testShouldReplaceRequestURL() {
@@ -63,7 +63,7 @@ class HTTPRequestTests: XCTestCase {
     private func givenAnEmptyHTTPRequest() -> HTTPRequest {
         return HTTPRequest(
             url: anyURL,
-            parameters: [String:String?](),
+            parameters: [String:String](),
             headers: nil,
             httpMethod: anyHTTPMethod,
             body: nil)
@@ -108,7 +108,7 @@ class HTTPRequestTests: XCTestCase {
     }
 
     private func givenAnHTTPRequest(url: String = "http://www.karumi.com",
-        parameters: [String:String?]? = nil,
+        parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         httpMethod: HTTPMethod = .GET,
         body: NSData? = nil ) -> HTTPRequest {

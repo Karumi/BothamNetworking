@@ -27,12 +27,12 @@ public class BothamAPIClient {
         self.responseInterceptors = [BothamResponseInterceptor]()
     }
 
-    public func GET(path: String, parameters: [String:String?]? = nil,
+    public func GET(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
         return sendRequest(.GET, path: path, params: parameters, headers: headers, completion: completion)
     }
 
-    public func POST(path: String, parameters: [String:String?]? = nil,
+    public func POST(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
@@ -40,7 +40,7 @@ public class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    public func PUT(path: String, parameters: [String:String?]? = nil,
+    public func PUT(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
@@ -48,7 +48,7 @@ public class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    public func DELETE(path: String, parameters: [String:String?]? = nil,
+    public func DELETE(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
@@ -56,7 +56,7 @@ public class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    public func PATCH(path: String, parameters: [String:String?]? = nil,
+    public func PATCH(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
@@ -65,7 +65,7 @@ public class BothamAPIClient {
     }
 
     func sendRequest(httpMethod: HTTPMethod, path: String,
-        params: [String:String?]? = nil,
+        params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {

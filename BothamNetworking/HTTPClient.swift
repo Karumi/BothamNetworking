@@ -13,6 +13,8 @@ import Result
 
 public protocol HTTPClient {
 
+    var timeout: NSTimeInterval { get }
+
     func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ())
 
     func hasValidScheme(httpRequest: HTTPRequest) -> Bool
@@ -20,9 +22,16 @@ public protocol HTTPClient {
     func isValidResponse(httpRespone: HTTPResponse) -> Bool
 
     func mapNSErrorToBothamError(error: NSError) -> BothamAPIClientError
+
 }
 
 extension HTTPClient {
+
+    public var timeout: NSTimeInterval {
+        get {
+            return 10
+        }
+    }
 
     public func hasValidScheme(request: HTTPRequest) -> Bool {
         return request.url.hasPrefix("http") || request.url.hasPrefix("https")
