@@ -12,7 +12,9 @@ import Result
 
 class ConnectionErrorHTTPClient: HTTPClient {
     func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, NSError>) -> ()) {
-        let connectionError = NSError(domain: "NSURLErrorDomain", code: -1009, userInfo: nil)
+        let connectionError = NSError(domain: NSURLErrorDomain,
+            code: NSURLErrorNotConnectedToInternet,
+            userInfo: nil)
         completion(Result.Failure(connectionError))
     }
 }

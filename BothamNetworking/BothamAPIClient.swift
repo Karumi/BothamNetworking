@@ -117,7 +117,7 @@ public class BothamAPIClient {
 
     private func mapNSErrorToBothamAPIClientError(error: NSError) -> BothamAPIClientError {
         switch error.code {
-        case BothamAPIClientErrorCode.networkError:
+        case NSURLErrorNotConnectedToInternet:
             return BothamAPIClientError.NetworkError
         default:
             return BothamAPIClientError.HTTPClientError(error: error)
@@ -143,8 +143,4 @@ public class BothamAPIClient {
         return httpClient.hasValidScheme(request)
 
     }
-}
-
-private struct BothamAPIClientErrorCode {
-    private static let networkError = -1009
 }
