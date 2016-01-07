@@ -275,7 +275,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testEncodesEmptyParameterValuesProperly() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?a")
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?a=")
         let bothamAPIClient = BothamAPIClient(baseEndpoint: anyHost)
 
         var response: Result<HTTPResponse, BothamAPIClientError>? = nil
