@@ -14,6 +14,8 @@ public class NSHTTPClient: HTTPClient {
     public func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, NSError>) -> ()) {
         let request = mapHTTPRequestToNSURLRequest(httpRequest)
         let session = NSURLSession.sharedSession()
+        session.configuration.timeoutIntervalForRequest = timeout
+        session.configuration.timeoutIntervalForResource = timeout
         session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
                 completion(Result.Failure(error))
@@ -36,6 +38,7 @@ public class NSHTTPClient: HTTPClient {
         request.allHTTPHeaderFields = httpRequest.headers
         request.HTTPMethod = httpRequest.httpMethod.rawValue
         request.HTTPBody = httpRequest.encodedBody
+        request.timeoutInterval = timeout
         return request
     }
 

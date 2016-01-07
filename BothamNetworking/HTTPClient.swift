@@ -19,6 +19,8 @@ public protocol HTTPClient {
 
     func isValidResponse(httpRespone: HTTPResponse) -> Bool
 
+    var timeout: NSTimeInterval { get }
+
 }
 
 extension HTTPClient {
@@ -29,6 +31,12 @@ extension HTTPClient {
 
     public func isValidResponse(response: HTTPResponse) -> Bool {
         return 200..<300 ~= response.statusCode
+    }
+
+    public var timeout: NSTimeInterval {
+        get {
+            return 10
+        }
     }
 
 }
