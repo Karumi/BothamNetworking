@@ -46,5 +46,5 @@ extension NSError {
     static func anyError() -> NSError {
         return NSError(domain: "Any error", code: 0, userInfo: nil)
     }
-    
+
 }
