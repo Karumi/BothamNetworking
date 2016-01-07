@@ -27,8 +27,9 @@ public class NSHTTPClient: HTTPClient {
     private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) -> NSURLRequest {
         let components = NSURLComponents(string: httpRequest.url)
         if let params = httpRequest.parameters {
-            components?.queryItems = params.map {
-                NSURLQueryItem(name: $0.0, value: $0.1)
+            components?.queryItems = params.map { (key, value) in
+                let paramValue: String? = !value.isEmpty ? value : nil
+                return NSURLQueryItem(name: key, value: paramValue)
             }
         }
         let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())

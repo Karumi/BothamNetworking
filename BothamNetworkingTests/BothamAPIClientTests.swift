@@ -274,6 +274,18 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         expect(response?.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
     }
 
+    func testEncodesEmptyParameterValuesProperly() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?a")
+        let bothamAPIClient = BothamAPIClient(baseEndpoint: anyHost)
+
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath, parameters: ["a":""]) { result in
+            response = result
+        }
+
+        expect(response).toEventually(beBothamRequestSuccess())
+    }
+
     private func givenABothamAPIClientWithGlobal(
         requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil)
