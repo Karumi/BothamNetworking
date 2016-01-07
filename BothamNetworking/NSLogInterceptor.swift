@@ -11,7 +11,7 @@ import Foundation
 public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseInterceptor {
 
     public init() {}
-    
+
     public func intercept(request: HTTPRequest) -> HTTPRequest {
         NSLog("-> \(request)")
         return request
