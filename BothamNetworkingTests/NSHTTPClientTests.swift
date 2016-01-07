@@ -27,7 +27,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -40,7 +40,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.POST, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -53,7 +53,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.PUT, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -66,7 +66,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.DELETE, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -79,7 +79,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.HEAD, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -92,7 +92,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -105,12 +105,12 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
 
-        expect(response).toEventually(failWithError(anyNSError))
+        expect(response).toEventually(failWithError(.HTTPClientError(error: anyNSError)))
     }
 
     func testSendsParamsConfiguredInTheHttpRequest() {
@@ -118,7 +118,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl, params: ["key" : "value"])
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }
@@ -132,7 +132,7 @@ class NSHTTPClientTests: NocillaTestCase {
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value"])
 
-        var response: Result<HTTPResponse, NSError>?
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
             response = result
         }

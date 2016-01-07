@@ -11,12 +11,13 @@ import Result
 
 public class NSHTTPClient: HTTPClient {
 
-    public func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, NSError>) -> ()) {
+    public func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
         let request = mapHTTPRequestToNSURLRequest(httpRequest)
         let session = NSURLSession.sharedSession()
         session.dataTaskWithRequest(request) { data, response, error in
             if let error = error {
-                completion(Result.Failure(error))
+                let bothamError = self.mapNSErrorToBothamError(error)
+                completion(Result.Failure(bothamError))
             } else if let response = response as? NSHTTPURLResponse, let data = data {
                 let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
                 completion(Result.Success(response))
@@ -48,4 +49,5 @@ public class NSHTTPClient: HTTPClient {
             headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers)),
             body: data)
     }
+
 }
