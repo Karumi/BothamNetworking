@@ -24,7 +24,7 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(beBothamRequestSuccess())
+        expect(response).toEventually(beSuccess())
     }
 
     func testSendsAnyHttpMethodRequestWithAuthenticationError() {

@@ -13,12 +13,13 @@ import Result
 
 public protocol HTTPClient {
 
-    func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, NSError>) -> ())
+    func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ())
 
     func hasValidScheme(httpRequest: HTTPRequest) -> Bool
 
     func isValidResponse(httpRespone: HTTPResponse) -> Bool
 
+    func mapNSErrorToBothamError(error: NSError) -> BothamAPIClientError
 }
 
 extension HTTPClient {
@@ -29,6 +30,21 @@ extension HTTPClient {
 
     public func isValidResponse(response: HTTPResponse) -> Bool {
         return 200..<300 ~= response.statusCode
+    }
+
+    public func mapNSErrorToBothamError(error: NSError) -> BothamAPIClientError {
+        let connectionErrors = [NSURLErrorCancelled,
+            NSURLErrorTimedOut,
+            NSURLErrorCannotConnectToHost,
+            NSURLErrorNetworkConnectionLost,
+            NSURLErrorNotConnectedToInternet,
+            NSURLErrorRequestBodyStreamExhausted
+        ]
+        if connectionErrors.contains(error.code) {
+            return .NetworkError
+        } else {
+            return .HTTPClientError(error: error)
+        }
     }
 
 }
