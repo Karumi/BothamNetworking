@@ -10,9 +10,9 @@ import Foundation
 import Result
 import SwiftyJSON
 
-extension ResultType where Value == HTTPResponse, Error == BothamAPIClientError {
+public extension ResultType where Value == HTTPResponse, Error == BothamAPIClientError {
 
-    func mapJSON<U>(transform: JSON -> U) -> Result<U, BothamAPIClientError> {
+    public func mapJSON<U>(transform: JSON -> U) -> Result<U, BothamAPIClientError> {
         return flatMap { result in
             let data = self.value?.body
             return dataToJSONResult(data).map { transform($0) }
