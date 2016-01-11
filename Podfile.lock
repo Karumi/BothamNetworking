@@ -2,15 +2,18 @@ PODS:
   - Nimble (3.0.0)
   - Nocilla (0.10.0)
   - Result (1.0.1)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Nimble
   - Nocilla
   - Result
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nocilla: ae0a2b05f3087b473624ac2b25903695df51246a
   Result: caef80340451e1f07492fa1e89117f83613bce24
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0
