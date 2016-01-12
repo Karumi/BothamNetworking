@@ -1,1 +1,2 @@
-//: [Send and read headers](AccessHeaders)
+//: * [Send and read headers](AccessHeaders)
+//: * [BasicAuthentication against httpbin](BasicAuthentication)

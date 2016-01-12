@@ -3,5 +3,6 @@
     <pages>
         <page name='Home'/>
         <page name='AccessHeaders'/>
+        <page name='BasicAuthentication'/>
     </pages>
 </playground>
