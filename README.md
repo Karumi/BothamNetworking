@@ -14,7 +14,7 @@ This framework contains all the classes needed to implement your networking laye
 ###Send a request using different HTTP methods:
 
 ```swift
-let botham = BothamAPIClient("https://api.github.com/repos/Karumi/")
+let botham = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
 
 botham.GET("/issues") { result in
        ...
@@ -155,7 +155,7 @@ extension BasicAuthentication {
 **Interceptors can be added to a ``BothamAPIClient`` instance or to all the ``BothamAPIClient`` instances at the same time. Interceptors added globally will be evaluated before and after every request independently of the ``BothamAPIClient`` instance. Interceptors added locally will be just appplied to the ``BothamAPIClient`` instance where you add those interceptors.**
 
 ```swift
-let botham = BothamAPIClient("https://api.github.com/repos/Karumi/")
+let botham = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
 
 //Add interceptors locally
 botham.requestInterceptors.append(NSLogInterceptor())
