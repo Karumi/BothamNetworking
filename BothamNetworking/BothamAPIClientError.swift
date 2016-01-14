@@ -15,5 +15,6 @@ public enum BothamAPIClientError: ErrorType {
     case HTTPClientError(error: NSError)
     case ParsingError(error: NSError)
     case UnsupportedURLScheme
+    case RetryableError
 
 }

@@ -82,12 +82,16 @@ public class BothamAPIClient {
                 completion(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
                 httpClient.send(interceptedRequest) { result in
-                    let response = result
-                        .map { return self.applyResponseInterceptors($0) }
-                        .flatMap { httpResponse -> Result<HTTPResponse, BothamAPIClientError> in
-                            return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                    if let _ = result.error {
+                        completion(result)
+                    } else if let response = result.value {
+                        self.applyResponseInterceptors(response) { interceptorResult in
+                            let mappedResult = result.flatMap { httpResponse in
+                                return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                            }
+                            completion(mappedResult)
+                        }
                     }
-                    completion(response)
                 }
             }
     }
@@ -104,15 +108,31 @@ public class BothamAPIClient {
         return interceptedRequest
     }
 
-    private func applyResponseInterceptors(response: HTTPResponse) -> HTTPResponse {
-        var interceptedResponse = response
-        responseInterceptors.forEach { interceptor in
-            interceptedResponse = interceptor.intercept(interceptedResponse)
-        }
-        BothamAPIClient.globalResponseInterceptors.forEach { interceptor in
-            interceptedResponse = interceptor.intercept(interceptedResponse)
-        }
-        return interceptedResponse
+    private func applyResponseInterceptors(response: HTTPResponse,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+            let interceptors = responseInterceptors + BothamAPIClient.globalResponseInterceptors
+            applyResponseInterceptors(interceptors, response: response, completion: completion)
+    }
+
+    private func applyResponseInterceptors(interceptors: [BothamResponseInterceptor],
+        response: HTTPResponse,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+            if interceptors.isEmpty {
+                completion(Result.Success(response))
+            } else if interceptors.count == 1 {
+                interceptors[0].intercept(response) { result in
+                    completion(result)
+                }
+            } else {
+                interceptors[0].intercept(response) { result in
+                    if let response = result.value {
+                        self.applyResponseInterceptors(Array(interceptors.dropFirst()),
+                            response: response, completion: completion)
+                    } else {
+                        completion(result)
+                    }
+                }
+            }
     }
 
     private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)

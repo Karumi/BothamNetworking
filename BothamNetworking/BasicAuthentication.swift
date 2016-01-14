@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Result
 
 /**
  * Basic Authentication http://tools.ietf.org/html/rfc2617
@@ -29,7 +30,8 @@ extension BasicAuthentication {
         return request.appendingHeaders(header)
     }
 
-    public func intercept(response: HTTPResponse) -> HTTPResponse {
+    public func intercept(response: HTTPResponse,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         if response.statusCode == 401, let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
             let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: [])
             let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
@@ -38,6 +40,6 @@ extension BasicAuthentication {
                 onAuthenticationError(realm)
             }
         }
-        return response
+        completion(Result.Success(response))
     }
 }
