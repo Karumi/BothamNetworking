@@ -1,9 +1,190 @@
 # ![Karumi logo][karumilogo] BothamNetworking [![Build Status](https://travis-ci.org/Karumi/BothamNetworking.svg?branch=master)](https://travis-ci.org/Karumi/BothamNetworking)
 ==================
 
-BothamNetworking is a API Client framework written in swift.
+BothamNetworking is a networking framework written in Swift.
 
-Project is under development.
+This project will help you to setup all your API clients and implement your networking layer easily. BothamNetworking provides classes to send HTTP requests and obtain HTTP responses ready to parse with just a few lines.
+
+In addition, BothamNetworking adds a Request/Response interceptor mechanisms to be able to modify the HTTP request before to be sent and the HTTPResponse after to be received. This mechanism can be used to implement authentication policies, add headers to a request or add log traces. BothaNetworking contains some already implemented interceptors like ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` or some authentication mechanisms like ``BaseAuthentication``.
+
+##Usage
+
+This framework contains all the classes needed to implement your networking layer with an easy to use facade named ``BothamAPIClient``. If you love Swift Playgrounds clone this project and review the playgrounds we've created to show how to use this framework.
+
+###Send a request using different HTTP methods:
+
+```swift
+let botham = BothamAPIClient("https://api.github.com/repos/Karumi/")
+
+botham.GET("/issues") { result in
+       ...
+}
+
+botham.POST("/issues") { result in
+       ...
+}
+
+botham.PUT("/issues") { result in
+       ...
+}
+
+botham.DELETE("/issues/1") { result in
+       ...
+}
+
+```
+
+###Add headers to the request:
+
+```swift
+botham.GET("/issues", headers: ["User-Agent": "BothamNetworking Headers", "Accept": "application/json; q=0.5"]) { result in
+       ...
+}
+```
+
+###Add parameters to the request:
+
+```swift
+botham.DELETE("/issues", parameters: ["id": "1"]) { result in
+       ...
+}
+```
+
+###Add a body to the request:
+
+```swift
+botham.POST("/authorizations", body: ["scopes": ["repo_status", "user:email"]]) { result in
+       ...
+}
+```
+**The body encoding will be determined by the HTTP headers used. To encode your body using json add a "ContentType: application/json" header to your request**
+
+
+###Request execution result:
+
+BothamNetworking uses ``Result`` return type composed by ``HTTPResponse`` or ``BothamAPIClientError`` instances. We have added a ``ResultType`` extension to be able to provide an easy to use mechanism to parse your response information using ``SwiftyJSON`` as parsing library.
+
+```swift
+botham.GET("/repos") { result in
+	result.mapJSON { json in
+       for result in json["results"].arrayValue {
+			let id = result["id"].stringValue
+			let name = result["name"].stringValue
+		}
+    }
+}
+```
+
+This is the information available in the ``HTTPResponse`` struct:
+
+```swift
+public struct HTTPResponse {
+
+    public let statusCode: Int
+    public let headers: CaseInsensitiveDictionary<String>?
+    public let body: NSData
+    
+    ...
+    
+}
+```
+
+The errors BothamNetworking can return are:
+
+```swift
+public enum BothamAPIClientError: ErrorType, Equatable {
+
+    case HTTPResponseError(statusCode: Int, body: NSData)
+    case NetworkError
+    case HTTPClientError(error: NSError)
+    case ParsingError(error: NSError)
+    case UnsupportedURLScheme
+    case RetryError
+
+}
+```
+
+###Interceptors:
+
+``BothamRequestInterceptor`` and ``BothamResponseInterceptor`` are two protocols you can use to modify a ``HTTPRequest`` instance before to be sent or a ``HTTPResponse`` before to be returned. This mechansim can be used to implement authentication policies, add default information to a request, add log traces or retry requests. An example could be ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` or ``BasicAuthentication``.
+
+```swfit
+class JSONHeadersRequestInterceptor: BothamRequestInterceptor {
+
+	func intercept(request: HTTPRequest) -> HTTPRequest {
+        return request.appendingHeaders(["Content-Type": "application/json", "Accept": "application:json"])
+    }
+}
+
+```
+
+```swift
+public protocol BasicAuthentication: BothamRequestInterceptor, BothamResponseInterceptor {
+    var credentials: (username: String, password: String) { get }
+    func onAuthenticationError(realm: String) -> Void
+}
+
+extension BasicAuthentication {
+    public func intercept(request: HTTPRequest) -> HTTPRequest {
+
+        let userPass = "\(credentials.username):\(credentials.password)"
+
+        let userPassData = userPass.dataUsingEncoding(NSUTF8StringEncoding)!
+        let base64UserPass = userPassData.base64EncodedStringWithOptions([])
+
+        let header = ["Authorization" : "Basic \(base64UserPass)"]
+
+        return request.appendingHeaders(header)
+    }
+
+    public func intercept(response: HTTPResponse,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+        if response.statusCode == 401, let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
+            let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: [])
+            let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
+            if let match = regex.firstMatchInString(unauthorizedHeader, options: [], range: range) {
+                let realm = (unauthorizedHeader as NSString).substringWithRange(match.rangeAtIndex(1))
+                onAuthenticationError(realm)
+            }
+        }
+        completion(Result.Success(response))
+    }
+}
+```
+
+**Interceptors can be added to a ``BothamAPIClient`` instance or to all the ``BothamAPIClient`` instances at the same time. Interceptors added globally will be evaluated before and after every request independently of the ``BothamAPIClient`` instance. Interceptors added locally will be just appplied to the ``BothamAPIClient`` instance where you add those interceptors.**
+
+```swift
+let botham = BothamAPIClient("https://api.github.com/repos/Karumi/")
+
+//Add interceptors locally
+botham.requestInterceptors.append(NSLogInterceptor())
+botham.responseInterceptors.append(NSLogInterceptor())
+
+//Add interceptors globally
+BothamAPIClient.globalRequestInterceptors.append(NSLogInterceptor())
+BothamAPIClient.globalResponseInterceptors.append(NSLogInterceptor())
+```
+
+###Retry requests:
+
+To be able to retry a request add a ``BothamResponseInterceptor`` and return a ``BothamAPIClientError.RetryError`` when needed. ``BothamAPIClient`` will automatically retry the original request you sent.
+
+```swift
+class RetryInterceptor: BothamResponseInterceptor {
+
+	func intercept(response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+            if response.statusCode == 401 {
+                completion(Result.Failure(.RetryError))
+            } else {
+                completion(Result.Success(response))
+            }
+    }
+
+}
+```
+
+**Be careful using this mechanism, you can create an infinite loop. Remember you should always call completion callback to do not break the ``BothamResponseInterceptor`` chain.**
 
 License
 -------
