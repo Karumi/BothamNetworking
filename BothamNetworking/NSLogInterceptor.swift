@@ -20,7 +20,7 @@ public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseIntercept
 
     public func intercept(response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
-        NSLog("<- \(response)")
-        completion(Result.Success(response))
+            NSLog("<- \(response)")
+            completion(Result.Success(response))
     }
 }

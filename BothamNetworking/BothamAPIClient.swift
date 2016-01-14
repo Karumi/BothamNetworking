@@ -113,10 +113,8 @@ public class BothamAPIClient {
 
     private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
-        requestInterceptors.forEach { interceptor in
-            interceptedRequest = interceptor.intercept(interceptedRequest)
-        }
-        BothamAPIClient.globalRequestInterceptors.forEach { interceptor in
+        let interceptors = requestInterceptors + BothamAPIClient.globalRequestInterceptors
+        interceptors.forEach { interceptor in
             interceptedRequest = interceptor.intercept(interceptedRequest)
         }
         return interceptedRequest
