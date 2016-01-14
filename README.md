@@ -1,5 +1,4 @@
 # ![Karumi logo][karumilogo] BothamNetworking [![Build Status](https://travis-ci.org/Karumi/BothamNetworking.svg?branch=master)](https://travis-ci.org/Karumi/BothamNetworking)
-==================
 
 BothamNetworking is a networking framework written in Swift.
 
@@ -99,7 +98,7 @@ public enum BothamAPIClientError: ErrorType, Equatable {
     case HTTPClientError(error: NSError)
     case ParsingError(error: NSError)
     case UnsupportedURLScheme
-    case RetryError
+    case Retry
 
 }
 ```
@@ -108,7 +107,7 @@ public enum BothamAPIClientError: ErrorType, Equatable {
 
 ``BothamRequestInterceptor`` and ``BothamResponseInterceptor`` are two protocols you can use to modify a ``HTTPRequest`` instance before to be sent or a ``HTTPResponse`` before to be returned. This mechansim can be used to implement authentication policies, add default information to a request, add log traces or retry requests. An example could be ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` or ``BasicAuthentication``.
 
-```swfit
+```swift
 class JSONHeadersRequestInterceptor: BothamRequestInterceptor {
 
 	func intercept(request: HTTPRequest) -> HTTPRequest {
