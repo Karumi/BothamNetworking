@@ -13,6 +13,7 @@
 		6B7BCF021C355BE500147FBD /* BothamNetworkingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCF011C355BE500147FBD /* BothamNetworkingTestCase.swift */; };
 		D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18346BC8A4CC5BD56E0F20B /* Pods.framework */; };
 		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
+		EB196FDD1C47E31C0080EDB9 /* BothamAPIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */; };
 		EB355DC81C33FD80003411DA /* HTTPEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DC71C33FD80003411DA /* HTTPEncoder.swift */; };
 		EB355DCB1C33FDE4003411DA /* HTTPEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DCA1C33FDE4003411DA /* HTTPEncoderTests.swift */; };
 		EB3973191C3A671000AF37CD /* NSLogInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */; };
@@ -63,6 +64,7 @@
 		A18346BC8A4CC5BD56E0F20B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D74D9F63C2D03CEA7DEAAA3F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.release.xcconfig"; sourceTree = "<group>"; };
+		EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClientError.swift; sourceTree = "<group>"; };
 		EB355DC71C33FD80003411DA /* HTTPEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPEncoder.swift; sourceTree = "<group>"; };
 		EB355DCA1C33FDE4003411DA /* HTTPEncoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPEncoderTests.swift; sourceTree = "<group>"; };
 		EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSLogInterceptor.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				EBE2C3BB1C3EB4D20096A24C /* ResultTypeTests.swift */,
+				EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				6B7BCF021C355BE500147FBD /* BothamNetworkingTestCase.swift in Sources */,
 				EB90F5F01C4798E800DA5E3C /* RetryResponseInterceptor.swift in Sources */,
 				EB5BD5261C32A32A00C02CDA /* SpyResponseInterceptor.swift in Sources */,
+				EB196FDD1C47E31C0080EDB9 /* BothamAPIClientError.swift in Sources */,
 				EB90F5EE1C47982F00DA5E3C /* BothamRetryRequestTests.swift in Sources */,
 				EBF3593A1BFF8EF700AD47C4 /* NocillaTestCase.swift in Sources */,
 				EBF359381BFF8E7B00AD47C4 /* NSHTTPClientTests.swift in Sources */,
