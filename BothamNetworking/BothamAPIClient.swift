@@ -83,7 +83,12 @@ public class BothamAPIClient {
             } else {
                 sendRequest(interceptedRequest) { result in
                     if let error = result.error where error == .RetryError {
-                        self.sendRequest(httpMethod, path: path, params: params, headers: headers, body: body, completion: completion)
+                        self.sendRequest(httpMethod,
+                            path: path,
+                            params: params,
+                            headers: headers,
+                            body: body,
+                            completion: completion)
                     } else {
                         completion(result)
                     }
