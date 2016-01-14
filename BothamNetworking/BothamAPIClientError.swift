@@ -8,13 +8,32 @@
 
 import Foundation
 
-public enum BothamAPIClientError: ErrorType {
+public enum BothamAPIClientError: ErrorType, Equatable {
 
     case HTTPResponseError(statusCode: Int, body: NSData)
     case NetworkError
     case HTTPClientError(error: NSError)
     case ParsingError(error: NSError)
     case UnsupportedURLScheme
-    case RetryableError
+    case RetryError
 
+}
+
+public func == (lhs: BothamAPIClientError, rhs: BothamAPIClientError) -> Bool {
+    switch (lhs, rhs) {
+    case let (.HTTPResponseError(statusCode1, body1), .HTTPResponseError(statusCode2, body2)):
+        return statusCode1 == statusCode2 && body1 == body2
+    case let (.HTTPClientError(error1), .HTTPClientError(error2)):
+        return error1 == error2
+    case (.NetworkError, .NetworkError):
+        return true
+    case (.UnsupportedURLScheme, .UnsupportedURLScheme):
+        return true
+    case (.ParsingError(_), .ParsingError(_)):
+        return true
+    case (.RetryError, .RetryError):
+        return true
+    default:
+        return false
+    }
 }

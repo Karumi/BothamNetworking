@@ -81,21 +81,30 @@ public class BothamAPIClient {
             if !hasValidScheme(interceptedRequest) {
                 completion(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
-                httpClient.send(interceptedRequest) { result in
-                    if let _ = result.error {
+                sendRequest(interceptedRequest) { result in
+                    if let error = result.error where error == .RetryError {
+                        self.sendRequest(httpMethod, path: path, params: params, headers: headers, body: body, completion: completion)
+                    } else {
                         completion(result)
-                    } else if let response = result.value {
-                        self.applyResponseInterceptors(response) { interceptorResult in
-                            let mappedResult = result.flatMap { httpResponse in
-                                return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
-                            }
-                            completion(mappedResult)
-                        }
                     }
                 }
             }
     }
 
+    private func sendRequest(request: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        httpClient.send(request) { result in
+            if let _ = result.error {
+                completion(result)
+            } else if let response = result.value {
+                self.applyResponseInterceptors(response) { interceptorResult in
+                    let mappedResult = result.flatMap { httpResponse in
+                        return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
+                    }
+                    completion(mappedResult)
+                }
+            }
+        }
+    }
 
     private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
