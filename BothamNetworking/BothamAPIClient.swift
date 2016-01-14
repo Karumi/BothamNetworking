@@ -82,7 +82,7 @@ public class BothamAPIClient {
                 completion(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
                 sendRequest(interceptedRequest) { result in
-                    if let error = result.error where error == .Retry {
+                    if let error = result.error, case .Retry = error {
                         self.sendRequest(httpMethod,
                             path: path,
                             params: params,
