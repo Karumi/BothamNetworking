@@ -1,19 +1,14 @@
+//: Welcome to the BothamNetworking's Playground!
 
 import Foundation
 import XCPlayground
+import BothamNetworking
 
 XCPlaygroundPage.currentPage.needsIndefiniteExecution = true
 
-//: Prepare your BothamAPIClient instance.
+let client = BothamAPIClient(baseEndpoint: "http://api.randomuser.me")
 
-import BothamNetworking
-
-let botham = BothamAPIClient(baseEndpoint: "http://api.randomuser.me")
-botham.requestInterceptors.append(JSONHeadersRequestInterceptor())
-
-//: Send HTTP requests:
-
-botham.GET("/") { result in
+client.GET("/") { result in
     result.mapJSON { json in
         print(json)
     }
@@ -21,4 +16,6 @@ botham.GET("/") { result in
 
 //: * [Send and read headers](Headers)
 //: * [Send parameters](Parameters)
-//: * [BasicAuthentication against httpbin](BasicAuthentication)
+//: * [Send body](body)
+//: * [Interceptors](Interceptors)
+//: * [BasicAuthentication using interceptors](BasicAuthentication)

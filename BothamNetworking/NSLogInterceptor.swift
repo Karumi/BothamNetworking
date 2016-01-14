@@ -20,10 +20,7 @@ public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseIntercept
 
     public func intercept(response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
-            if response.statusCode == 401 {
-                completion(Result.Failure(.RetryError))
-            } else {
-                completion(Result.Success(response))
-            }
+            NSLog("<- \(response)")
+            completion(Result.Success(response))
     }
 }
