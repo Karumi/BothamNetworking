@@ -13,21 +13,21 @@ This framework contains all the classes needed to implement your networking laye
 ###Send a request using different HTTP methods:
 
 ```swift
-let botham = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
+let apiClient = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
 
-botham.GET("/issues") { result in
+apiClient.GET("/issues") { result in
        ...
 }
 
-botham.POST("/issues") { result in
+apiClient.POST("/issues") { result in
        ...
 }
 
-botham.PUT("/issues") { result in
+apiClient.PUT("/issues") { result in
        ...
 }
 
-botham.DELETE("/issues/1") { result in
+apiClient.DELETE("/issues/1") { result in
        ...
 }
 
@@ -36,7 +36,7 @@ botham.DELETE("/issues/1") { result in
 ###Add headers to the request:
 
 ```swift
-botham.GET("/issues", headers: ["User-Agent": "BothamNetworking Headers", "Accept": "application/json; q=0.5"]) { result in
+apiClient.GET("/issues", headers: ["User-Agent": "BothamNetworking Headers", "Accept": "application/json; q=0.5"]) { result in
        ...
 }
 ```
@@ -44,7 +44,7 @@ botham.GET("/issues", headers: ["User-Agent": "BothamNetworking Headers", "Accep
 ###Add parameters to the request:
 
 ```swift
-botham.DELETE("/issues", parameters: ["id": "1"]) { result in
+apiClient.DELETE("/issues", parameters: ["id": "1"]) { result in
        ...
 }
 ```
@@ -52,7 +52,7 @@ botham.DELETE("/issues", parameters: ["id": "1"]) { result in
 ###Add a body to the request:
 
 ```swift
-botham.POST("/authorizations", body: ["scopes": ["repo_status", "user:email"]]) { result in
+apiClient.POST("/authorizations", body: ["scopes": ["repo_status", "user:email"]]) { result in
        ...
 }
 ```
@@ -64,7 +64,7 @@ botham.POST("/authorizations", body: ["scopes": ["repo_status", "user:email"]]) 
 BothamNetworking uses ``Result`` return type composed by ``HTTPResponse`` or ``BothamAPIClientError`` instances. We have added a ``ResultType`` extension to be able to provide an easy to use mechanism to parse your response information using ``SwiftyJSON`` as parsing library.
 
 ```swift
-botham.GET("/repos") { result in
+apiClient.GET("/repos") { result in
 	result.mapJSON { json in
        for result in json["results"].arrayValue {
 			let id = result["id"].stringValue
@@ -154,11 +154,11 @@ extension BasicAuthentication {
 **Interceptors can be added to a ``BothamAPIClient`` instance or to all the ``BothamAPIClient`` instances at the same time. Interceptors added globally will be evaluated before and after every request independently of the ``BothamAPIClient`` instance. Interceptors added locally will be just appplied to the ``BothamAPIClient`` instance where you add those interceptors.**
 
 ```swift
-let botham = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
+let apiClient = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
 
 //Add interceptors locally
-botham.requestInterceptors.append(NSLogInterceptor())
-botham.responseInterceptors.append(NSLogInterceptor())
+apiClient.requestInterceptors.append(NSLogInterceptor())
+apiClient.responseInterceptors.append(NSLogInterceptor())
 
 //Add interceptors globally
 BothamAPIClient.globalRequestInterceptors.append(NSLogInterceptor())
