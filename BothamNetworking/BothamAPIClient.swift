@@ -97,7 +97,7 @@ public class BothamAPIClient {
                 completion(result)
             } else if let response = result.value {
                 self.applyResponseInterceptors(response) { interceptorResult in
-                    let mappedResult = result.flatMap { httpResponse in
+                    let mappedResult = interceptorResult.flatMap { httpResponse in
                         return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                     }
                     completion(mappedResult)
