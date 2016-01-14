@@ -13,7 +13,7 @@ This framework contains all the classes needed to implement your networking laye
 ###Send a request using different HTTP methods:
 
 ```swift
-let apiClient = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/")
+let apiClient = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/BothamNetworking")
 
 apiClient.GET("/issues") { result in
        ...
