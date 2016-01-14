@@ -5,7 +5,7 @@ BothamNetworking is a networking framework written in Swift.
 
 This project will help you to setup all your API clients and implement your networking layer easily. BothamNetworking provides classes to send HTTP requests and obtain HTTP responses ready to parse with just a few lines.
 
-In addition, BothamNetworking adds a Request/Response interceptor mechanisms to be able to modify the HTTP request before to be sent and the HTTPResponse after to be received. This mechanism can be used to implement authentication policies, add headers to a request or add log traces. BothaNetworking contains some already implemented interceptors like ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` or some authentication mechanisms like ``BaseAuthentication``.
+In addition, BothamNetworking adds a Request/Response interceptor mechanisms to be able to modify the HTTPRequest before being sent and the HTTPResponse after being received. This mechanism can be used to implement authentication policies, add headers to a request or add log traces. BothamNetworking contains some already implemented interceptors like ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` and some authentication mechanisms like ``BaseAuthentication``.
 
 ##Usage
 
@@ -106,7 +106,7 @@ public enum BothamAPIClientError: ErrorType, Equatable {
 
 ###Interceptors:
 
-``BothamRequestInterceptor`` and ``BothamResponseInterceptor`` are two protocols you can use to modify a ``HTTPRequest`` instance before to be sent or a ``HTTPResponse`` before to be returned. This mechansim can be used to implement authentication policies, add default information to a request, add log traces or retry requests. An example could be ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` or ``BasicAuthentication``.
+``BothamRequestInterceptor`` and ``BothamResponseInterceptor`` are two protocols you can use to modify a ``HTTPRequest`` instance before sending it or a ``HTTPResponse`` before receiving it. This mechansim can be used to implement authentication policies, add default information to a request, add log traces or retry requests. An example could be ``NSLogInterceptor``, ``JSONHeadersRequestInterceptor`` or ``BasicAuthentication``.
 
 ```swfit
 class JSONHeadersRequestInterceptor: BothamRequestInterceptor {
@@ -184,7 +184,7 @@ class RetryInterceptor: BothamResponseInterceptor {
 }
 ```
 
-**Be careful using this mechanism, you can create an infinite loop. Remember you should always call completion callback to do not break the ``BothamResponseInterceptor`` chain.**
+**Be careful when using this mechanism as you can create an infinite loop or DOS yourself. Remember you should always call completion callback to do not break the ``BothamResponseInterceptor`` chain.**
 
 License
 -------
