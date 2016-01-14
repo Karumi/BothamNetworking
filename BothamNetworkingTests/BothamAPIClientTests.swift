@@ -286,18 +286,21 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         expect(response).toEventually(beSuccess())
     }
 
-    private func givenABothamAPIClientWithGlobal(
-        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
-        responseInterceptor: BothamResponseInterceptor? = nil)
-        -> BothamAPIClient {
-        let bothamAPIClient = givenABothamAPIClient()
-        if let interceptor = requestInterceptor {
-            BothamAPIClient.globalRequestInterceptors.append(interceptor)
+    func testDoesNotInvokeAllTheResponseInterceptorsIfAPreviousInterceptorReturnsAnError() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let interceptor1 = SpyResponseInterceptor()
+        interceptor1.error = .NetworkError
+        let interceptor2 = SpyResponseInterceptor()
+        let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptors: [interceptor1, interceptor2])
+
+        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        bothamAPIClient.GET(anyPath) { result in
+            response = result
         }
-        if let interceptor = responseInterceptor {
-            BothamAPIClient.globalResponseInterceptors.append(interceptor)
-        }
-        return bothamAPIClient
+
+        expect(response).toEventually(failWithError(.NetworkError))
+        expect(interceptor1.intercepted).toEventually(beTrue())
+        expect(interceptor2.intercepted).toEventually(beFalse())
     }
 
 }

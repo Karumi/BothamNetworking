@@ -14,7 +14,7 @@ import BothamNetworking
 
 class BothamRetryRequestTests: BothamNetworkingTestCase {
 
-    func testShouldRetryRequestIfResponseInterceptorsReturnsARetryError() {
+    func testRetriesRequestIfResponseInterceptorsReturnsARetryError() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let interceptor = RetryResponseInterceptor(numberOfRetries: 1)
         let apiClient = givenABothamAPIClientWithLocal(responseInterceptor: interceptor)
@@ -26,6 +26,20 @@ class BothamRetryRequestTests: BothamNetworkingTestCase {
 
         expect(response).toEventually(beSuccess())
         expect(interceptor.interceptCalls).to(equal(2))
+    }
+
+    func testRetriesRequestsMoreThanOnce() {
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
+        let interceptor = RetryResponseInterceptor(numberOfRetries: 2)
+        let apiClient = givenABothamAPIClientWithLocal(responseInterceptor: interceptor)
+
+        var response: Result<HTTPResponse, BothamAPIClientError>!
+        apiClient.GET(anyPath) { result in
+            response = result
+        }
+
+        expect(response).toEventually(beSuccess())
+        expect(interceptor.interceptCalls).to(equal(3))
     }
 
 }

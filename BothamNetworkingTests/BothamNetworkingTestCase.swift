@@ -32,4 +32,27 @@ class BothamNetworkingTestCase: NocillaTestCase {
             }
             return bothamAPIClient
     }
+
+    func givenABothamAPIClientWithLocal(
+        requestInterceptor requestInterceptors: [BothamRequestInterceptor] = [BothamRequestInterceptor](),
+        responseInterceptors: [BothamResponseInterceptor] = [BothamResponseInterceptor]()) -> BothamAPIClient {
+            let bothamAPIClient = givenABothamAPIClient()
+            bothamAPIClient.requestInterceptors.appendContentsOf(requestInterceptors)
+            bothamAPIClient.responseInterceptors.appendContentsOf(responseInterceptors)
+            return bothamAPIClient
+    }
+
+    func givenABothamAPIClientWithGlobal(
+        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
+        responseInterceptor: BothamResponseInterceptor? = nil)
+        -> BothamAPIClient {
+            let bothamAPIClient = givenABothamAPIClient()
+            if let interceptor = requestInterceptor {
+                BothamAPIClient.globalRequestInterceptors.append(interceptor)
+            }
+            if let interceptor = responseInterceptor {
+                BothamAPIClient.globalResponseInterceptors.append(interceptor)
+            }
+            return bothamAPIClient
+    }
 }
