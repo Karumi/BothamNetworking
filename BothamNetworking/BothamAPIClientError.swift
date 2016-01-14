@@ -15,7 +15,7 @@ public enum BothamAPIClientError: ErrorType, Equatable {
     case HTTPClientError(error: NSError)
     case ParsingError(error: NSError)
     case UnsupportedURLScheme
-    case RetryError
+    case Retry
 
 }
 
@@ -31,7 +31,7 @@ public func == (lhs: BothamAPIClientError, rhs: BothamAPIClientError) -> Bool {
         return true
     case (.ParsingError(_), .ParsingError(_)):
         return true
-    case (.RetryError, .RetryError):
+    case (.Retry, .Retry):
         return true
     default:
         return false

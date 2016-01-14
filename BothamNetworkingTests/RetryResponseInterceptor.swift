@@ -23,7 +23,7 @@ class RetryResponseInterceptor: BothamResponseInterceptor {
         interceptCalls++
         if numberOfRetries > 0 {
             numberOfRetries--
-            completion(Result.Failure(.RetryError))
+            completion(Result.Failure(.Retry))
         } else {
             completion(Result.Success(response))
         }
