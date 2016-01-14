@@ -26,6 +26,7 @@
 		EB8F442F1BFF442F00CC3AA5 /* BothamNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = EB8F442E1BFF442F00CC3AA5 /* BothamNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB90F5EE1C47982F00DA5E3C /* BothamRetryRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5ED1C47982F00DA5E3C /* BothamRetryRequestTests.swift */; };
 		EB90F5F01C4798E800DA5E3C /* RetryResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5EF1C4798E800DA5E3C /* RetryResponseInterceptor.swift */; };
+		EB90F5F21C47B77A00DA5E3C /* JSONHeadersRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5F11C47B77A00DA5E3C /* JSONHeadersRequestInterceptor.swift */; };
 		EBACCC591BFF463700F1CD7F /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */; };
 		EBACCC631BFF72B300F1CD7F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */; };
 		EBACCC651BFF734800F1CD7F /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */; };
@@ -78,6 +79,7 @@
 		EB8F44301BFF442F00CC3AA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB90F5ED1C47982F00DA5E3C /* BothamRetryRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamRetryRequestTests.swift; sourceTree = "<group>"; };
 		EB90F5EF1C4798E800DA5E3C /* RetryResponseInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryResponseInterceptor.swift; sourceTree = "<group>"; };
+		EB90F5F11C47B77A00DA5E3C /* JSONHeadersRequestInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONHeadersRequestInterceptor.swift; sourceTree = "<group>"; };
 		EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BothamNetworkingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBACCC581BFF463700F1CD7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				EB5BD5171C31A00800C02CDA /* BothamRequestInterceptor.swift */,
 				EB5BD5231C32A10A00C02CDA /* BothamResponseInterceptor.swift */,
 				EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */,
+				EB90F5F11C47B77A00DA5E3C /* JSONHeadersRequestInterceptor.swift */,
 			);
 			name = Interceptor;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				6B7BCEFE1C35402400147FBD /* BasicAuthentication.swift in Sources */,
 				EBE2C3B91C3EB3F10096A24C /* ResultType.swift in Sources */,
 				EBACCC6B1BFF76B000F1CD7F /* BothamAPIClient.swift in Sources */,
+				EB90F5F21C47B77A00DA5E3C /* JSONHeadersRequestInterceptor.swift in Sources */,
 				6B29E71D1C37048000427CA4 /* CaseInsensitiveDictionary.swift in Sources */,
 				EBF359421C0310DE00AD47C4 /* BothamAPIClientError.swift in Sources */,
 				EBACCC671BFF735600F1CD7F /* HTTPMethod.swift in Sources */,
