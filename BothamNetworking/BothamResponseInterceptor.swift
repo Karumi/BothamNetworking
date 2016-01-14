@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Result
 
 public protocol BothamResponseInterceptor {
 
-    func intercept(response: HTTPResponse) -> HTTPResponse
+    func intercept(response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void)
 
 }

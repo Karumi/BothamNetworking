@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Result
 
 public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseInterceptor {
 
@@ -17,8 +18,9 @@ public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseIntercept
         return request
     }
 
-    public func intercept(response: HTTPResponse) -> HTTPResponse {
+    public func intercept(response: HTTPResponse,
+        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         NSLog("<- \(response)")
-        return response
+        completion(Result.Success(response))
     }
 }
