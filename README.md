@@ -15,46 +15,31 @@ This framework contains all the classes needed to implement your networking laye
 ```swift
 let apiClient = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/BothamNetworking")
 
-apiClient.GET("/issues") { result in
-       ...
-}
+apiClient.GET("/issues")
 
-apiClient.POST("/issues") { result in
-       ...
-}
+apiClient.POST("/issues")
 
-apiClient.PUT("/issues") { result in
-       ...
-}
+apiClient.PUT("/issues")
 
-apiClient.DELETE("/issues/1") { result in
-       ...
-}
-
+apiClient.DELETE("/issues/1")
 ```
 
 ###Add headers to the request:
 
 ```swift
-apiClient.GET("/issues", headers: ["User-Agent": "BothamNetworking Headers", "Accept": "application/json; q=0.5"]) { result in
-       ...
-}
+apiClient.GET("/issues", headers: ["User-Agent": "BothamNetworking Headers", "Accept": "application/json; q=0.5"]) 
 ```
 
 ###Add parameters to the request:
 
 ```swift
-apiClient.DELETE("/issues", parameters: ["id": "1"]) { result in
-       ...
-}
+apiClient.DELETE("/issues", parameters: ["id": "1"])
 ```
 
 ###Add a body to the request:
 
 ```swift
-apiClient.POST("/authorizations", body: ["scopes": ["repo_status", "user:email"]]) { result in
-       ...
-}
+apiClient.POST("/authorizations", body: ["scopes": ["repo_status", "user:email"]]) 
 ```
 **The body encoding will be determined by the HTTP headers used. To encode your body using json add a "ContentType: application/json" header to your request**
 

@@ -28,14 +28,14 @@ public class BothamAPIClient {
     }
 
     public func GET(path: String, parameters: [String:String]? = nil,
-        headers: [String:String]? = nil, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        headers: [String:String]? = nil, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.GET, path: path, params: parameters, headers: headers, completion: completion)
     }
 
     public func POST(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.POST, path: path, params: parameters, headers: headers,
             body: body, completion: completion)
     }
@@ -43,7 +43,7 @@ public class BothamAPIClient {
     public func PUT(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.PUT, path: path, params: parameters, headers: headers,
             body: body, completion: completion)
     }
@@ -51,7 +51,7 @@ public class BothamAPIClient {
     public func DELETE(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.DELETE, path: path, params: parameters, headers: headers,
             body: body, completion: completion)
     }
@@ -59,7 +59,7 @@ public class BothamAPIClient {
     public func PATCH(path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.PATCH, path: path, params: parameters, headers: headers,
                 body: body, completion: completion)
     }
@@ -68,7 +68,7 @@ public class BothamAPIClient {
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
 
             let initialRequest = HTTPRequest(
                 url: baseEndpoint + path,
@@ -79,7 +79,7 @@ public class BothamAPIClient {
 
             let interceptedRequest = applyRequestInterceptors(initialRequest)
             if !hasValidScheme(interceptedRequest) {
-                completion(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
+                completion?(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
             } else {
                 sendRequest(interceptedRequest) { result in
                     if let error = result.error, case .Retry = error {
@@ -90,22 +90,22 @@ public class BothamAPIClient {
                             body: body,
                             completion: completion)
                     } else {
-                        completion(result)
+                        completion?(result)
                     }
                 }
             }
     }
 
-    private func sendRequest(request: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+    private func sendRequest(request: HTTPRequest, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         httpClient.send(request) { result in
             if let _ = result.error {
-                completion(result)
+                completion?(result)
             } else if let response = result.value {
                 self.applyResponseInterceptors(response) { interceptorResult in
                     let mappedResult = interceptorResult.flatMap { httpResponse in
                         return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
                     }
-                    completion(mappedResult)
+                    completion?(mappedResult)
                 }
             }
         }
