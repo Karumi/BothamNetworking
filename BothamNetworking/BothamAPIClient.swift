@@ -160,6 +160,5 @@ public class BothamAPIClient {
 
     private func hasValidScheme(request: HTTPRequest) -> Bool {
         return httpClient.hasValidScheme(request)
-
     }
 }
