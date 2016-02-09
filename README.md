@@ -1,4 +1,4 @@
-# ![Karumi logo][karumilogo] BothamNetworking [![Build Status](https://travis-ci.org/Karumi/BothamNetworking.svg?branch=master)](https://travis-ci.org/Karumi/BothamNetworking) https://img.shields.io/cocoapods/v/BothamNetworking.svg
+# ![Karumi logo][karumilogo] BothamNetworking [![Build Status](https://travis-ci.org/Karumi/BothamNetworking.svg?branch=master)](https://travis-ci.org/Karumi/BothamNetworking) ![CocoaPods](https://img.shields.io/cocoapods/v/BothamNetworking.svg)
 
 BothamNetworking is a networking framework written in Swift.
 
