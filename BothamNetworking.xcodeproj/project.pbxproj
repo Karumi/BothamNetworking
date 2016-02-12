@@ -11,8 +11,44 @@
 		6B7BCEFE1C35402400147FBD /* BasicAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCEFD1C35402400147FBD /* BasicAuthentication.swift */; };
 		6B7BCF001C35538F00147FBD /* BasicAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCEFF1C35538F00147FBD /* BasicAuthenticationTests.swift */; };
 		6B7BCF021C355BE500147FBD /* BothamNetworkingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCF011C355BE500147FBD /* BothamNetworkingTestCase.swift */; };
+		6BC01CEA1C6E4BE700D08E72 /* BothamNetworkingCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BC01CE91C6E4BE700D08E72 /* BothamNetworkingCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6BC01CF11C6E4BE800D08E72 /* BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BC01CE71C6E4BE700D08E72 /* BothamNetworking.framework */; };
+		6BC01CFE1C6E4C4100D08E72 /* BasicAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCEFD1C35402400147FBD /* BasicAuthentication.swift */; };
+		6BC01CFF1C6E4C4100D08E72 /* BothamAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC6A1BFF76B000F1CD7F /* BothamAPIClient.swift */; };
+		6BC01D001C6E4C4100D08E72 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51D1C328AEA00C02CDA /* Dictionary.swift */; };
+		6BC01D011C6E4C4100D08E72 /* CaseInsensitiveDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B29E71C1C37048000427CA4 /* CaseInsensitiveDictionary.swift */; };
+		6BC01D021C6E4C4100D08E72 /* ResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE2C3B81C3EB3F10096A24C /* ResultType.swift */; };
+		6BC01D031C6E4C4100D08E72 /* HTTPEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DC71C33FD80003411DA /* HTTPEncoder.swift */; };
+		6BC01D041C6E4C4100D08E72 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC621BFF72B300F1CD7F /* HTTPClient.swift */; };
+		6BC01D051C6E4C4100D08E72 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC661BFF735600F1CD7F /* HTTPMethod.swift */; };
+		6BC01D061C6E4C4100D08E72 /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC641BFF734800F1CD7F /* HTTPRequest.swift */; };
+		6BC01D071C6E4C4100D08E72 /* HTTPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBACCC681BFF737100F1CD7F /* HTTPResponse.swift */; };
+		6BC01D081C6E4C4100D08E72 /* NSHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359341BFF897500AD47C4 /* NSHTTPClient.swift */; };
+		6BC01D091C6E4C4100D08E72 /* BothamRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5171C31A00800C02CDA /* BothamRequestInterceptor.swift */; };
+		6BC01D0A1C6E4C4100D08E72 /* BothamResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5231C32A10A00C02CDA /* BothamResponseInterceptor.swift */; };
+		6BC01D0B1C6E4C4100D08E72 /* NSLogInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3973181C3A671000AF37CD /* NSLogInterceptor.swift */; };
+		6BC01D0C1C6E4C4100D08E72 /* JSONHeadersRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5F11C47B77A00DA5E3C /* JSONHeadersRequestInterceptor.swift */; };
+		6BC01D0D1C6E4C4100D08E72 /* BothamAPIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359411C0310DE00AD47C4 /* BothamAPIClientError.swift */; };
+		6BC01D0E1C6E4CD100D08E72 /* BothamNetworkingTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCF011C355BE500147FBD /* BothamNetworkingTestCase.swift */; };
+		6BC01D0F1C6E4CD100D08E72 /* BothamAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */; };
+		6BC01D101C6E4CD100D08E72 /* BasicAuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B7BCEFF1C35538F00147FBD /* BasicAuthenticationTests.swift */; };
+		6BC01D111C6E4CD100D08E72 /* BothamRetryRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5ED1C47982F00DA5E3C /* BothamRetryRequestTests.swift */; };
+		6BC01D121C6E4CD100D08E72 /* ResultTypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE2C3BB1C3EB4D20096A24C /* ResultTypeTests.swift */; };
+		6BC01D131C6E4CD100D08E72 /* BothamAPIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */; };
+		6BC01D141C6E4CD100D08E72 /* FutureMatchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */; };
+		6BC01D151C6E4CD100D08E72 /* HTTPEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DCA1C33FDE4003411DA /* HTTPEncoderTests.swift */; };
+		6BC01D161C6E4CD100D08E72 /* NSHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359371BFF8E7B00AD47C4 /* NSHTTPClientTests.swift */; };
+		6BC01D171C6E4CD100D08E72 /* HTTPRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51F1C328BC500C02CDA /* HTTPRequestTests.swift */; };
+		6BC01D181C6E4CD100D08E72 /* HTTPResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5211C32A00A00C02CDA /* HTTPResponseTests.swift */; };
+		6BC01D191C6E4CD100D08E72 /* SpyRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD51A1C31A60500C02CDA /* SpyRequestInterceptor.swift */; };
+		6BC01D1A1C6E4CD100D08E72 /* SpyResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5BD5251C32A32A00C02CDA /* SpyResponseInterceptor.swift */; };
+		6BC01D1B1C6E4CD100D08E72 /* RetryResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5EF1C4798E800DA5E3C /* RetryResponseInterceptor.swift */; };
+		6BC01D1C1C6E4CD100D08E72 /* NocillaTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */; };
+		B405560D6C2FA4BDFC9BDA53 /* Pods_BothamNetworkingCocoaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7216150E7783A6A1CEF955 /* Pods_BothamNetworkingCocoaTests.framework */; };
+		B4C8D0605C3DF92511721318 /* Pods_BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0776A3DEA351189FA48634C /* Pods_BothamNetworking.framework */; };
 		D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18346BC8A4CC5BD56E0F20B /* Pods.framework */; };
 		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
+		DE20AD833F73107D199FE618 /* Pods_BothamNetworkingCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F103F147ECF9AA3887848E1F /* Pods_BothamNetworkingCocoa.framework */; };
 		EB196FDD1C47E31C0080EDB9 /* BothamAPIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */; };
 		EB355DC81C33FD80003411DA /* HTTPEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DC71C33FD80003411DA /* HTTPEncoder.swift */; };
 		EB355DCB1C33FDE4003411DA /* HTTPEncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DCA1C33FDE4003411DA /* HTTPEncoderTests.swift */; };
@@ -45,6 +81,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6BC01CF21C6E4BE800D08E72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB8F44221BFF442F00CC3AA5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6BC01CE61C6E4BE700D08E72;
+			remoteInfo = BothamNetworkingCocoa;
+		};
 		EBACCC5A1BFF463700F1CD7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EB8F44221BFF442F00CC3AA5 /* Project object */;
@@ -55,14 +98,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1CB9CBB428605C388F047D24 /* Pods-BothamNetworkingCocoa.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingCocoa.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingCocoa/Pods-BothamNetworkingCocoa.release.xcconfig"; sourceTree = "<group>"; };
+		26BFD38BC006B4518E23E188 /* Pods-BothamNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworking/Pods-BothamNetworking.release.xcconfig"; sourceTree = "<group>"; };
 		296BA8C5294BBED8E4BD8266 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3FC9E1C42CF06518D223EF71 /* Pods-BothamNetworkingCocoaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingCocoaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests.release.xcconfig"; sourceTree = "<group>"; };
 		518F57893A1AECCB8BE10DE0 /* Pods-BothamNetworkingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6B29E71C1C37048000427CA4 /* CaseInsensitiveDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseInsensitiveDictionary.swift; sourceTree = "<group>"; };
 		6B58B9C01C4573DE00C37F02 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Playground.playground; path = BothamNetworking/Playground.playground; sourceTree = "<group>"; };
 		6B7BCEFD1C35402400147FBD /* BasicAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthentication.swift; sourceTree = "<group>"; };
 		6B7BCEFF1C35538F00147FBD /* BasicAuthenticationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthenticationTests.swift; sourceTree = "<group>"; };
 		6B7BCF011C355BE500147FBD /* BothamNetworkingTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamNetworkingTestCase.swift; sourceTree = "<group>"; };
+		6BC01CE71C6E4BE700D08E72 /* BothamNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BothamNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BC01CE91C6E4BE700D08E72 /* BothamNetworkingCocoa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BothamNetworkingCocoa.h; sourceTree = "<group>"; };
+		6BC01CEB1C6E4BE700D08E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BC01CF01C6E4BE800D08E72 /* BothamNetworkingCocoaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BothamNetworkingCocoaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BC01CF71C6E4BE800D08E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		72780B69BF244722E6B9D8CE /* Pods-BothamNetworkingCocoa.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingCocoa.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingCocoa/Pods-BothamNetworkingCocoa.debug.xcconfig"; sourceTree = "<group>"; };
 		A18346BC8A4CC5BD56E0F20B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A45A2C648AAA00863B776907 /* Pods-BothamNetworkingCocoaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingCocoaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D0776A3DEA351189FA48634C /* Pods_BothamNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4B6DF18BEAB0CCB1EF79317 /* Pods-BothamNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworking/Pods-BothamNetworking.debug.xcconfig"; sourceTree = "<group>"; };
 		D74D9F63C2D03CEA7DEAAA3F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.release.xcconfig"; sourceTree = "<group>"; };
 		EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClientError.swift; sourceTree = "<group>"; };
@@ -97,15 +152,35 @@
 		EBF3593C1BFF8F7600AD47C4 /* FutureMatchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureMatchers.swift; sourceTree = "<group>"; };
 		EBF3593E1C03081200AD47C4 /* BothamAPIClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClientTests.swift; sourceTree = "<group>"; };
 		EBF359411C0310DE00AD47C4 /* BothamAPIClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BothamAPIClientError.swift; sourceTree = "<group>"; };
+		F103F147ECF9AA3887848E1F /* Pods_BothamNetworkingCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD7216150E7783A6A1CEF955 /* Pods_BothamNetworkingCocoaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingCocoaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6BC01CE31C6E4BE700D08E72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE20AD833F73107D199FE618 /* Pods_BothamNetworkingCocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BC01CED1C6E4BE800D08E72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BC01CF11C6E4BE800D08E72 /* BothamNetworking.framework in Frameworks */,
+				B405560D6C2FA4BDFC9BDA53 /* Pods_BothamNetworkingCocoaTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB8F44271BFF442F00CC3AA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */,
+				B4C8D0605C3DF92511721318 /* Pods_BothamNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +201,9 @@
 			children = (
 				FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */,
 				A18346BC8A4CC5BD56E0F20B /* Pods.framework */,
+				D0776A3DEA351189FA48634C /* Pods_BothamNetworking.framework */,
+				F103F147ECF9AA3887848E1F /* Pods_BothamNetworkingCocoa.framework */,
+				FD7216150E7783A6A1CEF955 /* Pods_BothamNetworkingCocoaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,6 +216,23 @@
 			name = Authentication;
 			sourceTree = "<group>";
 		};
+		6BC01CE81C6E4BE700D08E72 /* BothamNetworkingCocoa */ = {
+			isa = PBXGroup;
+			children = (
+				6BC01CE91C6E4BE700D08E72 /* BothamNetworkingCocoa.h */,
+				6BC01CEB1C6E4BE700D08E72 /* Info.plist */,
+			);
+			path = BothamNetworkingCocoa;
+			sourceTree = "<group>";
+		};
+		6BC01CF41C6E4BE800D08E72 /* BothamNetworkingCocoaTests */ = {
+			isa = PBXGroup;
+			children = (
+				6BC01CF71C6E4BE800D08E72 /* Info.plist */,
+			);
+			path = BothamNetworkingCocoaTests;
+			sourceTree = "<group>";
+		};
 		DCA94239E2FFDCED361BB4F7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +240,12 @@
 				E724BA9CE7EC719AD8EEF534 /* Pods-BothamNetworkingTests.release.xcconfig */,
 				D74D9F63C2D03CEA7DEAAA3F /* Pods.debug.xcconfig */,
 				296BA8C5294BBED8E4BD8266 /* Pods.release.xcconfig */,
+				72780B69BF244722E6B9D8CE /* Pods-BothamNetworkingCocoa.debug.xcconfig */,
+				1CB9CBB428605C388F047D24 /* Pods-BothamNetworkingCocoa.release.xcconfig */,
+				A45A2C648AAA00863B776907 /* Pods-BothamNetworkingCocoaTests.debug.xcconfig */,
+				3FC9E1C42CF06518D223EF71 /* Pods-BothamNetworkingCocoaTests.release.xcconfig */,
+				D4B6DF18BEAB0CCB1EF79317 /* Pods-BothamNetworking.debug.xcconfig */,
+				26BFD38BC006B4518E23E188 /* Pods-BothamNetworking.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -202,6 +303,8 @@
 				6B58B9C01C4573DE00C37F02 /* Playground.playground */,
 				EB8F442D1BFF442F00CC3AA5 /* BothamNetworking */,
 				EBACCC551BFF463700F1CD7F /* BothamNetworkingTests */,
+				6BC01CE81C6E4BE700D08E72 /* BothamNetworkingCocoa */,
+				6BC01CF41C6E4BE800D08E72 /* BothamNetworkingCocoaTests */,
 				EB8F442C1BFF442F00CC3AA5 /* Products */,
 				DCA94239E2FFDCED361BB4F7 /* Pods */,
 				42E9C22008F67B81279A0BBB /* Frameworks */,
@@ -213,6 +316,8 @@
 			children = (
 				EB8F442B1BFF442F00CC3AA5 /* BothamNetworking.framework */,
 				EBACCC541BFF463700F1CD7F /* BothamNetworkingTests.xctest */,
+				6BC01CE71C6E4BE700D08E72 /* BothamNetworking.framework */,
+				6BC01CF01C6E4BE800D08E72 /* BothamNetworkingCocoaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,6 +406,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		6BC01CE41C6E4BE700D08E72 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BC01CEA1C6E4BE700D08E72 /* BothamNetworkingCocoa.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB8F44281BFF442F00CC3AA5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,6 +425,47 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		6BC01CE61C6E4BE700D08E72 /* BothamNetworkingCocoa */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BC01CFC1C6E4BE800D08E72 /* Build configuration list for PBXNativeTarget "BothamNetworkingCocoa" */;
+			buildPhases = (
+				6854311C8254400D3F0E465E /* Check Pods Manifest.lock */,
+				6BC01CE21C6E4BE700D08E72 /* Sources */,
+				6BC01CE31C6E4BE700D08E72 /* Frameworks */,
+				6BC01CE41C6E4BE700D08E72 /* Headers */,
+				6BC01CE51C6E4BE700D08E72 /* Resources */,
+				92C9BA537E3EC7BF02046597 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BothamNetworkingCocoa;
+			productName = BothamNetworkingCocoa;
+			productReference = 6BC01CE71C6E4BE700D08E72 /* BothamNetworking.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6BC01CEF1C6E4BE800D08E72 /* BothamNetworkingCocoaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6BC01CFD1C6E4BE800D08E72 /* Build configuration list for PBXNativeTarget "BothamNetworkingCocoaTests" */;
+			buildPhases = (
+				0A2143B7D17A95DC6AEE1CA4 /* Check Pods Manifest.lock */,
+				6BC01CEC1C6E4BE800D08E72 /* Sources */,
+				6BC01CED1C6E4BE800D08E72 /* Frameworks */,
+				6BC01CEE1C6E4BE800D08E72 /* Resources */,
+				C4F4F1BBE92D4027BF95E73E /* Embed Pods Frameworks */,
+				818F0A561D4C6E398A4C0339 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6BC01CF31C6E4BE800D08E72 /* PBXTargetDependency */,
+			);
+			name = BothamNetworkingCocoaTests;
+			productName = BothamNetworkingCocoaTests;
+			productReference = 6BC01CF01C6E4BE800D08E72 /* BothamNetworkingCocoaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		EB8F442A1BFF442F00CC3AA5 /* BothamNetworking */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB8F44331BFF442F00CC3AA5 /* Build configuration list for PBXNativeTarget "BothamNetworking" */;
@@ -359,10 +513,16 @@
 		EB8F44221BFF442F00CC3AA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "GoKarumi S.L.";
 				TargetAttributes = {
+					6BC01CE61C6E4BE700D08E72 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					6BC01CEF1C6E4BE800D08E72 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					EB8F442A1BFF442F00CC3AA5 = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
@@ -385,11 +545,27 @@
 			targets = (
 				EB8F442A1BFF442F00CC3AA5 /* BothamNetworking */,
 				EBACCC531BFF463700F1CD7F /* BothamNetworkingTests */,
+				6BC01CE61C6E4BE700D08E72 /* BothamNetworkingCocoa */,
+				6BC01CEF1C6E4BE800D08E72 /* BothamNetworkingCocoaTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6BC01CE51C6E4BE700D08E72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BC01CEE1C6E4BE800D08E72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB8F44291BFF442F00CC3AA5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -422,6 +598,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		0A2143B7D17A95DC6AEE1CA4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		32E61A7FD5F391578A6F3DBD /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +626,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6854311C8254400D3F0E465E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		818F0A561D4C6E398A4C0339 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8CAE95E3E4D198D02C074BAC /* Embed Pods Frameworks */ = {
@@ -452,6 +673,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		92C9BA537E3EC7BF02046597 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingCocoa/Pods-BothamNetworkingCocoa-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4F4F1BBE92D4027BF95E73E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CF87CABBE6E53C2005C131C1 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -464,7 +715,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworking/Pods-BothamNetworking-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DB774EC8615E404939A9986B /* Check Pods Manifest.lock */ = {
@@ -485,6 +736,51 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6BC01CE21C6E4BE700D08E72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BC01CFE1C6E4C4100D08E72 /* BasicAuthentication.swift in Sources */,
+				6BC01CFF1C6E4C4100D08E72 /* BothamAPIClient.swift in Sources */,
+				6BC01D001C6E4C4100D08E72 /* Dictionary.swift in Sources */,
+				6BC01D011C6E4C4100D08E72 /* CaseInsensitiveDictionary.swift in Sources */,
+				6BC01D021C6E4C4100D08E72 /* ResultType.swift in Sources */,
+				6BC01D031C6E4C4100D08E72 /* HTTPEncoder.swift in Sources */,
+				6BC01D041C6E4C4100D08E72 /* HTTPClient.swift in Sources */,
+				6BC01D051C6E4C4100D08E72 /* HTTPMethod.swift in Sources */,
+				6BC01D061C6E4C4100D08E72 /* HTTPRequest.swift in Sources */,
+				6BC01D071C6E4C4100D08E72 /* HTTPResponse.swift in Sources */,
+				6BC01D081C6E4C4100D08E72 /* NSHTTPClient.swift in Sources */,
+				6BC01D091C6E4C4100D08E72 /* BothamRequestInterceptor.swift in Sources */,
+				6BC01D0A1C6E4C4100D08E72 /* BothamResponseInterceptor.swift in Sources */,
+				6BC01D0B1C6E4C4100D08E72 /* NSLogInterceptor.swift in Sources */,
+				6BC01D0C1C6E4C4100D08E72 /* JSONHeadersRequestInterceptor.swift in Sources */,
+				6BC01D0D1C6E4C4100D08E72 /* BothamAPIClientError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6BC01CEC1C6E4BE800D08E72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BC01D0E1C6E4CD100D08E72 /* BothamNetworkingTestCase.swift in Sources */,
+				6BC01D0F1C6E4CD100D08E72 /* BothamAPIClientTests.swift in Sources */,
+				6BC01D101C6E4CD100D08E72 /* BasicAuthenticationTests.swift in Sources */,
+				6BC01D111C6E4CD100D08E72 /* BothamRetryRequestTests.swift in Sources */,
+				6BC01D121C6E4CD100D08E72 /* ResultTypeTests.swift in Sources */,
+				6BC01D131C6E4CD100D08E72 /* BothamAPIClientError.swift in Sources */,
+				6BC01D141C6E4CD100D08E72 /* FutureMatchers.swift in Sources */,
+				6BC01D151C6E4CD100D08E72 /* HTTPEncoderTests.swift in Sources */,
+				6BC01D161C6E4CD100D08E72 /* NSHTTPClientTests.swift in Sources */,
+				6BC01D171C6E4CD100D08E72 /* HTTPRequestTests.swift in Sources */,
+				6BC01D181C6E4CD100D08E72 /* HTTPResponseTests.swift in Sources */,
+				6BC01D191C6E4CD100D08E72 /* SpyRequestInterceptor.swift in Sources */,
+				6BC01D1A1C6E4CD100D08E72 /* SpyResponseInterceptor.swift in Sources */,
+				6BC01D1B1C6E4CD100D08E72 /* RetryResponseInterceptor.swift in Sources */,
+				6BC01D1C1C6E4CD100D08E72 /* NocillaTestCase.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB8F44261BFF442F00CC3AA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -533,6 +829,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6BC01CF31C6E4BE800D08E72 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6BC01CE61C6E4BE700D08E72 /* BothamNetworkingCocoa */;
+			targetProxy = 6BC01CF21C6E4BE800D08E72 /* PBXContainerItemProxy */;
+		};
 		EBACCC5B1BFF463700F1CD7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EB8F442A1BFF442F00CC3AA5 /* BothamNetworking */;
@@ -541,6 +842,80 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		6BC01CF81C6E4BE800D08E72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72780B69BF244722E6B9D8CE /* Pods-BothamNetworkingCocoa.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = BothamNetworkingCocoa/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.BothamNetworkingCocoa;
+				PRODUCT_NAME = BothamNetworking;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6BC01CF91C6E4BE800D08E72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CB9CBB428605C388F047D24 /* Pods-BothamNetworkingCocoa.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = BothamNetworkingCocoa/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.BothamNetworkingCocoa;
+				PRODUCT_NAME = BothamNetworking;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6BC01CFA1C6E4BE800D08E72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A45A2C648AAA00863B776907 /* Pods-BothamNetworkingCocoaTests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = BothamNetworkingCocoaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.BothamNetworkingCocoaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6BC01CFB1C6E4BE800D08E72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FC9E1C42CF06518D223EF71 /* Pods-BothamNetworkingCocoaTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = BothamNetworkingCocoaTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.BothamNetworkingCocoaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		EB8F44311BFF442F00CC3AA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -579,6 +954,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -621,6 +997,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -632,7 +1009,7 @@
 		};
 		EB8F44341BFF442F00CC3AA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D74D9F63C2D03CEA7DEAAA3F /* Pods.debug.xcconfig */;
+			baseConfigurationReference = D4B6DF18BEAB0CCB1EF79317 /* Pods-BothamNetworking.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -651,7 +1028,7 @@
 		};
 		EB8F44351BFF442F00CC3AA5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 296BA8C5294BBED8E4BD8266 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 26BFD38BC006B4518E23E188 /* Pods-BothamNetworking.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
@@ -695,6 +1072,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6BC01CFC1C6E4BE800D08E72 /* Build configuration list for PBXNativeTarget "BothamNetworkingCocoa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BC01CF81C6E4BE800D08E72 /* Debug */,
+				6BC01CF91C6E4BE800D08E72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6BC01CFD1C6E4BE800D08E72 /* Build configuration list for PBXNativeTarget "BothamNetworkingCocoaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6BC01CFA1C6E4BE800D08E72 /* Debug */,
+				6BC01CFB1C6E4BE800D08E72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EB8F44251BFF442F00CC3AA5 /* Build configuration list for PBXProject "BothamNetworking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
