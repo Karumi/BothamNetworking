@@ -46,7 +46,6 @@
 		6BC01D3C1C6E5CAF00D08E72 /* BothamNetworkingCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BC01CE91C6E4BE700D08E72 /* BothamNetworkingCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B405560D6C2FA4BDFC9BDA53 /* Pods_BothamNetworkingCocoaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7216150E7783A6A1CEF955 /* Pods_BothamNetworkingCocoaTests.framework */; };
 		B4C8D0605C3DF92511721318 /* Pods_BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0776A3DEA351189FA48634C /* Pods_BothamNetworking.framework */; };
-		D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A18346BC8A4CC5BD56E0F20B /* Pods.framework */; };
 		DAF48DF591D309FABB4E7FC6 /* Pods_BothamNetworkingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB776DA923364C274134982C /* Pods_BothamNetworkingTests.framework */; };
 		DE20AD833F73107D199FE618 /* Pods_BothamNetworkingCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F103F147ECF9AA3887848E1F /* Pods_BothamNetworkingCocoa.framework */; };
 		EB196FDD1C47E31C0080EDB9 /* BothamAPIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */; };
@@ -179,7 +178,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D631FF669467EFA331BB0AEC /* Pods.framework in Frameworks */,
 				B4C8D0605C3DF92511721318 /* Pods_BothamNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
