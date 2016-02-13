@@ -15,6 +15,7 @@ end
 target 'BothamNetworking' do
 	platform :ios, '8.0'
 	framework_pods
+	testing_pods
 end
 
 target 'BothamNetworkingTests' do
