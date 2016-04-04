@@ -5,9 +5,10 @@ before_install:
   - brew install swiftlint
   - gem install xcpretty
   - gem install cocoapods
+  - gem install cocoapods-deploy
 
 install:
-  - pod install
+  - pod deploy
 
 script:
   - swiftlint
