@@ -25,6 +25,10 @@ class NocillaTestCase: XCTestCase {
         super.tearDown()
     }
 
+    @discardableResult func stubRequest(_ method: String, _ url: String) -> LSStubRequestDSL {
+        return Nocilla.stubRequest(method, (url as NSString) as LSMatcheable)
+    }
+
     func fromJsonFile(_ fileName: String) -> String {
         let classBundle = Bundle(for: self.classForCoder)
         let path = classBundle.path(forResource: fileName, ofType: "json")

@@ -61,12 +61,12 @@ open class NSHTTPClient: HTTPClient {
     fileprivate func mapNSHTTPURlResponseToHTTPResponse(_ response: HTTPURLResponse,
         data: Data) -> HTTPResponse {
         let statusCode = response.statusCode
-        let headers: [(String, String)] = response.allHeaderFields.map {
+        let headers = response.allHeaderFields.map {
             (key, value) in (key as! String, value as! String)
         }
         return HTTPResponse(
             statusCode: statusCode,
-            headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers as [(String, String)])),
+            headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers)),
             body: data)
     }
 

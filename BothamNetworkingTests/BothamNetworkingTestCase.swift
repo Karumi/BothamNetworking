@@ -17,10 +17,6 @@ class BothamNetworkingTestCase: NocillaTestCase {
     let anyHTTPMethod = HTTPMethod.GET
     let anyStatusCode = 200
 
-    @discardableResult func stubRequest(_ method: String, _ url: String) -> LSStubRequestDSL {
-        return Nocilla.stubRequest(method, (url as NSString) as LSMatcheable)
-    }
-
     func givenABothamAPIClient() -> BothamAPIClient {
         return BothamAPIClient(baseEndpoint: anyHost)
     }
