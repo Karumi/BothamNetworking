@@ -29,8 +29,8 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
 
     func testSendsAnyHttpMethodRequestWithAuthenticationError() {
         stubRequest("GET", anyHost + anyPath)
-            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
-            .andReturn(401)
+            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")?
+            .andReturn(401)?
             .withHeader("WWW-Authenticate","Basic realm=\"WallyWorld\"")
 
         let basicAuthentication = SpyBasicAuthentication()
@@ -42,8 +42,8 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(BothamAPIClientError.HTTPResponseError(statusCode: 401,
-            body: NSData())))
+        expect(response).toEventually(failWithError(BothamAPIClientError.httpResponseError(statusCode: 401,
+            body: Data())))
         expect(basicAuthentication.authenticationError).toEventually(beTrue())
     }
 }
@@ -55,7 +55,7 @@ private class SpyBasicAuthentication: BasicAuthentication {
         return ("Aladdin", "open sesame")
     }
 
-    private func onAuthenticationError(realm: String) {
+    fileprivate func onAuthenticationError(_ realm: String) {
         authenticationError = true
     }
 }

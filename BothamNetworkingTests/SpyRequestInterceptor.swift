@@ -14,7 +14,7 @@ class SpyRequestInterceptor: BothamRequestInterceptor {
     var intercepted: Bool = false
     var interceptedRequest: HTTPRequest!
 
-    func intercept(request: HTTPRequest) -> HTTPRequest {
+    func intercept(_ request: HTTPRequest) -> HTTPRequest {
         intercepted = true
         interceptedRequest = request
         return request

@@ -9,47 +9,64 @@
 import Foundation
 import Result
 
-public class NSHTTPClient: HTTPClient {
+open class NSHTTPClient: HTTPClient {
 
-    public func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
-        let request = mapHTTPRequestToNSURLRequest(httpRequest)
-        let session = NSURLSession.sharedSession()
+    open func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+        guard let request = mapHTTPRequestToNSURLRequest(httpRequest) else {
+            completion(Result.failure(.unsupportedURLScheme))
+            return
+        }
+
+        let session = URLSession.shared
         session.configuration.timeoutIntervalForRequest = timeout
         session.configuration.timeoutIntervalForResource = timeout
-        session.dataTaskWithRequest(request) { data, response, error in
+        session.dataTask(with: request, completionHandler: { data, response, error in
             if let error = error {
-                let bothamError = self.mapNSErrorToBothamError(error)
-                completion(Result.Failure(bothamError))
-            } else if let response = response as? NSHTTPURLResponse, let data = data {
+                let bothamError = self.mapNSErrorToBothamError(error as NSError)
+                completion(Result.failure(bothamError))
+            } else if let response = response as? HTTPURLResponse, let data = data {
                 let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
-                completion(Result.Success(response))
+                completion(Result.success(response))
             }
-        }.resume()
+        }) .resume()
     }
 
-    private func mapHTTPRequestToNSURLRequest(httpRequest: HTTPRequest) -> NSURLRequest {
-        let components = NSURLComponents(string: httpRequest.url)
+    fileprivate func mapHTTPRequestToNSURLRequest(_ httpRequest: HTTPRequest) -> URLRequest? {
+        guard let url = mapHTTPRequestURL(httpRequest) else {
+            return nil
+        }
+
+        let request = NSMutableURLRequest(url: url)
+        request.allHTTPHeaderFields = httpRequest.headers
+        request.httpMethod = httpRequest.httpMethod.rawValue
+        request.httpBody = httpRequest.encodedBody
+        request.timeoutInterval = timeout
+        return request as URLRequest
+    }
+
+    private func mapHTTPRequestURL(_ httpRequest: HTTPRequest) -> URL? {
+        guard var components = URLComponents(string: httpRequest.url) else {
+            return nil
+        }
+
         if let params = httpRequest.parameters {
-            components?.queryItems = params.map { (key, value) in
-                return NSURLQueryItem(name: key, value: value)
+            components.queryItems = params.map { (key, value) in
+                return URLQueryItem(name: key, value: value)
             }
         }
-        let request = NSMutableURLRequest(URL: components?.URL ?? NSURL())
-        request.allHTTPHeaderFields = httpRequest.headers
-        request.HTTPMethod = httpRequest.httpMethod.rawValue
-        request.HTTPBody = httpRequest.encodedBody
-        request.timeoutInterval = timeout
-        return request
+
+        return components.url
     }
 
-    private func mapNSHTTPURlResponseToHTTPResponse(response: NSHTTPURLResponse,
-        data: NSData) -> HTTPResponse {
+    fileprivate func mapNSHTTPURlResponseToHTTPResponse(_ response: HTTPURLResponse,
+        data: Data) -> HTTPResponse {
         let statusCode = response.statusCode
-        let headers = response.allHeaderFields.map {
+        let headers: [(String, String)] = response.allHeaderFields.map {
             (key, value) in (key as! String, value as! String)
         }
-        return HTTPResponse(statusCode: statusCode,
-            headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers)),
+        return HTTPResponse(
+            statusCode: statusCode,
+            headers: CaseInsensitiveDictionary(dictionary: Dictionary(headers as [(String, String)])),
             body: data)
     }
 

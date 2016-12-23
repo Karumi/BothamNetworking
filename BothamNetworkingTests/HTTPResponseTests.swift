@@ -13,7 +13,7 @@ import Nimble
 
 class HTTPResponseTests: XCTestCase {
 
-    private let anyHeaders = ["x":"y"]
+    fileprivate let anyHeaders = ["x":"y"]
 
     func testShouldReplaceResponseStatusCode() {
         var response = givenAResponse(200)
@@ -24,9 +24,9 @@ class HTTPResponseTests: XCTestCase {
     }
 
     func testShouldReplaceResponseBody() {
-        var response = givenAResponse(body: NSData())
+        var response = givenAResponse(body: Data() as NSData)
 
-        let newBody = NSData()
+        let newBody = Data()
         response = response.withBody(newBody)
 
         expect(response.body).to(equal(newBody))
@@ -60,12 +60,12 @@ class HTTPResponseTests: XCTestCase {
         expect(response.headers?["a"]).to(equal("b"))
     }
 
-    private func givenAResponse(statusCode: Int = 200,
+    fileprivate func givenAResponse(_ statusCode: Int = 200,
         headers: [String:String]? = nil,
         body: NSData = NSData()) -> HTTPResponse {
         return HTTPResponse(statusCode: statusCode,
             headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),
-            body: body)
+            body: body as Data)
     }
 
 }

@@ -17,13 +17,13 @@ import Result
 
 class NSHTTPClientTests: NocillaTestCase {
 
-    private let anyUrl = "http://www.any.com"
-    private let anyStatusCode = 201
-    private let anyBody = "{HttpResponseBody = true}"
-    private let anyNSError = NSError(domain: "DomainError", code: 123, userInfo: nil)
+    fileprivate let anyUrl = "http://www.any.com"
+    fileprivate let anyStatusCode = 201
+    fileprivate let anyBody = "{HttpResponseBody = true}"
+    fileprivate let anyNSError = NSError(domain: "DomainError", code: 123, userInfo: nil)
 
     func testSendsGetRequestToAnyPath() {
-        stubRequest("GET", anyUrl)
+        stubRequest("GET", anyUrl as LSMatcheable!)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
@@ -36,7 +36,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testSendsPostRequestToAnyPath() {
-        stubRequest("POST", anyUrl)
+        stubRequest("POST", anyUrl as LSMatcheable!)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.POST, url: anyUrl)
 
@@ -49,7 +49,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testSendsPutRequestToAnyPath() {
-        stubRequest("PUT", anyUrl)
+        stubRequest("PUT", anyUrl as LSMatcheable!)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.PUT, url: anyUrl)
 
@@ -62,7 +62,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testSendsDeleteRequestToAnyPath() {
-        stubRequest("DELETE", anyUrl)
+        stubRequest("DELETE", anyUrl as LSMatcheable!)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.DELETE, url: anyUrl)
 
@@ -75,7 +75,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testSendsHeadRequestToAnyPath() {
-        stubRequest("HEAD", anyUrl)
+        stubRequest("HEAD", anyUrl as LSMatcheable!)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.HEAD, url: anyUrl)
 
@@ -88,7 +88,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testReceivesHttpStatusCodeInTheHttpResponse() {
-        stubRequest("GET", anyUrl).andReturn(anyStatusCode)
+        stubRequest("GET", anyUrl as LSMatcheable!).andReturn(anyStatusCode)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
@@ -101,7 +101,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testPropagatesErrorsInTheFuture() {
-        stubRequest("GET", anyUrl).andFailWithError(anyNSError)
+        stubRequest("GET", anyUrl as LSMatcheable!).andFailWithError(anyNSError)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
@@ -110,11 +110,11 @@ class NSHTTPClientTests: NocillaTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.HTTPClientError(error: anyNSError)))
+        expect(response).toEventually(failWithError(.httpClientError(error: anyNSError)))
     }
 
     func testSendsParamsConfiguredInTheHttpRequest() {
-        stubRequest("GET", anyUrl + "?key=value")
+        stubRequest("GET", anyUrl + "?key=value" as NSString)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl, params: ["key" : "value"])
 
@@ -127,10 +127,10 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testSendsBodyConfiguredInTheHttpRequest() {
-        stubRequest("POST", anyUrl)
-            .withBody("{\"key\":\"value\"}")
+        stubRequest("POST", anyUrl as LSMatcheable!)
+            .withBody("{\"key\":\"value\"}" as NSString)
         let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value"])
+        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value" as AnyObject])
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
@@ -141,7 +141,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testReturnsNSConnectionErrorsAsABothamAPIClientNetworkError() {
-        stubRequest("GET", anyUrl).andFailWithError(NSError.anyConnectionError())
+        stubRequest("GET", anyUrl as LSMatcheable!).andFailWithError(NSError.anyConnectionError())
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
@@ -150,10 +150,10 @@ class NSHTTPClientTests: NocillaTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.NetworkError))
+        expect(response).toEventually(failWithError(.networkError))
     }
 
-    private func givenOneHttpRequest(httpMethod: HTTPMethod,
+    fileprivate func givenOneHttpRequest(_ httpMethod: HTTPMethod,
         url: String, params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> HTTPRequest {

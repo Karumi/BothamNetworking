@@ -14,32 +14,32 @@ import Result
  */
 public protocol BasicAuthentication: BothamRequestInterceptor, BothamResponseInterceptor {
     var credentials: (username: String, password: String) { get }
-    func onAuthenticationError(realm: String) -> Void
+    func onAuthenticationError(_ realm: String) -> Void
 }
 
 extension BasicAuthentication {
-    public func intercept(request: HTTPRequest) -> HTTPRequest {
+    public func intercept(_ request: HTTPRequest) -> HTTPRequest {
 
         let userPass = "\(credentials.username):\(credentials.password)"
 
-        let userPassData = userPass.dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64UserPass = userPassData.base64EncodedStringWithOptions([])
+        let userPassData = userPass.data(using: String.Encoding.utf8)!
+        let base64UserPass = userPassData.base64EncodedString(options: [])
 
         let header = ["Authorization" : "Basic \(base64UserPass)"]
 
         return request.appendingHeaders(header)
     }
 
-    public func intercept(response: HTTPResponse,
+    public func intercept(_ response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         if response.statusCode == 401, let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
             let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: []) // swiftlint:disable:this force_try
             let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
-            if let match = regex.firstMatchInString(unauthorizedHeader, options: [], range: range) {
-                let realm = (unauthorizedHeader as NSString).substringWithRange(match.rangeAtIndex(1))
+            if let match = regex.firstMatch(in: unauthorizedHeader, options: [], range: range) {
+                let realm = (unauthorizedHeader as NSString).substring(with: match.rangeAt(1))
                 onAuthenticationError(realm)
             }
         }
-        completion(Result.Success(response))
+        completion(Result.success(response))
     }
 }

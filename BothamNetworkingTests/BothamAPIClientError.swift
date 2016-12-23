@@ -13,17 +13,17 @@ extension BothamAPIClientError: Equatable { }
 
 public func == (lhs: BothamAPIClientError, rhs: BothamAPIClientError) -> Bool {
     switch (lhs, rhs) {
-    case let (.HTTPResponseError(statusCode1, body1), .HTTPResponseError(statusCode2, body2)):
+    case let (.httpResponseError(statusCode1, body1), .httpResponseError(statusCode2, body2)):
         return statusCode1 == statusCode2 && body1 == body2
-    case let (.HTTPClientError(error1), .HTTPClientError(error2)):
+    case let (.httpClientError(error1), .httpClientError(error2)):
         return error1 == error2
-    case (.NetworkError, .NetworkError):
+    case (.networkError, .networkError):
         return true
-    case (.UnsupportedURLScheme, .UnsupportedURLScheme):
+    case (.unsupportedURLScheme, .unsupportedURLScheme):
         return true
-    case (.ParsingError(_), .ParsingError(_)):
+    case (.parsingError(_), .parsingError(_)):
         return true
-    case (.Retry, .Retry):
+    case (.retry, .retry):
         return true
     default:
         return false

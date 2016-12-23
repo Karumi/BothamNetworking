@@ -19,13 +19,13 @@ class RetryResponseInterceptor: BothamResponseInterceptor {
         self.numberOfRetries = numberOfRetries
     }
 
-    func intercept(response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+    func intercept(_ response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         interceptCalls += 1
         if numberOfRetries > 0 {
             numberOfRetries -= 1
-            completion(Result.Failure(.Retry))
+            completion(Result.failure(.retry))
         } else {
-            completion(Result.Success(response))
+            completion(Result.success(response))
         }
     }
 }

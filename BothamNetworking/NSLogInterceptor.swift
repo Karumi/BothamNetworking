@@ -9,18 +9,18 @@
 import Foundation
 import Result
 
-public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseInterceptor {
+open class NSLogInterceptor: BothamRequestInterceptor, BothamResponseInterceptor {
 
     public init() {}
 
-    public func intercept(request: HTTPRequest) -> HTTPRequest {
+    open func intercept(_ request: HTTPRequest) -> HTTPRequest {
         NSLog("-> \(request)")
         return request
     }
 
-    public func intercept(response: HTTPResponse,
+    open func intercept(_ response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
             NSLog("<- \(response)")
-            completion(Result.Success(response))
+            completion(Result.success(response))
     }
 }

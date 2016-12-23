@@ -10,6 +10,6 @@ import Foundation
 
 public protocol BothamRequestInterceptor {
 
-    func intercept(request: HTTPRequest) -> HTTPRequest
+    func intercept(_ request: HTTPRequest) -> HTTPRequest
 
 }

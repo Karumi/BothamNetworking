@@ -17,19 +17,19 @@ import BothamNetworking
 class ResultTypeTests: XCTestCase {
 
     func testReturnsMalformedJsonAsAParsingError() {
-        let malformedJSON = "{".dataUsingEncoding(NSUTF8StringEncoding)
+        let malformedJSON = "{".data(using: String.Encoding.utf8)
         let response = HTTPResponse(statusCode: 200, headers: nil, body: malformedJSON!)
-        let result = Result<HTTPResponse, BothamAPIClientError>.Success(response)
+        let result = Result<HTTPResponse, BothamAPIClientError>.success(response)
 
         let jsonMappingError = result.mapJSON { return $0 }
 
-        expect(jsonMappingError.error).to(equal(BothamAPIClientError.ParsingError(error: NSError.anyError())))
+        expect(jsonMappingError.error).to(equal(BothamAPIClientError.parsingError(error: NSError.anyError())))
     }
 
     func testReturnsResponseBodyAsJSON() {
-        let malformedJSON = "{\"a\":\"b\"}".dataUsingEncoding(NSUTF8StringEncoding)
+        let malformedJSON = "{\"a\":\"b\"}".data(using: String.Encoding.utf8)
         let response = HTTPResponse(statusCode: 200, headers: nil, body: malformedJSON!)
-        let result = Result<HTTPResponse, BothamAPIClientError>.Success(response)
+        let result = Result<HTTPResponse, BothamAPIClientError>.success(response)
 
         let parsedValue = result.mapJSON { json in
             json["a"]

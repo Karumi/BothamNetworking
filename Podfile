@@ -1,5 +1,5 @@
 workspace 'BothamNetworking.xcworkspace'
-xcodeproj 'BothamNetworking.xcodeproj'
+project 'BothamNetworking.xcodeproj'
 use_frameworks!
 
 def framework_pods

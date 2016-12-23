@@ -16,7 +16,7 @@ public struct HTTPRequest {
     public let httpMethod: HTTPMethod
     public let body: [String:AnyObject]?
 
-    public var encodedBody: NSData? {
+    public var encodedBody: Data? {
         get {
             return HTTPEncoder.encodeBody(self)
         }
@@ -34,8 +34,8 @@ public struct HTTPRequest {
             self.body = body
     }
 
-    @warn_unused_result
-    public func withURL(url: String) -> HTTPRequest {
+    
+    public func withURL(_ url: String) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -44,8 +44,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    @warn_unused_result
-    public func withParameters(parameters: [String:String]) -> HTTPRequest {
+    
+    public func withParameters(_ parameters: [String:String]) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -54,8 +54,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    @warn_unused_result
-    public func withHeaders(headers: [String:String]?) -> HTTPRequest {
+    
+    public func withHeaders(_ headers: [String:String]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -64,8 +64,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    @warn_unused_result
-    public func withHTTPMethod(httpMethod: HTTPMethod) -> HTTPRequest {
+    
+    public func withHTTPMethod(_ httpMethod: HTTPMethod) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -74,8 +74,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    @warn_unused_result
-    public func withBody(body: [String:AnyObject]?) -> HTTPRequest {
+    
+    public func withBody(_ body: [String:AnyObject]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -84,8 +84,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    @warn_unused_result
-    public func appendingHeaders(headers: [String:String]) -> HTTPRequest {
+    
+    public func appendingHeaders(_ headers: [String:String]) -> HTTPRequest {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPRequest(
@@ -96,8 +96,8 @@ public struct HTTPRequest {
             body: body)
     }
 
-    @warn_unused_result
-    public func appendingParameters(parameters: [String:String]) -> HTTPRequest {
+    
+    public func appendingParameters(_ parameters: [String:String]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(
@@ -116,11 +116,11 @@ extension HTTPRequest: CustomDebugStringConvertible {
         get {
             let headers = self.headers?.map {
                 (key, value) in "\(key): \(value)\n"
-                }.joinWithSeparator("\n") ?? ""
+                }.joined(separator: "\n") ?? ""
             let parameters = self.parameters?.map {
                 (key, value) in "\(key): \(value)\n"
-                }.joinWithSeparator("\n") ?? ""
-            let encodedBody = String(data: self.encodedBody ?? NSData(), encoding: NSUTF8StringEncoding)!
+                }.joined(separator: "\n") ?? ""
+            let encodedBody = String(data: self.encodedBody ?? Data(), encoding: String.Encoding.utf8)!
             return "\(httpMethod.rawValue) \(url)"
             + "\(parameters)\n"
             + "\(headers)\n"

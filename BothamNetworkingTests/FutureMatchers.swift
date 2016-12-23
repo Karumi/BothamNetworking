@@ -19,7 +19,7 @@ func beSuccess<T>() -> MatcherFunc<T?> {
     }
 }
 
-func failWithError<T>(expectedError: BothamAPIClientError) -> MatcherFunc<T?> {
+func failWithError<T>(_ expectedError: BothamAPIClientError) -> MatcherFunc<T?> {
     return MatcherFunc { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>

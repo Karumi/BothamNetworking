@@ -25,12 +25,12 @@ class NocillaTestCase: XCTestCase {
         super.tearDown()
     }
 
-    func fromJsonFile(fileName: String) -> String {
-        let classBundle = NSBundle(forClass: self.classForCoder)
-        let path = classBundle.pathForResource(fileName, ofType: "json")
+    func fromJsonFile(_ fileName: String) -> String {
+        let classBundle = Bundle(for: self.classForCoder)
+        let path = classBundle.path(forResource: fileName, ofType: "json")
         let absolutePath =  path ?? ""
         do {
-            return try String(contentsOfFile: absolutePath, encoding: NSUTF8StringEncoding)
+            return try String(contentsOfFile: absolutePath, encoding: String.Encoding.utf8)
         } catch _ {
             print("Error trying to read file \(absolutePath). The file does not exist")
             return ""

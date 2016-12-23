@@ -8,13 +8,13 @@
 
 import Foundation
 
-public enum BothamAPIClientError: ErrorType {
+public enum BothamAPIClientError: Error {
 
-    case HTTPResponseError(statusCode: Int, body: NSData)
-    case NetworkError
-    case HTTPClientError(error: NSError)
-    case ParsingError(error: NSError)
-    case UnsupportedURLScheme
-    case Retry
+    case httpResponseError(statusCode: Int, body: Data)
+    case networkError
+    case httpClientError(error: NSError)
+    case parsingError(error: NSError)
+    case unsupportedURLScheme
+    case retry
 
 }

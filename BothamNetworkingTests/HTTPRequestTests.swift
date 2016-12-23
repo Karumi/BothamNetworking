@@ -13,10 +13,10 @@ import Nimble
 
 class HTTPRequestTests: XCTestCase {
 
-    private let anyURL = "http://www.karumi.com"
-    private let anyHTTPMethod = HTTPMethod.GET
-    private let anyParams = ["x":"y"]
-    private let anyHeaders = ["x":"y"]
+    fileprivate let anyURL = "http://www.karumi.com"
+    fileprivate let anyHTTPMethod = HTTPMethod.GET
+    fileprivate let anyParams = ["x":"y"]
+    fileprivate let anyHeaders = ["x":"y"]
 
     func testShouldReplaceRequestURL() {
         var request = givenAnHTTPRequest("http://www.karumi.com")
@@ -53,14 +53,14 @@ class HTTPRequestTests: XCTestCase {
     }
 
     func testShouldReplaceRequestBody() {
-        var request = givenAnHTTPRequest(body: NSData())
+        var request = givenAnHTTPRequest(body: Data() as NSData?)
 
-        request = request.withBody(["a":"b"])
+        request = request.withBody(["a":"b" as AnyObject])
 
         expect(request.body?["a"] as? String).to(equal("b"))
     }
 
-    private func givenAnEmptyHTTPRequest() -> HTTPRequest {
+    fileprivate func givenAnEmptyHTTPRequest() -> HTTPRequest {
         return HTTPRequest(
             url: anyURL,
             parameters: [String:String](),
@@ -107,7 +107,7 @@ class HTTPRequestTests: XCTestCase {
         expect(request.parameters?["a"]!).to(equal("b"))
     }
 
-    private func givenAnHTTPRequest(url: String = "http://www.karumi.com",
+    fileprivate func givenAnHTTPRequest(_ url: String = "http://www.karumi.com",
         parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         httpMethod: HTTPMethod = .GET,

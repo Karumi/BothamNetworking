@@ -13,35 +13,35 @@ import Result
 
 public protocol HTTPClient {
 
-    var timeout: NSTimeInterval { get }
+    var timeout: TimeInterval { get }
 
-    func send(httpRequest: HTTPRequest, completion: (Result<HTTPResponse, BothamAPIClientError>) -> ())
+    func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> ())
 
-    func hasValidScheme(httpRequest: HTTPRequest) -> Bool
+    func hasValidScheme(_ httpRequest: HTTPRequest) -> Bool
 
-    func isValidResponse(httpRespone: HTTPResponse) -> Bool
+    func isValidResponse(_ httpRespone: HTTPResponse) -> Bool
 
-    func mapNSErrorToBothamError(error: NSError) -> BothamAPIClientError
+    func mapNSErrorToBothamError(_ error: NSError) -> BothamAPIClientError
 
 }
 
 extension HTTPClient {
 
-    public var timeout: NSTimeInterval {
+    public var timeout: TimeInterval {
         get {
             return 10
         }
     }
 
-    public func hasValidScheme(request: HTTPRequest) -> Bool {
+    public func hasValidScheme(_ request: HTTPRequest) -> Bool {
         return request.url.hasPrefix("http") || request.url.hasPrefix("https")
     }
 
-    public func isValidResponse(response: HTTPResponse) -> Bool {
+    public func isValidResponse(_ response: HTTPResponse) -> Bool {
         return 200..<300 ~= response.statusCode
     }
 
-    public func mapNSErrorToBothamError(error: NSError) -> BothamAPIClientError {
+    public func mapNSErrorToBothamError(_ error: NSError) -> BothamAPIClientError {
         let connectionErrors = [NSURLErrorCancelled,
             NSURLErrorTimedOut,
             NSURLErrorCannotConnectToHost,
@@ -50,9 +50,9 @@ extension HTTPClient {
             NSURLErrorRequestBodyStreamExhausted
         ]
         if connectionErrors.contains(error.code) {
-            return .NetworkError
+            return .networkError
         } else {
-            return .HTTPClientError(error: error)
+            return .httpClientError(error: error)
         }
     }
 
