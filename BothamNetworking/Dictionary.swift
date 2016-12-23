@@ -22,7 +22,7 @@ func += <KeyType, ValueType> (left: inout Dictionary<KeyType, ValueType>?, right
         left = [KeyType:ValueType]()
     }
     for (k, v) in right {
-        let _ = left?.updateValue(v, forKey: k)
+        left?.updateValue(v, forKey: k)
     }
 }
 

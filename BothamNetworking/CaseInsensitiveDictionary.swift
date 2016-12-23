@@ -189,7 +189,7 @@ func += <ValueType> (left: inout CaseInsensitiveDictionary<ValueType>?, right: D
         left = CaseInsensitiveDictionary()
     }
     for (k, v) in right {
-        let _ = left?.updateValue(v, forKey: k)
+        left?.updateValue(v, forKey: k)
     }
 }
 
