@@ -19,7 +19,7 @@ public extension ResultProtocol where Value == HTTPResponse, Error == BothamAPIC
         }
     }
 
-    fileprivate func dataToJSONResult(_ data: NSData?) -> Result<JSON, BothamAPIClientError> {
+    private func dataToJSONResult(_ data: NSData?) -> Result<JSON, BothamAPIClientError> {
         do {
             let object: Any = try JSONSerialization.jsonObject(with: (data ?? NSData()) as Data,
                 options: .allowFragments)

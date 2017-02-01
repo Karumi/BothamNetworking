@@ -17,10 +17,10 @@ import Result
 
 class NSHTTPClientTests: NocillaTestCase {
 
-    fileprivate let anyUrl = "http://www.any.com"
-    fileprivate let anyStatusCode = 201
-    fileprivate let anyBody = "{HttpResponseBody = true}"
-    fileprivate let anyNSError = NSError(domain: "DomainError", code: 123, userInfo: nil)
+    private let anyUrl = "http://www.any.com"
+    private let anyStatusCode = 201
+    private let anyBody = "{HttpResponseBody = true}"
+    private let anyNSError = NSError(domain: "DomainError", code: 123, userInfo: nil)
 
     func testSendsGetRequestToAnyPath() {
         stubRequest("GET", anyUrl)
@@ -153,7 +153,7 @@ class NSHTTPClientTests: NocillaTestCase {
         expect(response).toEventually(failWithError(.networkError))
     }
 
-    fileprivate func givenOneHttpRequest(_ httpMethod: HTTPMethod,
+    private func givenOneHttpRequest(_ httpMethod: HTTPMethod,
         url: String, params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> HTTPRequest {

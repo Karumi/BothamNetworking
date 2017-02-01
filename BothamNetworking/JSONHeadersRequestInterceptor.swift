@@ -8,11 +8,11 @@
 
 import Foundation
 
-open class JSONHeadersRequestInterceptor: BothamRequestInterceptor {
+public class JSONHeadersRequestInterceptor: BothamRequestInterceptor {
 
     public init() {}
 
-    open func intercept(_ request: HTTPRequest) -> HTTPRequest {
+    public func intercept(_ request: HTTPRequest) -> HTTPRequest {
         return request.appendingHeaders(["Accept": "application/json",
             "Content-Type": "application/json"])
     }

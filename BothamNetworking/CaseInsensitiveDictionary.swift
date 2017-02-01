@@ -17,7 +17,7 @@ public struct CaseInsensitiveDictionary<Value> : Collection, ExpressibleByDictio
     public typealias Index = DictionaryIndex<Key, Value>
 
     fileprivate var data: [Key: Value] = [:]
-    fileprivate var keyMap: [String: Key] = [:]
+    private var keyMap: [String: Key] = [:]
 
 
     /// Create an empty dictionary.
@@ -66,7 +66,7 @@ public struct CaseInsensitiveDictionary<Value> : Collection, ExpressibleByDictio
 
     /// Returns the `Index` for the given key, or `nil` if the key is not
     /// present in the dictionary.
-    
+
     public func indexForKey(_ key: Key) -> DictionaryIndex<Key, Value>? {
         if let realKey = keyMap["\(key)".lowercased()] {
             return data.index(forKey: realKey)
@@ -104,7 +104,7 @@ public struct CaseInsensitiveDictionary<Value> : Collection, ExpressibleByDictio
     ///
     /// Returns the value that was replaced, or `nil` if a new key-value pair
     /// was added.
-    public mutating func updateValue(_ value: Value, forKey key: Key) -> Value? {
+    public mutating func update(value: Value, forKey key: Key) -> Value? {
         if let realKey = keyMap["\(key)".lowercased()] {
             return data.updateValue(value, forKey: realKey)
         } else {
@@ -126,17 +126,17 @@ public struct CaseInsensitiveDictionary<Value> : Collection, ExpressibleByDictio
 
     /// Remove all elements.
     ///
-    /// - Postcondition: `capacity == 0` if `keepCapacity` is `false`, otherwise
+    /// - Postcondition: `capacity == 0` if `keepingCapacity` is `false`, otherwise
     ///   the capacity will not be decreased.
     ///
     /// Invalidates all indices with respect to `self`.
     ///
-    /// - parameter keepCapacity: If `true`, the operation preserves the
+    /// - parameter keepingCapacity: If `true`, the operation preserves the
     ///   storage capacity that the collection has, otherwise the underlying
     ///   storage is released.  The default is `false`.
     ///
     /// Complexity: O(`count`).
-    public mutating func removeAll(keepCapacity: Bool = false) {
+    public mutating func removeAll(keepingCapacity keepCapacity: Bool = false) {
         keyMap.removeAll()
         return data.removeAll(keepingCapacity: keepCapacity)
     }
@@ -189,7 +189,7 @@ func += <ValueType> (left: inout CaseInsensitiveDictionary<ValueType>?, right: D
         left = CaseInsensitiveDictionary()
     }
     for (k, v) in right {
-        left?.updateValue(v, forKey: k)
+        let _ = left?.update(value: v, forKey: k)
     }
 }
 

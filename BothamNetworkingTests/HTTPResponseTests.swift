@@ -13,7 +13,7 @@ import Nimble
 
 class HTTPResponseTests: XCTestCase {
 
-    fileprivate let anyHeaders = ["x":"y"]
+    private let anyHeaders = ["x":"y"]
 
     func testShouldReplaceResponseStatusCode() {
         var response = givenAResponse(200)
@@ -60,7 +60,7 @@ class HTTPResponseTests: XCTestCase {
         expect(response.headers?["a"]).to(equal("b"))
     }
 
-    fileprivate func givenAResponse(_ statusCode: Int = 200,
+    private func givenAResponse(_ statusCode: Int = 200,
         headers: [String:String]? = nil,
         body: NSData = NSData()) -> HTTPResponse {
         return HTTPResponse(statusCode: statusCode,

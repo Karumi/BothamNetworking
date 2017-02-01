@@ -13,10 +13,10 @@ import Nimble
 
 class HTTPRequestTests: XCTestCase {
 
-    fileprivate let anyURL = "http://www.karumi.com"
-    fileprivate let anyHTTPMethod = HTTPMethod.GET
-    fileprivate let anyParams = ["x":"y"]
-    fileprivate let anyHeaders = ["x":"y"]
+    private let anyURL = "http://www.karumi.com"
+    private let anyHTTPMethod = HTTPMethod.GET
+    private let anyParams = ["x":"y"]
+    private let anyHeaders = ["x":"y"]
 
     func testShouldReplaceRequestURL() {
         var request = givenAnHTTPRequest("http://www.karumi.com")
@@ -60,7 +60,7 @@ class HTTPRequestTests: XCTestCase {
         expect(request.body?["a"] as? String).to(equal("b"))
     }
 
-    fileprivate func givenAnEmptyHTTPRequest() -> HTTPRequest {
+    private func givenAnEmptyHTTPRequest() -> HTTPRequest {
         return HTTPRequest(
             url: anyURL,
             parameters: [String:String](),
@@ -107,7 +107,7 @@ class HTTPRequestTests: XCTestCase {
         expect(request.parameters?["a"]!).to(equal("b"))
     }
 
-    fileprivate func givenAnHTTPRequest(_ url: String = "http://www.karumi.com",
+    private func givenAnHTTPRequest(_ url: String = "http://www.karumi.com",
         parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         httpMethod: HTTPMethod = .GET,

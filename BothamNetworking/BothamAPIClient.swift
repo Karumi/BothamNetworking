@@ -9,13 +9,13 @@
 import Foundation
 import Result
 
-open class BothamAPIClient {
+public class BothamAPIClient {
 
-    open static var globalRequestInterceptors = [BothamRequestInterceptor]()
-    open static var globalResponseInterceptors = [BothamResponseInterceptor]()
+    public static var globalRequestInterceptors = [BothamRequestInterceptor]()
+    public static var globalResponseInterceptors = [BothamResponseInterceptor]()
 
-    open var requestInterceptors: [BothamRequestInterceptor]
-    open var responseInterceptors: [BothamResponseInterceptor]
+    public var requestInterceptors: [BothamRequestInterceptor]
+    public var responseInterceptors: [BothamResponseInterceptor]
 
     let baseEndpoint: String
     let httpClient: HTTPClient
@@ -27,12 +27,12 @@ open class BothamAPIClient {
         self.responseInterceptors = [BothamResponseInterceptor]()
     }
 
-    open func GET(_ path: String, parameters: [String:String]? = nil,
+    public func GET(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.GET, path: path, params: parameters, headers: headers, completion: completion)
     }
 
-    open func POST(_ path: String, parameters: [String:String]? = nil,
+    public func POST(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -40,7 +40,7 @@ open class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    open func PUT(_ path: String, parameters: [String:String]? = nil,
+    public func PUT(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -48,7 +48,7 @@ open class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    open func DELETE(_ path: String, parameters: [String:String]? = nil,
+    public func DELETE(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -56,7 +56,7 @@ open class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    open func PATCH(_ path: String, parameters: [String:String]? = nil,
+    public func PATCH(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -96,7 +96,7 @@ open class BothamAPIClient {
             }
     }
 
-    fileprivate func send(request: HTTPRequest, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
+    private func send(request: HTTPRequest, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         httpClient.send(request) { result in
             if let _ = result.error {
                 completion?(result)
@@ -111,7 +111,7 @@ open class BothamAPIClient {
         }
     }
 
-    fileprivate func applyRequestInterceptors(_ request: HTTPRequest) -> HTTPRequest {
+    private func applyRequestInterceptors(_ request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
         let interceptors = requestInterceptors + BothamAPIClient.globalRequestInterceptors
         interceptors.forEach { interceptor in
@@ -120,13 +120,13 @@ open class BothamAPIClient {
         return interceptedRequest
     }
 
-    fileprivate func applyResponseInterceptors(_ response: HTTPResponse,
+    private func applyResponseInterceptors(_ response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
             let interceptors = responseInterceptors + BothamAPIClient.globalResponseInterceptors
             applyResponseInterceptors(interceptors, response: response, completion: completion)
     }
 
-    fileprivate func applyResponseInterceptors(_ interceptors: [BothamResponseInterceptor],
+    private func applyResponseInterceptors(_ interceptors: [BothamResponseInterceptor],
         response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
             if interceptors.isEmpty {
@@ -143,7 +143,7 @@ open class BothamAPIClient {
             }
     }
 
-    fileprivate func mapHTTPResponseToBothamAPIClientError(_ httpResponse: HTTPResponse)
+    private func mapHTTPResponseToBothamAPIClientError(_ httpResponse: HTTPResponse)
         -> Result<HTTPResponse, BothamAPIClientError> {
             if isValid(response: httpResponse) {
                 return Result.success(httpResponse)
@@ -154,11 +154,11 @@ open class BothamAPIClient {
             }
     }
 
-    fileprivate func isValid(response: HTTPResponse) -> Bool {
+    private func isValid(response: HTTPResponse) -> Bool {
         return httpClient.isValidResponse(response)
     }
 
-    fileprivate func hasValidScheme(_ request: HTTPRequest) -> Bool {
+    private func hasValidScheme(_ request: HTTPRequest) -> Bool {
         return httpClient.hasValidScheme(request)
     }
 }

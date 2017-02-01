@@ -9,9 +9,9 @@
 import Foundation
 import Result
 
-open class NSHTTPClient: HTTPClient {
+public class NSHTTPClient: HTTPClient {
 
-    open func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
+    public func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
         guard let request = mapHTTPRequestToNSURLRequest(httpRequest) else {
             completion(Result.failure(.unsupportedURLScheme))
             return
@@ -28,10 +28,10 @@ open class NSHTTPClient: HTTPClient {
                 let response = self.mapNSHTTPURlResponseToHTTPResponse(response, data: data)
                 completion(Result.success(response))
             }
-        }) .resume()
+        }).resume()
     }
 
-    fileprivate func mapHTTPRequestToNSURLRequest(_ httpRequest: HTTPRequest) -> URLRequest? {
+    private func mapHTTPRequestToNSURLRequest(_ httpRequest: HTTPRequest) -> URLRequest? {
         guard let url = mapHTTPRequestURL(httpRequest) else {
             return nil
         }
@@ -58,7 +58,7 @@ open class NSHTTPClient: HTTPClient {
         return components.url
     }
 
-    fileprivate func mapNSHTTPURlResponseToHTTPResponse(_ response: HTTPURLResponse,
+    private func mapNSHTTPURlResponseToHTTPResponse(_ response: HTTPURLResponse,
         data: Data) -> HTTPResponse {
         let statusCode = response.statusCode
         let headers = response.allHeaderFields.map {

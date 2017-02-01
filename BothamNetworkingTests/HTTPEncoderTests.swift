@@ -40,7 +40,7 @@ class HTTPEncoderTests: XCTestCase {
         expect(bodyString).to(equal("a=b&c=3"))
     }
 
-    fileprivate func givenAHTTPRequestWith(
+    private func givenAHTTPRequestWith(
         headers: [String:String]? = nil,
         parameters: [String: String]? = nil,
         body: [String: AnyObject]? = nil) -> HTTPRequest {
