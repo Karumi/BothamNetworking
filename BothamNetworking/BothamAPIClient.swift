@@ -27,12 +27,12 @@ public class BothamAPIClient {
         self.responseInterceptors = [BothamResponseInterceptor]()
     }
 
-    public func GET(path: String, parameters: [String:String]? = nil,
+    public func GET(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         return sendRequest(.GET, path: path, params: parameters, headers: headers, completion: completion)
     }
 
-    public func POST(path: String, parameters: [String:String]? = nil,
+    public func POST(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -40,7 +40,7 @@ public class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    public func PUT(path: String, parameters: [String:String]? = nil,
+    public func PUT(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -48,7 +48,7 @@ public class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    public func DELETE(path: String, parameters: [String:String]? = nil,
+    public func DELETE(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -56,7 +56,7 @@ public class BothamAPIClient {
             body: body, completion: completion)
     }
 
-    public func PATCH(path: String, parameters: [String:String]? = nil,
+    public func PATCH(_ path: String, parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String: AnyObject]? = nil,
         completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
@@ -64,7 +64,7 @@ public class BothamAPIClient {
                 body: body, completion: completion)
     }
 
-    func sendRequest(httpMethod: HTTPMethod, path: String,
+    func sendRequest(_ httpMethod: HTTPMethod, path: String,
         params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil,
@@ -79,10 +79,10 @@ public class BothamAPIClient {
 
             let interceptedRequest = applyRequestInterceptors(initialRequest)
             if !hasValidScheme(interceptedRequest) {
-                completion?(Result.Failure(BothamAPIClientError.UnsupportedURLScheme))
+                completion?(Result.failure(BothamAPIClientError.unsupportedURLScheme))
             } else {
-                sendRequest(interceptedRequest) { result in
-                    if let error = result.error, case .Retry = error {
+                send(request: interceptedRequest) { result in
+                    if let error = result.error, case .retry = error {
                         self.sendRequest(httpMethod,
                             path: path,
                             params: params,
@@ -96,7 +96,7 @@ public class BothamAPIClient {
             }
     }
 
-    private func sendRequest(request: HTTPRequest, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
+    private func send(request: HTTPRequest, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> ())? = nil) {
         httpClient.send(request) { result in
             if let _ = result.error {
                 completion?(result)
@@ -111,7 +111,7 @@ public class BothamAPIClient {
         }
     }
 
-    private func applyRequestInterceptors(request: HTTPRequest) -> HTTPRequest {
+    private func applyRequestInterceptors(_ request: HTTPRequest) -> HTTPRequest {
         var interceptedRequest = request
         let interceptors = requestInterceptors + BothamAPIClient.globalRequestInterceptors
         interceptors.forEach { interceptor in
@@ -120,17 +120,17 @@ public class BothamAPIClient {
         return interceptedRequest
     }
 
-    private func applyResponseInterceptors(response: HTTPResponse,
+    private func applyResponseInterceptors(_ response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
             let interceptors = responseInterceptors + BothamAPIClient.globalResponseInterceptors
             applyResponseInterceptors(interceptors, response: response, completion: completion)
     }
 
-    private func applyResponseInterceptors(interceptors: [BothamResponseInterceptor],
+    private func applyResponseInterceptors(_ interceptors: [BothamResponseInterceptor],
         response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
             if interceptors.isEmpty {
-                completion(Result.Success(response))
+                completion(Result.success(response))
             } else {
                 interceptors[0].intercept(response) { result in
                     if let response = result.value {
@@ -143,22 +143,22 @@ public class BothamAPIClient {
             }
     }
 
-    private func mapHTTPResponseToBothamAPIClientError(httpResponse: HTTPResponse)
+    private func mapHTTPResponseToBothamAPIClientError(_ httpResponse: HTTPResponse)
         -> Result<HTTPResponse, BothamAPIClientError> {
-            if isValidResponse(httpResponse) {
-                return Result.Success(httpResponse)
+            if isValid(response: httpResponse) {
+                return Result.success(httpResponse)
             } else {
                 let statusCode = httpResponse.statusCode
                 let body = httpResponse.body
-                return Result.Failure(.HTTPResponseError(statusCode: statusCode, body: body))
+                return Result.failure(.httpResponseError(statusCode: statusCode, body: body))
             }
     }
 
-    private func isValidResponse(response: HTTPResponse) -> Bool {
+    private func isValid(response: HTTPResponse) -> Bool {
         return httpClient.isValidResponse(response)
     }
 
-    private func hasValidScheme(request: HTTPRequest) -> Bool {
+    private func hasValidScheme(_ request: HTTPRequest) -> Bool {
         return httpClient.hasValidScheme(request)
     }
 }

@@ -12,7 +12,7 @@ public class JSONHeadersRequestInterceptor: BothamRequestInterceptor {
 
     public init() {}
 
-    public func intercept(request: HTTPRequest) -> HTTPRequest {
+    public func intercept(_ request: HTTPRequest) -> HTTPRequest {
         return request.appendingHeaders(["Accept": "application/json",
             "Content-Type": "application/json"])
     }

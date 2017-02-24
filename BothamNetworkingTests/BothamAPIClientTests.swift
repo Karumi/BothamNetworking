@@ -112,7 +112,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.HTTPResponseError(statusCode: 400, body: NSData())))
+        expect(response).toEventually(failWithError(.httpResponseError(statusCode: 400, body: Data())))
     }
 
     func testReturns50XResponsesAsError() {
@@ -124,7 +124,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.HTTPResponseError(statusCode: 500, body: NSData())))
+        expect(response).toEventually(failWithError(.httpResponseError(statusCode: 500, body: Data())))
     }
 
     func testInterceptRequestsUsingInterceptorsAddedLocally() {
@@ -249,7 +249,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
 
     func testParseHTTPResponsHeaders() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
-            .andReturn(anyStatusCode)
+            .andReturn(anyStatusCode)?
             .withHeaders(["Content-Type":"application/json", "Server": "KarumiServer"])
         let bothamAPIClient = givenABothamAPIClient()
 
@@ -271,7 +271,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response?.error).toEventually(equal(BothamAPIClientError.UnsupportedURLScheme))
+        expect(response?.error).toEventually(equal(BothamAPIClientError.unsupportedURLScheme))
     }
 
     func testEncodesEmptyParameterValuesProperly() {
@@ -289,7 +289,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     func testDoesNotInvokeAllTheResponseInterceptorsIfAPreviousInterceptorReturnsAnError() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
         let interceptor1 = SpyResponseInterceptor()
-        interceptor1.error = .NetworkError
+        interceptor1.error = .networkError
         let interceptor2 = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptors: [interceptor1, interceptor2])
 
@@ -298,7 +298,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.NetworkError))
+        expect(response).toEventually(failWithError(.networkError))
         expect(interceptor1.intercepted).toEventually(beTrue())
         expect(interceptor2.intercepted).toEventually(beFalse())
     }

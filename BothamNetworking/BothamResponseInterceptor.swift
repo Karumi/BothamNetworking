@@ -11,6 +11,6 @@ import Result
 
 public protocol BothamResponseInterceptor {
 
-    func intercept(response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void)
+    func intercept(_ response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void)
 
 }

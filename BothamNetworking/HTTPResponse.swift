@@ -12,34 +12,34 @@ public struct HTTPResponse {
 
     public let statusCode: Int
     public let headers: CaseInsensitiveDictionary<String>?
-    public let body: NSData
+    public let body: Data
 
     public init(statusCode: Int,
         headers: CaseInsensitiveDictionary<String>?,
-        body: NSData) {
+        body: Data) {
             self.statusCode = statusCode
             self.headers = headers
             self.body = body
     }
 
-    @warn_unused_result
-    public func withStatusCode(statusCode: Int) -> HTTPResponse {
+    
+    public func withStatusCode(_ statusCode: Int) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
             headers: headers,
             body: body)
     }
 
-    @warn_unused_result
-    public func withHeaders(headers: [String:String]?) -> HTTPResponse {
+    
+    public func withHeaders(_ headers: [String:String]?) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
             headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),
             body: body)
     }
 
-    @warn_unused_result
-    public func appendingHeaders(headers: [String:String]) -> HTTPResponse {
+    
+    public func appendingHeaders(_ headers: [String:String]) -> HTTPResponse {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPResponse(
@@ -48,8 +48,8 @@ public struct HTTPResponse {
             body: body)
     }
 
-    @warn_unused_result
-    public func withBody(body: NSData) -> HTTPResponse {
+    
+    public func withBody(_ body: Data) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
             headers: headers,
@@ -64,10 +64,10 @@ extension HTTPResponse: CustomDebugStringConvertible {
         get {
             let headers = self.headers?.map {
                 (key, value) in "\(key): \(value)\n"
-                }.joinWithSeparator("\n") ?? ""
+                }.joined(separator: "\n") ?? ""
             return "\(statusCode)\n"
                 + "\(headers)\n"
-                + "\(String(data: body, encoding: NSUTF8StringEncoding)!)\n"
+                + "\(String(data: body, encoding: String.Encoding.utf8)!)\n"
         }
     }
 

@@ -53,9 +53,9 @@ class HTTPRequestTests: XCTestCase {
     }
 
     func testShouldReplaceRequestBody() {
-        var request = givenAnHTTPRequest(body: NSData())
+        var request = givenAnHTTPRequest(body: Data() as NSData?)
 
-        request = request.withBody(["a":"b"])
+        request = request.withBody(["a":"b" as AnyObject])
 
         expect(request.body?["a"] as? String).to(equal("b"))
     }
@@ -107,7 +107,7 @@ class HTTPRequestTests: XCTestCase {
         expect(request.parameters?["a"]!).to(equal("b"))
     }
 
-    private func givenAnHTTPRequest(url: String = "http://www.karumi.com",
+    private func givenAnHTTPRequest(_ url: String = "http://www.karumi.com",
         parameters: [String:String]? = nil,
         headers: [String:String]? = nil,
         httpMethod: HTTPMethod = .GET,

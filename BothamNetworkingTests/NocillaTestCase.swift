@@ -25,12 +25,16 @@ class NocillaTestCase: XCTestCase {
         super.tearDown()
     }
 
-    func fromJsonFile(fileName: String) -> String {
-        let classBundle = NSBundle(forClass: self.classForCoder)
-        let path = classBundle.pathForResource(fileName, ofType: "json")
+    @discardableResult func stubRequest(_ method: String, _ url: String) -> LSStubRequestDSL {
+        return Nocilla.stubRequest(method, (url as NSString) as LSMatcheable)
+    }
+
+    func fromJsonFile(_ fileName: String) -> String {
+        let classBundle = Bundle(for: self.classForCoder)
+        let path = classBundle.path(forResource: fileName, ofType: "json")
         let absolutePath =  path ?? ""
         do {
-            return try String(contentsOfFile: absolutePath, encoding: NSUTF8StringEncoding)
+            return try String(contentsOfFile: absolutePath, encoding: String.Encoding.utf8)
         } catch _ {
             print("Error trying to read file \(absolutePath). The file does not exist")
             return ""

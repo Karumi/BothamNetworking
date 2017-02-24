@@ -10,23 +10,23 @@ import Foundation
 import Result
 import SwiftyJSON
 
-public extension ResultType where Value == HTTPResponse, Error == BothamAPIClientError {
+public extension ResultProtocol where Value == HTTPResponse, Error == BothamAPIClientError {
 
-    public func mapJSON<U>(transform: JSON -> U) -> Result<U, BothamAPIClientError> {
+    public func mapJSON<U>(_ transform: @escaping (JSON) -> U) -> Result<U, BothamAPIClientError> {
         return flatMap { result in
             let data = self.value?.body
-            return dataToJSONResult(data).map { transform($0) }
+            return dataToJSONResult(data as NSData?).map { transform($0) }
         }
     }
 
-    private func dataToJSONResult(data: NSData?) -> Result<JSON, BothamAPIClientError> {
+    private func dataToJSONResult(_ data: NSData?) -> Result<JSON, BothamAPIClientError> {
         do {
-            let object: AnyObject = try NSJSONSerialization.JSONObjectWithData(data ?? NSData(),
-                options: .AllowFragments)
-            return Result.Success(JSON(object))
+            let object: Any = try JSONSerialization.jsonObject(with: (data ?? NSData()) as Data,
+                options: .allowFragments)
+            return Result.success(JSON(object))
         } catch {
             let parsingError = error as NSError
-            return Result.Failure(BothamAPIClientError.ParsingError(error: parsingError))
+            return Result.failure(BothamAPIClientError.parsingError(error: parsingError))
         }
     }
 

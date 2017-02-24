@@ -110,7 +110,7 @@ class NSHTTPClientTests: NocillaTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.HTTPClientError(error: anyNSError)))
+        expect(response).toEventually(failWithError(.httpClientError(error: anyNSError)))
     }
 
     func testSendsParamsConfiguredInTheHttpRequest() {
@@ -128,9 +128,9 @@ class NSHTTPClientTests: NocillaTestCase {
 
     func testSendsBodyConfiguredInTheHttpRequest() {
         stubRequest("POST", anyUrl)
-            .withBody("{\"key\":\"value\"}")
+            .withBody("{\"key\":\"value\"}" as NSString)
         let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value"])
+        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value" as AnyObject])
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
@@ -150,10 +150,10 @@ class NSHTTPClientTests: NocillaTestCase {
             response = result
         }
 
-        expect(response).toEventually(failWithError(.NetworkError))
+        expect(response).toEventually(failWithError(.networkError))
     }
 
-    private func givenOneHttpRequest(httpMethod: HTTPMethod,
+    private func givenOneHttpRequest(_ httpMethod: HTTPMethod,
         url: String, params: [String:String]? = nil,
         headers: [String:String]? = nil,
         body: [String:AnyObject]? = nil) -> HTTPRequest {

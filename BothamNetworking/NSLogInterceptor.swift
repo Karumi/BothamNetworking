@@ -13,14 +13,14 @@ public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseIntercept
 
     public init() {}
 
-    public func intercept(request: HTTPRequest) -> HTTPRequest {
+    public func intercept(_ request: HTTPRequest) -> HTTPRequest {
         NSLog("-> \(request)")
         return request
     }
 
-    public func intercept(response: HTTPResponse,
+    public func intercept(_ response: HTTPResponse,
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
             NSLog("<- \(response)")
-            completion(Result.Success(response))
+            completion(Result.success(response))
     }
 }

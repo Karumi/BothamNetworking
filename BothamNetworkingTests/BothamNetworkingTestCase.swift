@@ -8,6 +8,7 @@
 
 import Foundation
 import XCTest
+import Nocilla
 import BothamNetworking
 
 class BothamNetworkingTestCase: NocillaTestCase {
@@ -21,7 +22,7 @@ class BothamNetworkingTestCase: NocillaTestCase {
     }
 
     func givenABothamAPIClientWithLocal(
-        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
+        requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil) -> BothamAPIClient {
             let bothamAPIClient = givenABothamAPIClient()
             if let interceptor = requestInterceptor {
@@ -37,13 +38,13 @@ class BothamNetworkingTestCase: NocillaTestCase {
         requestInterceptor requestInterceptors: [BothamRequestInterceptor] = [BothamRequestInterceptor](),
         responseInterceptors: [BothamResponseInterceptor] = [BothamResponseInterceptor]()) -> BothamAPIClient {
             let bothamAPIClient = givenABothamAPIClient()
-            bothamAPIClient.requestInterceptors.appendContentsOf(requestInterceptors)
-            bothamAPIClient.responseInterceptors.appendContentsOf(responseInterceptors)
+            bothamAPIClient.requestInterceptors.append(contentsOf: requestInterceptors)
+            bothamAPIClient.responseInterceptors.append(contentsOf: responseInterceptors)
             return bothamAPIClient
     }
 
     func givenABothamAPIClientWithGlobal(
-        requestInterceptor requestInterceptor: BothamRequestInterceptor? = nil,
+        requestInterceptor: BothamRequestInterceptor? = nil,
         responseInterceptor: BothamResponseInterceptor? = nil)
         -> BothamAPIClient {
             let bothamAPIClient = givenABothamAPIClient()
