@@ -8,7 +8,7 @@ def framework_pods
 end
 
 def testing_pods
-    pod "Nimble"
+    pod "Nimble", :git => "https://github.com/Quick/Nimble", :branch => "master"
     pod "Nocilla"
 end
 

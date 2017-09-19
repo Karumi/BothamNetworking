@@ -41,7 +41,11 @@ public struct HTTPResponse {
     
     public func appendingHeaders(_ headers: [String:String]) -> HTTPResponse {
         var newHeaders = self.headers
-        newHeaders += headers
+
+        for (k, v) in headers {
+            let _ = newHeaders?.update(value: v, forKey: k)
+        }
+
         return HTTPResponse(
             statusCode: statusCode,
             headers: newHeaders,

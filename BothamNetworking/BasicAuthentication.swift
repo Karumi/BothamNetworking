@@ -36,7 +36,7 @@ extension BasicAuthentication {
             let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: []) // swiftlint:disable:this force_try
             let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
             if let match = regex.firstMatch(in: unauthorizedHeader, options: [], range: range) {
-                let realm = (unauthorizedHeader as NSString).substring(with: match.rangeAt(1))
+                let realm = (unauthorizedHeader as NSString).substring(with: match.range(at: 1))
                 onAuthenticationError(realm)
             }
         }

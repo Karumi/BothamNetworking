@@ -11,6 +11,8 @@ import Result
 
 public class NSHTTPClient: HTTPClient {
 
+    public init() {}
+    
     public func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> ()) {
         guard let request = mapHTTPRequestToNSURLRequest(httpRequest) else {
             completion(Result.failure(.unsupportedURLScheme))
