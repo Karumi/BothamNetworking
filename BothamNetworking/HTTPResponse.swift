@@ -22,7 +22,6 @@ public struct HTTPResponse {
             self.body = body
     }
 
-    
     public func withStatusCode(_ statusCode: Int) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
@@ -30,25 +29,26 @@ public struct HTTPResponse {
             body: body)
     }
 
-    
-    public func withHeaders(_ headers: [String:String]?) -> HTTPResponse {
+    public func withHeaders(_ headers: [String: String]?) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,
             headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),
             body: body)
     }
 
-    
-    public func appendingHeaders(_ headers: [String:String]) -> HTTPResponse {
+    public func appendingHeaders(_ headers: [String: String]) -> HTTPResponse {
         var newHeaders = self.headers
-        newHeaders += headers
+
+        for (k, v) in headers {
+            _ = newHeaders?.update(value: v, forKey: k)
+        }
+
         return HTTPResponse(
             statusCode: statusCode,
             headers: newHeaders,
             body: body)
     }
 
-    
     public func withBody(_ body: Data) -> HTTPResponse {
         return HTTPResponse(
             statusCode: statusCode,

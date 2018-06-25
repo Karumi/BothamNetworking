@@ -14,7 +14,7 @@ import Result
  */
 public protocol BasicAuthentication: BothamRequestInterceptor, BothamResponseInterceptor {
     var credentials: (username: String, password: String) { get }
-    func onAuthenticationError(_ realm: String) -> Void
+    func onAuthenticationError(_ realm: String)
 }
 
 extension BasicAuthentication {
@@ -25,7 +25,7 @@ extension BasicAuthentication {
         let userPassData = userPass.data(using: String.Encoding.utf8)!
         let base64UserPass = userPassData.base64EncodedString(options: [])
 
-        let header = ["Authorization" : "Basic \(base64UserPass)"]
+        let header = ["Authorization": "Basic \(base64UserPass)"]
 
         return request.appendingHeaders(header)
     }
@@ -34,9 +34,9 @@ extension BasicAuthentication {
         completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         if response.statusCode == 401, let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
             let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: []) // swiftlint:disable:this force_try
-            let range = NSMakeRange(0, unauthorizedHeader.utf8.count)
+            let range = NSRange(location: 0, length: unauthorizedHeader.utf8.count)
             if let match = regex.firstMatch(in: unauthorizedHeader, options: [], range: range) {
-                let realm = (unauthorizedHeader as NSString).substring(with: match.rangeAt(1))
+                let realm = (unauthorizedHeader as NSString).substring(with: match.range(at: 1))
                 onAuthenticationError(realm)
             }
         }

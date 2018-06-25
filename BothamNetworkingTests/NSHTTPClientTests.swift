@@ -116,7 +116,7 @@ class NSHTTPClientTests: NocillaTestCase {
     func testSendsParamsConfiguredInTheHttpRequest() {
         stubRequest("GET", anyUrl + "?key=value")
         let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.GET, url: anyUrl, params: ["key" : "value"])
+        let request = givenOneHttpRequest(.GET, url: anyUrl, params: ["key": "value"])
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
@@ -130,7 +130,7 @@ class NSHTTPClientTests: NocillaTestCase {
         stubRequest("POST", anyUrl)
             .withBody("{\"key\":\"value\"}" as NSString)
         let httpClient = NSHTTPClient()
-        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key" : "value" as AnyObject])
+        let request = givenOneHttpRequest(.POST, url: anyUrl, body: ["key": "value" as AnyObject])
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
         httpClient.send(request) { result in
@@ -154,11 +154,11 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     private func givenOneHttpRequest(_ httpMethod: HTTPMethod,
-        url: String, params: [String:String]? = nil,
-        headers: [String:String]? = nil,
-        body: [String:AnyObject]? = nil) -> HTTPRequest {
+        url: String, params: [String: String]? = nil,
+        headers: [String: String]? = nil,
+        body: [String: AnyObject]? = nil) -> HTTPRequest {
             var headers = headers
-            headers += ["Content-Type":"application/json"]
+            headers += ["Content-Type": "application/json"]
             return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: body)
     }
 

@@ -11,10 +11,10 @@ import Foundation
 public struct HTTPRequest {
 
     public let url: String
-    public let parameters: [String:String]?
-    public let headers: [String:String]?
+    public let parameters: [String: String]?
+    public let headers: [String: String]?
     public let httpMethod: HTTPMethod
-    public let body: [String:AnyObject]?
+    public let body: [String: AnyObject]?
 
     public var encodedBody: Data? {
         get {
@@ -23,10 +23,10 @@ public struct HTTPRequest {
     }
 
     public init(url: String,
-        parameters: [String:String]?,
-        headers: [String:String]?,
+        parameters: [String: String]?,
+        headers: [String: String]?,
         httpMethod: HTTPMethod,
-        body: [String:AnyObject]?) {
+        body: [String: AnyObject]?) {
             self.url = url
             self.parameters = parameters
             self.headers = headers
@@ -34,7 +34,6 @@ public struct HTTPRequest {
             self.body = body
     }
 
-    
     public func withURL(_ url: String) -> HTTPRequest {
         return HTTPRequest(
             url: url,
@@ -44,8 +43,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    
-    public func withParameters(_ parameters: [String:String]) -> HTTPRequest {
+    public func withParameters(_ parameters: [String: String]) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -54,8 +52,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    
-    public func withHeaders(_ headers: [String:String]?) -> HTTPRequest {
+    public func withHeaders(_ headers: [String: String]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -64,7 +61,6 @@ public struct HTTPRequest {
             body: body)
     }
 
-    
     public func withHTTPMethod(_ httpMethod: HTTPMethod) -> HTTPRequest {
         return HTTPRequest(
             url: url,
@@ -74,8 +70,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    
-    public func withBody(_ body: [String:AnyObject]?) -> HTTPRequest {
+    public func withBody(_ body: [String: AnyObject]?) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -84,8 +79,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    
-    public func appendingHeaders(_ headers: [String:String]) -> HTTPRequest {
+    public func appendingHeaders(_ headers: [String: String]) -> HTTPRequest {
         var newHeaders = self.headers
         newHeaders += headers
         return HTTPRequest(
@@ -96,8 +90,7 @@ public struct HTTPRequest {
             body: body)
     }
 
-    
-    public func appendingParameters(_ parameters: [String:String]) -> HTTPRequest {
+    public func appendingParameters(_ parameters: [String: String]) -> HTTPRequest {
         var newParameters = self.parameters
         newParameters += parameters
         return HTTPRequest(

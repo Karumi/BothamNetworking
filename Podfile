@@ -8,7 +8,7 @@ def framework_pods
 end
 
 def testing_pods
-    pod "Nimble"
+    pod "Nimble", '7.1.2'
     pod "Nocilla"
 end
 

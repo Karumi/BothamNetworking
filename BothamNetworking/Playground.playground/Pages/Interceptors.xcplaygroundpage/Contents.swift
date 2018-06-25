@@ -10,6 +10,6 @@ let client = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/
 client.requestInterceptors.append(NSLogInterceptor())
 client.responseInterceptors.append(NSLogInterceptor())
 
-client.GET("/issues") { response in }
+client.GET("/issues") { _ in }
 
 //: [Next](@next)

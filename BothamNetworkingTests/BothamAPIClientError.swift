@@ -21,7 +21,7 @@ public func == (lhs: BothamAPIClientError, rhs: BothamAPIClientError) -> Bool {
         return true
     case (.unsupportedURLScheme, .unsupportedURLScheme):
         return true
-    case (.parsingError(_), .parsingError(_)):
+    case (.parsingError, .parsingError):
         return true
     case (.retry, .retry):
         return true

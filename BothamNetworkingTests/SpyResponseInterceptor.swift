@@ -14,7 +14,7 @@ class SpyResponseInterceptor: BothamResponseInterceptor {
 
     var intercepted: Bool = false
     var interceptedResponse: HTTPResponse!
-    var error: BothamAPIClientError? = nil
+    var error: BothamAPIClientError?
 
     func intercept(_ response: HTTPResponse, completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         intercepted = true

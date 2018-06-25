@@ -14,7 +14,7 @@ import Nimble
 class HTTPEncoderTests: XCTestCase {
 
     func testDoesNotEncodesBodyIfTheRequestDoesNotContainsContentTypeHeader() {
-        let request = givenAHTTPRequestWith(body: ["a":"b" as AnyObject])
+        let request = givenAHTTPRequestWith(body: ["a": "b" as AnyObject])
 
         let bodyNSData = HTTPEncoder.encodeBody(request)
 
@@ -22,7 +22,7 @@ class HTTPEncoderTests: XCTestCase {
     }
 
     func testEncodesBodyUsingJsonEncodingIfTheRequestContainsJsonContentTypeHeader() {
-        let request = givenAHTTPRequestWith(headers: ["Content-Type":"application/json"], body: ["a":"b" as AnyObject])
+        let request = givenAHTTPRequestWith(headers: ["Content-Type": "application/json"], body: ["a": "b" as AnyObject])
 
         let bodyNSData = HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: String.Encoding.utf8)
@@ -31,8 +31,8 @@ class HTTPEncoderTests: XCTestCase {
     }
 
     func testEncodesParamsUsingFormEncodingIfTheRequestContainsFormContentTypeHeader() {
-        let request = givenAHTTPRequestWith(headers: ["Content-Type":"application/x-www-form-urlencoded"],
-            body: ["a":"b" as AnyObject,"c":3 as AnyObject])
+        let request = givenAHTTPRequestWith(headers: ["Content-Type": "application/x-www-form-urlencoded"],
+            body: ["a": "b" as AnyObject, "c": 3 as AnyObject])
 
         let bodyNSData = HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: String.Encoding.utf8)
@@ -41,7 +41,7 @@ class HTTPEncoderTests: XCTestCase {
     }
 
     private func givenAHTTPRequestWith(
-        headers: [String:String]? = nil,
+        headers: [String: String]? = nil,
         parameters: [String: String]? = nil,
         body: [String: AnyObject]? = nil) -> HTTPRequest {
         return HTTPRequest(

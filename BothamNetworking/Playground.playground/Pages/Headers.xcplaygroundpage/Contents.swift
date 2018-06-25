@@ -10,7 +10,7 @@ let client = BothamAPIClient(baseEndpoint: "https://api.github.com/repos/Karumi/
 
 client.GET("/issues", headers: [
     "User-Agent": "BothamNetworking Headers",
-    "Accept": "application/json; q=0.5",
+    "Accept": "application/json; q=0.5"
     ]) { result in
         switch result {
         case let .Success(response) :

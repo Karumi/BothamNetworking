@@ -15,8 +15,8 @@ class HTTPRequestTests: XCTestCase {
 
     private let anyURL = "http://www.karumi.com"
     private let anyHTTPMethod = HTTPMethod.GET
-    private let anyParams = ["x":"y"]
-    private let anyHeaders = ["x":"y"]
+    private let anyParams = ["x": "y"]
+    private let anyHeaders = ["x": "y"]
 
     func testShouldReplaceRequestURL() {
         var request = givenAnHTTPRequest("http://www.karumi.com")
@@ -29,7 +29,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldReplaceRequestParameters() {
         var request = givenAnHTTPRequest(parameters: anyParams)
 
-        request = request.withParameters(["a":"b"])
+        request = request.withParameters(["a": "b"])
 
         expect(request.parameters?.count).to(equal(1))
         expect(request.parameters?["a"]!).to(equal("b"))
@@ -38,7 +38,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldReplaceRequestHeaders() {
         var request = givenAnHTTPRequest(headers: anyHeaders)
 
-        request = request.withHeaders(["a":"b"])
+        request = request.withHeaders(["a": "b"])
 
         expect(request.headers?.count).to(equal(1))
         expect(request.headers?["a"]).to(equal("b"))
@@ -55,7 +55,7 @@ class HTTPRequestTests: XCTestCase {
     func testShouldReplaceRequestBody() {
         var request = givenAnHTTPRequest(body: Data() as NSData?)
 
-        request = request.withBody(["a":"b" as AnyObject])
+        request = request.withBody(["a": "b" as AnyObject])
 
         expect(request.body?["a"] as? String).to(equal("b"))
     }
@@ -63,7 +63,7 @@ class HTTPRequestTests: XCTestCase {
     private func givenAnEmptyHTTPRequest() -> HTTPRequest {
         return HTTPRequest(
             url: anyURL,
-            parameters: [String:String](),
+            parameters: [String: String](),
             headers: nil,
             httpMethod: anyHTTPMethod,
             body: nil)
@@ -72,16 +72,16 @@ class HTTPRequestTests: XCTestCase {
     func testShouldAddHeadersWhenTheOriginalRequestIsEmpty() {
         var request = givenAnEmptyHTTPRequest()
 
-        request = request.appendingHeaders(["a":"b"])
+        request = request.appendingHeaders(["a": "b"])
 
         expect(request.headers?.count).to(equal(1))
         expect(request.headers?["a"]).to(equal("b"))
     }
 
     func testShouldAddHeadersWhenTheRequestAlreadyHaveRequests() {
-        var request = givenAnHTTPRequest(headers:["key":"value"])
+        var request = givenAnHTTPRequest(headers: ["key": "value"])
 
-        request = request.appendingHeaders(["a":"b"])
+        request = request.appendingHeaders(["a": "b"])
 
         expect(request.headers?.count).to(equal(2))
         expect(request.headers?["key"]).to(equal("value"))
@@ -91,16 +91,16 @@ class HTTPRequestTests: XCTestCase {
     func testShouldAddParametersWhenTheOriginalRequestIsEmpty() {
         var request = givenAnEmptyHTTPRequest()
 
-        request = request.appendingParameters(["a":"b"])
+        request = request.appendingParameters(["a": "b"])
 
         expect(request.parameters?.count).to(equal(1))
         expect(request.parameters?["a"]!).to(equal("b"))
     }
 
     func testShouldAddParametersWhenTheRequestAlreadyHaveRequests() {
-        var request = givenAnHTTPRequest(parameters:["key":"value"])
+        var request = givenAnHTTPRequest(parameters: ["key": "value"])
 
-        request = request.appendingParameters(["a":"b"])
+        request = request.appendingParameters(["a": "b"])
 
         expect(request.parameters?.count).to(equal(2))
         expect(request.parameters?["key"]!).to(equal("value"))
@@ -108,8 +108,8 @@ class HTTPRequestTests: XCTestCase {
     }
 
     private func givenAnHTTPRequest(_ url: String = "http://www.karumi.com",
-        parameters: [String:String]? = nil,
-        headers: [String:String]? = nil,
+        parameters: [String: String]? = nil,
+        headers: [String: String]? = nil,
         httpMethod: HTTPMethod = .GET,
         body: NSData? = nil ) -> HTTPRequest {
         return HTTPRequest(

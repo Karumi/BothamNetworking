@@ -56,7 +56,7 @@ class HTTPEncoder {
             components += queryComponents(key, String(describing: value))
         }
 
-        return (components.map { "\($0)=\($1)" } ).joined(separator: "&")
+        return (components.map { "\($0)=\($1)" }).joined(separator: "&")
     }
 
     private static func queryComponents(_ key: String, _ value: String?) -> [(String, String)] {
