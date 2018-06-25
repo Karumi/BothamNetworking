@@ -31,7 +31,7 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
         stubRequest("GET", anyHost + anyPath)
             .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")?
             .andReturn(401)?
-            .withHeader("WWW-Authenticate","Basic realm=\"WallyWorld\"")
+            .withHeader("WWW-Authenticate", "Basic realm=\"WallyWorld\"")
 
         let basicAuthentication = SpyBasicAuthentication()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: basicAuthentication,

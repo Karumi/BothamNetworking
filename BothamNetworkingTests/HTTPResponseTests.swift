@@ -13,7 +13,7 @@ import Nimble
 
 class HTTPResponseTests: XCTestCase {
 
-    private let anyHeaders = ["x":"y"]
+    private let anyHeaders = ["x": "y"]
 
     func testShouldReplaceResponseStatusCode() {
         var response = givenAResponse(200)
@@ -35,7 +35,7 @@ class HTTPResponseTests: XCTestCase {
     func testShouldReplaceResponseHeaders() {
         var response = givenAResponse(headers: anyHeaders)
 
-        response = response.withHeaders(["a":"b"])
+        response = response.withHeaders(["a": "b"])
 
         expect(response.headers?.count).to(equal(1))
         expect(response.headers?["a"]).to(equal("b"))
@@ -44,16 +44,16 @@ class HTTPResponseTests: XCTestCase {
     func testShouldAppendHeadersWhenTheOriginalResponseIsEmpty() {
         var response = givenAResponse()
 
-        response = response.appendingHeaders(["a":"b"])
+        response = response.appendingHeaders(["a": "b"])
 
         expect(response.headers?.count).to(equal(1))
         expect(response.headers?["a"]).to(equal("b"))
     }
 
     func testShouldAppendHeadersWhenTheResponseAlreadyHaveHeaders() {
-        var response = givenAResponse(headers:["key":"value"])
+        var response = givenAResponse(headers: ["key": "value"])
 
-        response = response.appendingHeaders(["a":"b"])
+        response = response.appendingHeaders(["a": "b"])
 
         expect(response.headers?.count).to(equal(2))
         expect(response.headers?["key"]).to(equal("value"))
@@ -61,7 +61,7 @@ class HTTPResponseTests: XCTestCase {
     }
 
     private func givenAResponse(_ statusCode: Int = 200,
-        headers: [String:String]? = nil,
+        headers: [String: String]? = nil,
         body: NSData = NSData()) -> HTTPResponse {
         return HTTPResponse(statusCode: statusCode,
             headers: CaseInsensitiveDictionary(dictionary: headers ?? [ : ]),

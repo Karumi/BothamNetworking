@@ -15,7 +15,7 @@ public protocol HTTPClient {
 
     var timeout: TimeInterval { get }
 
-    func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> ())
+    func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> Void)
 
     func hasValidScheme(_ httpRequest: HTTPRequest) -> Bool
 

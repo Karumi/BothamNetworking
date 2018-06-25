@@ -13,7 +13,7 @@ import SwiftyJSON
 public extension ResultProtocol where Value == HTTPResponse, Error == BothamAPIClientError {
 
     public func mapJSON<U>(_ transform: @escaping (JSON) -> U) -> Result<U, BothamAPIClientError> {
-        return flatMap { result in
+        return flatMap { _ in
             let data = self.value?.body
             return dataToJSONResult(data as NSData?).map { transform($0) }
         }

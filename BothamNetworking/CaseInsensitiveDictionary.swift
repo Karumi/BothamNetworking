@@ -1,6 +1,5 @@
 public struct CaseInsensitiveDictionary<Value>: Collection,
-    ExpressibleByDictionaryLiteral
-{
+    ExpressibleByDictionaryLiteral {
     public typealias Key = String
     private var _data: [Key: Value] = [:]
     private var _keyMap: [String: Key] = [:]
@@ -42,7 +41,7 @@ public struct CaseInsensitiveDictionary<Value>: Collection,
 
     static func += <Value> (left: inout CaseInsensitiveDictionary<Value>, right: Dictionary<String, Value>) {
         for (k, v) in right {
-            let _ = left.update(value: v, forKey: k)
+            _ = left.update(value: v, forKey: k)
         }
     }
 

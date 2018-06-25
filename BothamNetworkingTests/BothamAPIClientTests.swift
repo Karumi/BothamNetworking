@@ -55,7 +55,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         expect(response).toEventually(beSuccess())
     }
 
-    func XtestSendsDeleteRequestToAnyPath() {
+    func testSendsDeleteRequestToAnyPath() {
         stubRequest("DELETE", anyHost + anyPath)
         let bothamAPIClient = givenABothamAPIClient()
 
@@ -250,7 +250,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     func testParseHTTPResponsHeaders() {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
             .andReturn(anyStatusCode)?
-            .withHeaders(["Content-Type":"application/json", "Server": "KarumiServer"])
+            .withHeaders(["Content-Type": "application/json", "Server": "KarumiServer"])
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>? = nil
@@ -279,7 +279,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = BothamAPIClient(baseEndpoint: anyHost)
 
         var response: Result<HTTPResponse, BothamAPIClientError>? = nil
-        bothamAPIClient.GET(anyPath, parameters: ["a":""]) { result in
+        bothamAPIClient.GET(anyPath, parameters: ["a": ""]) { result in
             response = result
         }
 
