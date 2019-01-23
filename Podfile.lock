@@ -1,10 +1,10 @@
 PODS:
-  - Nimble (7.1.2)
+  - Nimble (7.3.2)
   - Nocilla (0.11.0)
   - Result (3.1.0)
 
 DEPENDENCIES:
-  - Nimble (= 7.1.2)
+  - Nimble (= 7.3.2)
   - Nocilla
   - Result
 
@@ -15,10 +15,10 @@ SPEC REPOS:
     - Result
 
 SPEC CHECKSUMS:
-  Nimble: 3835ba9f459daa6b347f8a8e110aaae8ca1920a8
+  Nimble: 5e94a8cacb355943c6c87198035dc4adbb0f10e4
   Nocilla: 7af7a386071150cc8aa5da4da97d060f049dd61c
   Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
 
-PODFILE CHECKSUM: 725ee75fa9853024e568afb0cb874ef12130e424
+PODFILE CHECKSUM: c35c728d2b4c55bbd37182a931e21598b4e4a4cd
 
 COCOAPODS: 1.5.3

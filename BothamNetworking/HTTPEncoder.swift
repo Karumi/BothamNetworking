@@ -97,12 +97,10 @@ class HTTPEncoder {
             while index != string.endIndex {
                 let startIndex = index
                 let endIndex = string.index(index, offsetBy: batchSize, limitedBy: string.endIndex)!
-                let range = startIndex..<endIndex
-
-                let substring = string.substring(with: range)
+                let substring = string[startIndex..<endIndex]
 
                 escaped += substring.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet as CharacterSet)
-                    ?? substring
+                    ?? String(substring)
 
                 index = endIndex
             }
