@@ -509,9 +509,11 @@
 				TargetAttributes = {
 					6BC01CE61C6E4BE700D08E72 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 1010;
 					};
 					6BC01CEF1C6E4BE800D08E72 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 1010;
 					};
 					EB8F442A1BFF442F00CC3AA5 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -819,7 +821,7 @@
 				PRODUCT_NAME = BothamNetworking;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -842,7 +844,7 @@
 				PRODUCT_NAME = BothamNetworking;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -858,7 +860,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.BothamNetworkingCocoaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -874,7 +876,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.BothamNetworkingCocoaTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

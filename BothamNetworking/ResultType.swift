@@ -13,7 +13,7 @@ public extension Result where Value == HTTPResponse, Error == BothamAPIClientErr
 
     var iso8601JSONDecoder: JSONDecoder {
         let decoder = JSONDecoder()
-        if #available(iOS 10.0, *) {
+        if #available(iOS 10.0, OSX 10.12, *) {
             decoder.dateDecodingStrategy = .iso8601
         }
         return decoder
