@@ -11,7 +11,7 @@ import Nimble
 import Result
 @testable import BothamNetworking
 
-public func beSuccess<S>() -> Predicate<S> {
+public func beSuccess<T>() -> Predicate<T> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be success"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
@@ -20,8 +20,7 @@ public func beSuccess<S>() -> Predicate<S> {
 }
 
 
-public func failWithError<S>(_ expectedError: BothamAPIClientError) -> Predicate<S> {
-    
+public func failWithError<T>(_ expectedError: BothamAPIClientError) -> Predicate<T> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
