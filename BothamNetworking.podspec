@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name = 'BothamNetworking'
-    s.version = '3.0.0'
-    s.swift_version = '4.1'
+    s.version = '4.0.0'
+    s.swift_version = '4.2'
     s.license = 'Apache V2'
     s.summary = 'Networking Framework written in Swift'
     s.homepage = 'https://github.com/Karumi/BothamNetworking'
@@ -15,6 +15,5 @@ Pod::Spec.new do |s|
     s.source_files = 'BothamNetworking/*.swift'
     s.requires_arc = true
 
-    s.dependency 'Result', '3.1.0'
-    s.dependency 'SwiftyJSON'
+    s.dependency 'Result', '4.1.0'
 end

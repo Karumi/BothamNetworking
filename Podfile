@@ -3,7 +3,7 @@ project 'BothamNetworking.xcodeproj'
 use_frameworks!
 
 def framework_pods
-	pod "Result"
+	pod "Result", '4.1.0'
 end
 
 def testing_pods
