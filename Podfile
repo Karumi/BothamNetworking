@@ -4,7 +4,6 @@ use_frameworks!
 
 def framework_pods
 	pod "Result"
-	pod "SwiftyJSON"
 end
 
 def testing_pods
@@ -19,6 +18,7 @@ target 'BothamNetworking' do
 end
 
 target 'BothamNetworkingTests' do
+    platform :ios, '8.0'
 	framework_pods
 	testing_pods
 end
