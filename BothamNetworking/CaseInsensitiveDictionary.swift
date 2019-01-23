@@ -39,7 +39,7 @@ public struct CaseInsensitiveDictionary<Value>: Collection,
         }
     }
 
-    static func += <Value> (left: inout CaseInsensitiveDictionary<Value>, right: Dictionary<String, Value>) {
+    static func += <Value> (left: inout CaseInsensitiveDictionary<Value>, right: [String: Value]) {
         for (k, v) in right {
             _ = left.update(value: v, forKey: k)
         }

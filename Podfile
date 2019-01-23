@@ -11,10 +11,15 @@ def testing_pods
     pod "Nocilla"
 end
 
+def app_development_pods
+	pod 'SwiftLint'
+end
+
 target 'BothamNetworking' do
 	platform :ios, '8.0'
 	framework_pods
 	testing_pods
+	app_development_pods
 end
 
 target 'BothamNetworkingTests' do
@@ -33,3 +38,4 @@ target 'BothamNetworkingCocoaTests' do
 	framework_pods
 	testing_pods
 end
+

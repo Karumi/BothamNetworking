@@ -108,10 +108,10 @@ class HTTPRequestTests: XCTestCase {
     }
 
     private func givenAnHTTPRequest(_ url: String = "http://www.karumi.com",
-        parameters: [String: String]? = nil,
-        headers: [String: String]? = nil,
-        httpMethod: HTTPMethod = .GET,
-        body: NSData? = nil ) -> HTTPRequest {
+                                    parameters: [String: String]? = nil,
+                                    headers: [String: String]? = nil,
+                                    httpMethod: HTTPMethod = .GET,
+                                    body: NSData? = nil ) -> HTTPRequest {
         return HTTPRequest(
             url: url,
             parameters: parameters,
@@ -120,3 +120,4 @@ class HTTPRequestTests: XCTestCase {
             body: nil)
     }
 }
+

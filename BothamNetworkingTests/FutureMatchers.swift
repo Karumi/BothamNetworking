@@ -19,7 +19,6 @@ public func beSuccess<T>() -> Predicate<T> {
     }
 }
 
-
 public func failWithError<T>(_ expectedError: BothamAPIClientError) -> Predicate<T> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"

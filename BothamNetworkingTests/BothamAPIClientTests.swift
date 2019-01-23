@@ -132,7 +132,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -147,7 +147,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyRequestInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -163,7 +163,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: spyInterceptor)
 
         bothamAPIClient.requestInterceptors.removeAll()
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -178,7 +178,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithGlobal(requestInterceptor: spyInterceptor)
 
         BothamAPIClient.globalRequestInterceptors.removeAll()
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -192,7 +192,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -207,7 +207,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let spyInterceptor = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -223,7 +223,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptor: spyInterceptor)
 
         bothamAPIClient.responseInterceptors.removeAll()
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -238,7 +238,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let bothamAPIClient = givenABothamAPIClientWithGlobal(responseInterceptor: spyInterceptor)
 
         BothamAPIClient.globalResponseInterceptors.removeAll()
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -253,7 +253,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             .withHeaders(["Content-Type": "application/json", "Server": "KarumiServer"])
         let bothamAPIClient = givenABothamAPIClient()
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }
@@ -278,7 +278,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath + "?a=")
         let bothamAPIClient = BothamAPIClient(baseEndpoint: anyHost)
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath, parameters: ["a": ""]) { result in
             response = result
         }
@@ -293,7 +293,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
         let interceptor2 = SpyResponseInterceptor()
         let bothamAPIClient = givenABothamAPIClientWithLocal(responseInterceptors: [interceptor1, interceptor2])
 
-        var response: Result<HTTPResponse, BothamAPIClientError>? = nil
+        var response: Result<HTTPResponse, BothamAPIClientError>?
         bothamAPIClient.GET(anyPath) { result in
             response = result
         }

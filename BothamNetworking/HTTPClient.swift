@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import Result
 
 public protocol HTTPClient {
@@ -28,9 +26,7 @@ public protocol HTTPClient {
 extension HTTPClient {
 
     public var timeout: TimeInterval {
-        get {
-            return 10
-        }
+        return 10
     }
 
     public func hasValidScheme(_ request: HTTPRequest) -> Bool {
@@ -43,11 +39,11 @@ extension HTTPClient {
 
     public func mapNSErrorToBothamError(_ error: NSError) -> BothamAPIClientError {
         let connectionErrors = [NSURLErrorCancelled,
-            NSURLErrorTimedOut,
-            NSURLErrorCannotConnectToHost,
-            NSURLErrorNetworkConnectionLost,
-            NSURLErrorNotConnectedToInternet,
-            NSURLErrorRequestBodyStreamExhausted
+                                NSURLErrorTimedOut,
+                                NSURLErrorCannotConnectToHost,
+                                NSURLErrorNetworkConnectionLost,
+                                NSURLErrorNotConnectedToInternet,
+                                NSURLErrorRequestBodyStreamExhausted
         ]
         if connectionErrors.contains(error.code) {
             return .networkError
@@ -57,3 +53,4 @@ extension HTTPClient {
     }
 
 }
+

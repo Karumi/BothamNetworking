@@ -17,7 +17,7 @@ class ResultTypeTests: XCTestCase {
 
     struct Empty: Decodable {
     }
-    
+
     func testReturnsMalformedJsonAsAParsingError() {
         let malformedJSON = "{".data(using: String.Encoding.utf8)
         let response = HTTPResponse(statusCode: 200, headers: nil, body: malformedJSON!)
@@ -31,7 +31,7 @@ class ResultTypeTests: XCTestCase {
     struct Box: Decodable {
         let a: String
     }
-    
+
     func testReturnsResponseBodyAsJSON() {
         let malformedJSON = "{\"a\":\"b\"}".data(using: String.Encoding.utf8)
         let response = HTTPResponse(statusCode: 200, headers: nil, body: malformedJSON!)

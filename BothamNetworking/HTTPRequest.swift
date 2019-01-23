@@ -17,21 +17,19 @@ public struct HTTPRequest {
     public let body: [String: AnyObject]?
 
     public var encodedBody: Data? {
-        get {
-            return HTTPEncoder.encodeBody(self)
-        }
+        return HTTPEncoder.encodeBody(self)
     }
 
     public init(url: String,
-        parameters: [String: String]?,
-        headers: [String: String]?,
-        httpMethod: HTTPMethod,
-        body: [String: AnyObject]?) {
-            self.url = url
-            self.parameters = parameters
-            self.headers = headers
-            self.httpMethod = httpMethod
-            self.body = body
+                parameters: [String: String]?,
+                headers: [String: String]?,
+                httpMethod: HTTPMethod,
+                body: [String: AnyObject]?) {
+        self.url = url
+        self.parameters = parameters
+        self.headers = headers
+        self.httpMethod = httpMethod
+        self.body = body
     }
 
     public func withURL(_ url: String) -> HTTPRequest {
@@ -106,19 +104,15 @@ public struct HTTPRequest {
 extension HTTPRequest: CustomDebugStringConvertible {
 
     public var debugDescription: String {
-        get {
-            let headers = self.headers?.map {
-                (key, value) in "\(key): \(value)\n"
-                }.joined(separator: "\n") ?? ""
-            let parameters = self.parameters?.map {
-                (key, value) in "\(key): \(value)\n"
-                }.joined(separator: "\n") ?? ""
-            let encodedBody = String(data: self.encodedBody ?? Data(), encoding: String.Encoding.utf8)!
-            return "\(httpMethod.rawValue) \(url)"
+        let headers = self.headers?.map { (key, value) in "\(key): \(value)\n"
+            }.joined(separator: "\n") ?? ""
+        let parameters = self.parameters?.map { (key, value) in "\(key): \(value)\n"
+            }.joined(separator: "\n") ?? ""
+        let encodedBody = String(data: self.encodedBody ?? Data(), encoding: String.Encoding.utf8)!
+        return "\(httpMethod.rawValue) \(url)"
             + "\(parameters)\n"
             + "\(headers)\n"
             + "\(encodedBody)\n"
-        }
     }
 
 }

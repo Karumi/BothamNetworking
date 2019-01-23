@@ -22,7 +22,10 @@ class HTTPEncoderTests: XCTestCase {
     }
 
     func testEncodesBodyUsingJsonEncodingIfTheRequestContainsJsonContentTypeHeader() {
-        let request = givenAHTTPRequestWith(headers: ["Content-Type": "application/json"], body: ["a": "b" as AnyObject])
+        let request = givenAHTTPRequestWith(
+            headers: ["Content-Type": "application/json"],
+            body: ["a": "b" as AnyObject]
+        )
 
         let bodyNSData = HTTPEncoder.encodeBody(request)
         let bodyString = String(data: bodyNSData!, encoding: String.Encoding.utf8)
