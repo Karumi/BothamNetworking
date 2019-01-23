@@ -1,12 +1,12 @@
 PODS:
   - Nimble (7.3.2)
   - Nocilla (0.11.0)
-  - Result (3.1.0)
+  - Result (4.1.0)
 
 DEPENDENCIES:
   - Nimble (= 7.3.2)
   - Nocilla
-  - Result
+  - Result (= 4.1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -17,8 +17,8 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Nimble: 5e94a8cacb355943c6c87198035dc4adbb0f10e4
   Nocilla: 7af7a386071150cc8aa5da4da97d060f049dd61c
-  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
 
-PODFILE CHECKSUM: c35c728d2b4c55bbd37182a931e21598b4e4a4cd
+PODFILE CHECKSUM: 7b1abc442a857cd035d4540483a1448cbce3f06d
 
 COCOAPODS: 1.5.3

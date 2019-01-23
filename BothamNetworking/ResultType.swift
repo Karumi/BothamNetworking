@@ -9,7 +9,7 @@
 import Foundation
 import Result
 
-public extension ResultProtocol where Value == HTTPResponse, Error == BothamAPIClientError {
+public extension Result where Value == HTTPResponse, Error == BothamAPIClientError {
 
     var iso8601JSONDecoder: JSONDecoder {
         let decoder = JSONDecoder()
@@ -20,22 +20,18 @@ public extension ResultProtocol where Value == HTTPResponse, Error == BothamAPIC
     }
     
     public func mapJSON<T: Decodable>() -> Result<T, BothamAPIClientError> {
-        return flatMap { _ in
-            if let data = self.value?.body {
-                return dataToJSONResult(data)
-            } else {
-                return .failure(BothamAPIClientError.networkError)
-            }
+        return flatMap {
+            return dataToJSONResult($0.body)
         }
     }
 
     private func dataToJSONResult<T: Decodable>(_ data: Data) -> Result<T, BothamAPIClientError> {
         do {
             let object = try self.iso8601JSONDecoder.decode(T.self, from: data)
-            return Result.success(object)
+            return .success(object)
         } catch {
             let parsingError = error as NSError
-            return Result.failure(BothamAPIClientError.parsingError(error: parsingError))
+            return .failure(BothamAPIClientError.parsingError(error: parsingError))
         }
     }
 
