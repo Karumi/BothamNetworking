@@ -519,11 +519,11 @@
 					};
 					EB8F442A1BFF442F00CC3AA5 = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 					EBACCC531BFF463700F1CD7F = {
 						CreatedOnToolsVersion = 7.1.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -1015,7 +1015,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1036,7 +1036,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1050,7 +1050,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1063,7 +1063,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.karumi.bothamnetworking.BothamNetworkingTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
