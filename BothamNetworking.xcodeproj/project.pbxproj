@@ -114,6 +114,7 @@
 		6BC01CEB1C6E4BE700D08E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BC01CF01C6E4BE800D08E72 /* BothamNetworkingCocoaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BothamNetworkingCocoaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BC01CF71C6E4BE800D08E72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BD616B22278A854005FDC81 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		72AABE860F7A8830DF0F2775 /* Pods-BothamNetworking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworking.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworking/Pods-BothamNetworking.debug.xcconfig"; sourceTree = "<group>"; };
 		7D41723C7DCE0AD8A2882A32 /* Pods-BothamNetworking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworking.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworking/Pods-BothamNetworking.release.xcconfig"; sourceTree = "<group>"; };
 		A18346BC8A4CC5BD56E0F20B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,6 +196,7 @@
 		42E9C22008F67B81279A0BBB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6BD616B22278A854005FDC81 /* XCTest.framework */,
 				A18346BC8A4CC5BD56E0F20B /* Pods.framework */,
 				1DFF96FC7D1F052D35A2405E /* Pods_BothamNetworking.framework */,
 				B74A096FAA90491C59CE744D /* Pods_BothamNetworkingCocoa.framework */,
@@ -530,6 +532,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = EB8F44211BFF442F00CC3AA5;
@@ -583,20 +586,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Result-macOS/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble-macOS/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Nocilla-macOS/Nocilla.framework",
-				"${BUILT_PRODUCTS_DIR}/Result-macOS/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nocilla.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1CDBFCBB440376131C4B2858 /* [CP] Check Pods Manifest.lock */ = {
@@ -623,20 +626,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Result-iOS/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/Nimble-iOS/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Nocilla-iOS/Nocilla.framework",
-				"${BUILT_PRODUCTS_DIR}/Result-iOS/Result.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nocilla.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		75FB535CEB595086E8FB3F8D /* [CP] Check Pods Manifest.lock */ = {

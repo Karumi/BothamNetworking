@@ -7,7 +7,7 @@ def framework_pods
 end
 
 def testing_pods
-    pod "Nimble", '7.3.2'
+    pod "Nimble"
     pod "Nocilla"
 end
 
@@ -18,12 +18,11 @@ end
 target 'BothamNetworking' do
 	platform :ios, '8.0'
 	framework_pods
-	testing_pods
 	app_development_pods
 end
 
 target 'BothamNetworkingTests' do
-    platform :ios, '8.0'
+  platform :ios, '8.0'
 	framework_pods
 	testing_pods
 end

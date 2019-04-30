@@ -19,7 +19,7 @@ public extension Result where Value == HTTPResponse, Error == BothamAPIClientErr
         return decoder
     }
 
-    public func mapJSON<T: Decodable>() -> Result<T, BothamAPIClientError> {
+    func mapJSON<T: Decodable>() -> Result<T, BothamAPIClientError> {
         return flatMap {
             return dataToJSONResult($0.body)
         }
