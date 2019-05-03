@@ -257,9 +257,9 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect{ try? response?.get().headers?["Content-Type"] }.toEventually(equal("application/json"))
-        expect{ try? response?.get().headers?["Server"] }.toEventually(equal("KarumiServer"))
-        expect{ try? response?.get().headers?.count }.toEventually(equal(2))
+        expect { try? response?.get().headers?["Content-Type"] }.toEventually(equal("application/json"))
+        expect { try? response?.get().headers?["Server"] }.toEventually(equal("KarumiServer"))
+        expect { try? response?.get().headers?.count }.toEventually(equal(2))
     }
 
     func testShouldReturnUnsupportedSchemeErrorIfTheRequestDoesNotUseHttp() {
@@ -270,7 +270,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect{ try response?.get() }.to(throwError(BothamAPIClientError.unsupportedURLScheme))
+        expect { try response?.get() }.to(throwError(BothamAPIClientError.unsupportedURLScheme))
     }
 
     func testEncodesEmptyParameterValuesProperly() {

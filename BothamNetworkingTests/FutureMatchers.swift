@@ -14,7 +14,7 @@ public func beSuccess<T>() -> Predicate<T> {
     return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be success"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
-        return try! result?.get() != nil
+        return (try? result?.get()) != nil
     }
 }
 
