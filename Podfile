@@ -18,7 +18,7 @@ end
 
 target 'BothamNetworkingTests' do
   platform :ios, '8.0'
-	testing_pods
+  testing_pods
 end
 
 target 'BothamNetworkingCocoaTests' do
