@@ -8,7 +8,6 @@
 
 import Foundation
 import Nimble
-import Nocilla
 import BothamNetworking
 
 class BothamRetryRequestTests: BothamNetworkingTestCase {

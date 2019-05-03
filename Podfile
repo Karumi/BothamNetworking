@@ -4,7 +4,7 @@ use_frameworks!
 
 def testing_pods
     pod "Nimble"
-    pod "Nocilla"
+    pod "OHHTTPStubs/Swift"
 end
 
 def app_development_pods
@@ -25,4 +25,3 @@ target 'BothamNetworkingCocoaTests' do
 	platform :osx, '10.10'
 	testing_pods
 end
-

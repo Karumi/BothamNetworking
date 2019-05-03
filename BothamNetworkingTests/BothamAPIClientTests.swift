@@ -8,7 +8,6 @@
 
 import Foundation
 import Nimble
-import Nocilla
 @testable import BothamNetworking
 
 class BothamAPIClientTests: BothamNetworkingTestCase {
@@ -103,7 +102,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testReturns40XResponsesAsError() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(400)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath, andReturn: 400)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -115,7 +114,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testReturns50XResponsesAsError() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath).andReturn(500)
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath, andReturn: 500)
         let bothamAPIClient = givenABothamAPIClient()
 
         var response: Result<HTTPResponse, BothamAPIClientError>?
@@ -247,8 +246,8 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
     }
 
     func testParseHTTPResponsHeaders() {
-        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath)
-            .andReturn(anyStatusCode)?
+        stubRequest(anyHTTPMethod.rawValue, anyHost + anyPath,
+                    andReturn: anyStatusCode)?
             .withHeaders(["Content-Type": "application/json", "Server": "KarumiServer"])
         let bothamAPIClient = givenABothamAPIClient()
 

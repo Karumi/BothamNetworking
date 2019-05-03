@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import Nocilla
 import Nimble
 @testable import BothamNetworking
 
@@ -85,7 +84,7 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     func testReceivesHttpStatusCodeInTheHttpResponse() {
-        stubRequest("GET", anyUrl).andReturn(anyStatusCode)
+        stubRequest("GET", anyUrl, andReturn: anyStatusCode)
         let httpClient = NSHTTPClient()
         let request = givenOneHttpRequest(.GET, url: anyUrl)
 
