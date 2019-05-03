@@ -31,9 +31,10 @@ extension BasicAuthentication {
     }
 
     public func intercept(_ response: HTTPResponse,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+                          completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         if response.statusCode == 401, let unauthorizedHeader = response.headers?["WWW-Authenticate"] {
-            let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: []) // swiftlint:disable:this force_try
+            // swiftlint:disable force_try
+            let regex = try! NSRegularExpression(pattern: "Basic realm=\"(.*)\"", options: [])
             let range = NSRange(location: 0, length: unauthorizedHeader.utf8.count)
             if let match = regex.firstMatch(in: unauthorizedHeader, options: [], range: range) {
                 let realm = (unauthorizedHeader as NSString).substring(with: match.range(at: 1))
@@ -43,3 +44,4 @@ extension BasicAuthentication {
         completion(Result.success(response))
     }
 }
+

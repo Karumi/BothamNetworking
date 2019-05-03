@@ -7,8 +7,6 @@
 //
 
 import Foundation
-
-import Foundation
 import XCTest
 import Nocilla
 import Nimble
@@ -154,12 +152,12 @@ class NSHTTPClientTests: NocillaTestCase {
     }
 
     private func givenOneHttpRequest(_ httpMethod: HTTPMethod,
-        url: String, params: [String: String]? = nil,
-        headers: [String: String]? = nil,
-        body: [String: AnyObject]? = nil) -> HTTPRequest {
-            var headers = headers
-            headers += ["Content-Type": "application/json"]
-            return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: body)
+                                     url: String, params: [String: String]? = nil,
+                                     headers: [String: String]? = nil,
+                                     body: [String: AnyObject]? = nil) -> HTTPRequest {
+        var headers = headers
+        headers += ["Content-Type": "application/json"]
+        return HTTPRequest(url: url, parameters: params, headers: headers, httpMethod: httpMethod, body: body)
     }
 
 }
@@ -171,3 +169,4 @@ extension NSError {
     }
 
 }
+

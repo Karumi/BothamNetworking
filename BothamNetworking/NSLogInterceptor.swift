@@ -19,8 +19,9 @@ public class NSLogInterceptor: BothamRequestInterceptor, BothamResponseIntercept
     }
 
     public func intercept(_ response: HTTPResponse,
-        completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
-            NSLog("<- \(response)")
-            completion(Result.success(response))
+                          completion: (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+        NSLog("<- \(response)")
+        completion(Result.success(response))
     }
 }
+

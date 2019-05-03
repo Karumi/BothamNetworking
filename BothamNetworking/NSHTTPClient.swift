@@ -13,7 +13,8 @@ public class NSHTTPClient: HTTPClient {
 
     public init() {}
 
-    public func send(_ httpRequest: HTTPRequest, completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
+    public func send(_ httpRequest: HTTPRequest,
+                     completion: @escaping (Result<HTTPResponse, BothamAPIClientError>) -> Void) {
         guard let request = mapHTTPRequestToNSURLRequest(httpRequest) else {
             completion(Result.failure(.unsupportedURLScheme))
             return
@@ -61,10 +62,10 @@ public class NSHTTPClient: HTTPClient {
     }
 
     private func mapNSHTTPURlResponseToHTTPResponse(_ response: HTTPURLResponse,
-        data: Data) -> HTTPResponse {
+                                                    data: Data) -> HTTPResponse {
         let statusCode = response.statusCode
-        let headers = response.allHeaderFields.map {
-            (key, value) in (key as! String, value as! String)
+        let headers = response.allHeaderFields.map { (key, value) in
+            (key as! String, value as! String)
         }
         return HTTPResponse(
             statusCode: statusCode,

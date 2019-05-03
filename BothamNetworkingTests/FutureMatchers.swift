@@ -11,16 +11,16 @@ import Nimble
 import Result
 @testable import BothamNetworking
 
-func beSuccess<T>() -> MatcherFunc<T?> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func beSuccess<T>() -> Predicate<T> {
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "be success"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
         return result?.value != nil
     }
 }
 
-func failWithError<T>(_ expectedError: BothamAPIClientError) -> MatcherFunc<T?> {
-    return MatcherFunc { actualExpression, failureMessage in
+public func failWithError<T>(_ expectedError: BothamAPIClientError) -> Predicate<T> {
+    return Predicate.fromDeprecatedClosure { actualExpression, failureMessage in
         failureMessage.postfixMessage = "has error"
         let result = try actualExpression.evaluate() as? Result<HTTPResponse, BothamAPIClientError>
         if let error = result?.error {
@@ -30,3 +30,4 @@ func failWithError<T>(_ expectedError: BothamAPIClientError) -> MatcherFunc<T?> 
         }
     }
 }
+

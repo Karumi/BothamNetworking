@@ -15,11 +15,11 @@ public struct HTTPResponse {
     public let body: Data
 
     public init(statusCode: Int,
-        headers: CaseInsensitiveDictionary<String>?,
-        body: Data) {
-            self.statusCode = statusCode
-            self.headers = headers
-            self.body = body
+                headers: CaseInsensitiveDictionary<String>?,
+                body: Data) {
+        self.statusCode = statusCode
+        self.headers = headers
+        self.body = body
     }
 
     public func withStatusCode(_ statusCode: Int) -> HTTPResponse {
@@ -61,14 +61,11 @@ public struct HTTPResponse {
 extension HTTPResponse: CustomDebugStringConvertible {
 
     public var debugDescription: String {
-        get {
-            let headers = self.headers?.map {
-                (key, value) in "\(key): \(value)\n"
-                }.joined(separator: "\n") ?? ""
-            return "\(statusCode)\n"
-                + "\(headers)\n"
-                + "\(String(data: body, encoding: String.Encoding.utf8)!)\n"
-        }
+        let headers = self.headers?.map { (key, value) in "\(key): \(value)\n"
+            }.joined(separator: "\n") ?? ""
+        return "\(statusCode)\n"
+            + "\(headers)\n"
+            + "\(String(data: body, encoding: String.Encoding.utf8)!)\n"
     }
 
 }

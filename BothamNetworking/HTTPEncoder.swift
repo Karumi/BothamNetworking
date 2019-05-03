@@ -11,35 +11,35 @@ import Foundation
 class HTTPEncoder {
 
     /**
-        Given a HTTPRequest instance performs the body encoding based on a Content-Type request header.
+     Given a HTTPRequest instance performs the body encoding based on a Content-Type request header.
 
-        This class only supports two different encodings: "application/x-www-form-urlencoded"
-        and "application/json".
+     This class only supports two different encodings: "application/x-www-form-urlencoded"
+     and "application/json".
 
-        If the request does not contain any "Content-Type" header the body is not encoded and the return
-        value is nil.
+     If the request does not contain any "Content-Type" header the body is not encoded and the return
+     value is nil.
 
-        @param request to encode
+     @param request to encode
 
-        @return encoded body based on the request headers or nil if there is no any valid Content-Type
-        configured.
-    */
+     @return encoded body based on the request headers or nil if there is no any valid Content-Type
+     configured.
+     */
     static func encodeBody(_ request: HTTPRequest) -> Data? {
         let contentType = request.headers?["Content-Type"] ?? ""
         switch contentType {
-            case "application/x-www-form-urlencoded":
-                return query(request.body).data(
-                    using: String.Encoding.utf8,
-                    allowLossyConversion: false)
-            case "application/json":
-                if let body = request.body {
-                    let options = JSONSerialization.WritingOptions()
-                    return try? JSONSerialization.data(withJSONObject: body, options: options)
-                } else {
-                    return nil
-                }
-            default:
+        case "application/x-www-form-urlencoded":
+            return query(request.body).data(
+                using: String.Encoding.utf8,
+                allowLossyConversion: false)
+        case "application/json":
+            if let body = request.body {
+                let options = JSONSerialization.WritingOptions()
+                return try? JSONSerialization.data(withJSONObject: body, options: options)
+            } else {
                 return nil
+            }
+        default:
+            return nil
         }
     }
 
@@ -73,7 +73,8 @@ class HTTPEncoder {
         let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
         let subDelimitersToEncode = "!$&'()*+,;="
 
-        let allowedCharacterSet = (CharacterSet.urlQueryAllowed as NSCharacterSet).mutableCopy() as! NSMutableCharacterSet
+        let allowedCharacterSet = (CharacterSet.urlQueryAllowed as NSCharacterSet)
+                                    .mutableCopy() as! NSMutableCharacterSet
         allowedCharacterSet.removeCharacters(in: generalDelimitersToEncode + subDelimitersToEncode)
         var escaped = ""
 
@@ -97,12 +98,10 @@ class HTTPEncoder {
             while index != string.endIndex {
                 let startIndex = index
                 let endIndex = string.index(index, offsetBy: batchSize, limitedBy: string.endIndex)!
-                let range = startIndex..<endIndex
-
-                let substring = string.substring(with: range)
+                let substring = string[startIndex..<endIndex]
 
                 escaped += substring.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet as CharacterSet)
-                    ?? substring
+                    ?? String(substring)
 
                 index = endIndex
             }
@@ -112,3 +111,4 @@ class HTTPEncoder {
     }
 
 }
+

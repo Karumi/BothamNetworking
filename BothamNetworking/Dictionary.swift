@@ -17,7 +17,7 @@ extension Dictionary {
     }
 }
 
-func += <KeyType, ValueType> (left: inout Dictionary<KeyType, ValueType>?, right: Dictionary<KeyType, ValueType>) {
+func += <KeyType, ValueType> (left: inout [KeyType: ValueType]?, right: [KeyType: ValueType]) {
     if left == nil {
         left = [KeyType: ValueType]()
     }
@@ -26,7 +26,7 @@ func += <KeyType, ValueType> (left: inout Dictionary<KeyType, ValueType>?, right
     }
 }
 
-func += <KeyType, ValueType> (left: inout Dictionary<KeyType, ValueType>, right: Dictionary<KeyType, ValueType>) {
+func += <KeyType, ValueType> (left: inout [KeyType: ValueType], right: [KeyType: ValueType]) {
     for (k, v) in right {
         left.updateValue(v, forKey: k)
     }

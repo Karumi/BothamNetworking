@@ -3,22 +3,27 @@ project 'BothamNetworking.xcodeproj'
 use_frameworks!
 
 def framework_pods
-	pod "Result"
-	pod "SwiftyJSON"
+	pod "Result", '4.1.0'
 end
 
 def testing_pods
-    pod "Nimble", '7.1.2'
+    pod "Nimble", '7.3.2'
     pod "Nocilla"
+end
+
+def app_development_pods
+	pod 'SwiftLint'
 end
 
 target 'BothamNetworking' do
 	platform :ios, '8.0'
 	framework_pods
 	testing_pods
+	app_development_pods
 end
 
 target 'BothamNetworkingTests' do
+    platform :ios, '8.0'
 	framework_pods
 	testing_pods
 end
@@ -33,3 +38,4 @@ target 'BothamNetworkingCocoaTests' do
 	framework_pods
 	testing_pods
 end
+
