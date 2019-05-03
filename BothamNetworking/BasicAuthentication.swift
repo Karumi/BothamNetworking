@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 
 /**
  * Basic Authentication http://tools.ietf.org/html/rfc2617

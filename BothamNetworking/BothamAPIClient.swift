@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 
 public class BothamAPIClient {
 
@@ -84,7 +83,7 @@ public class BothamAPIClient {
             completion?(Result.failure(BothamAPIClientError.unsupportedURLScheme))
         } else {
             send(request: interceptedRequest) { result in
-                if let error = result.error, case .retry = error {
+                if case let .failure(error) = result, case .retry = error {
                     self.sendRequest(httpMethod,
                                      path: path,
                                      params: params,
@@ -100,9 +99,9 @@ public class BothamAPIClient {
 
     private func send(request: HTTPRequest, completion: ((Result<HTTPResponse, BothamAPIClientError>) -> Void)? = nil) {
         httpClient.send(request) { result in
-            if result.error != nil {
+            if case .failure(_) = result {
                 completion?(result)
-            } else if let response = result.value {
+            } else if case let .success(response) = result {
                 self.applyResponseInterceptors(response) { interceptorResult in
                     let mappedResult = interceptorResult.flatMap { httpResponse in
                         return self.mapHTTPResponseToBothamAPIClientError(httpResponse)
@@ -135,7 +134,7 @@ public class BothamAPIClient {
             completion(Result.success(response))
         } else {
             interceptors[0].intercept(response) { result in
-                if let response = result.value {
+                if case let .success(response) = result {
                     self.applyResponseInterceptors(Array(interceptors.dropFirst()),
                                                    response: response, completion: completion)
                 } else {

@@ -1,28 +1,24 @@
 PODS:
   - Nimble (8.0.1)
   - Nocilla (0.11.0)
-  - Result (4.1.0)
   - SwiftLint (0.32.0)
 
 DEPENDENCIES:
   - Nimble
   - Nocilla
-  - Result (= 4.1.0)
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Nimble
     - Nocilla
-    - Result
     - SwiftLint
 
 SPEC CHECKSUMS:
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
   Nocilla: 7af7a386071150cc8aa5da4da97d060f049dd61c
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SwiftLint: 009a898ef2a1c851f45e1b59349bf6ff2ddc990d
 
-PODFILE CHECKSUM: c2e84257bb1252bb159a3f9730a208afe83361cc
+PODFILE CHECKSUM: fdbe1e006191da0eb74bf5fdb7a34138f8b9286a
 
 COCOAPODS: 1.6.1

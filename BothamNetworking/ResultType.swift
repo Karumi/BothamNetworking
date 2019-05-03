@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import Result
 
-public extension Result where Value == HTTPResponse, Error == BothamAPIClientError {
+public extension Result where Success == HTTPResponse, Failure == BothamAPIClientError {
 
     var iso8601JSONDecoder: JSONDecoder {
         let decoder = JSONDecoder()
