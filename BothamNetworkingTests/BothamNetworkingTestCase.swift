@@ -8,6 +8,7 @@
 
 import Foundation
 import XCTest
+import Nocilla
 import BothamNetworking
 
 class BothamNetworkingTestCase: NocillaTestCase {

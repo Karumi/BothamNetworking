@@ -8,13 +8,14 @@
 
 import Foundation
 import Nimble
+import Nocilla
 import BothamNetworking
 
 class BasicAuthenticationTests: BothamNetworkingTestCase {
 
     func testSendsAnyHttpMethodRequestWithBasicAuthentication() {
-        stubRequest("GET", anyHost + anyPath,
-                    withHeader: ("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="))
+        stubRequest("GET", anyHost + anyPath)
+            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
         let bothamAPIClient = givenABothamAPIClientWithLocal(requestInterceptor: SpyBasicAuthentication())
 
         var response: Result<HTTPResponse, BothamAPIClientError>!
@@ -26,9 +27,9 @@ class BasicAuthenticationTests: BothamNetworkingTestCase {
     }
 
     func testSendsAnyHttpMethodRequestWithAuthenticationError() {
-        stubRequest("GET", anyHost + anyPath,
-                    withHeader: ("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=="),
-                    andReturn: 401)?
+        stubRequest("GET", anyHost + anyPath)
+            .withHeader("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")?
+            .andReturn(401)?
             .withHeader("WWW-Authenticate", "Basic realm=\"WallyWorld\"")
 
         let basicAuthentication = SpyBasicAuthentication()

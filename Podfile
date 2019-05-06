@@ -4,7 +4,7 @@ use_frameworks!
 
 def testing_pods
     pod "Nimble"
-    pod "OHHTTPStubs/Swift"
+    pod "Nocilla"
 end
 
 def app_development_pods

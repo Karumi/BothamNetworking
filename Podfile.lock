@@ -1,36 +1,24 @@
 PODS:
   - Nimble (8.0.1)
-  - OHHTTPStubs/Core (8.0.0)
-  - OHHTTPStubs/Default (8.0.0):
-    - OHHTTPStubs/Core
-    - OHHTTPStubs/JSON
-    - OHHTTPStubs/NSURLSession
-    - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (8.0.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (8.0.0):
-    - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (8.0.0)
-  - OHHTTPStubs/Swift (8.0.0):
-    - OHHTTPStubs/Default
+  - Nocilla (0.11.0)
   - SwiftLint (0.32.0)
 
 DEPENDENCIES:
   - Nimble
-  - OHHTTPStubs/Swift
+  - Nocilla
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Nimble
-    - OHHTTPStubs
+    - Nocilla
     - SwiftLint
 
 SPEC CHECKSUMS:
   Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
-  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  Nocilla: 7af7a386071150cc8aa5da4da97d060f049dd61c
   SwiftLint: 009a898ef2a1c851f45e1b59349bf6ff2ddc990d
 
-PODFILE CHECKSUM: dd6e3696d475a36780011c0a10916d550fd7d790
+PODFILE CHECKSUM: 948f3f06dba4825dd14f6fcf0ed6d76f1cdbb016
 
 COCOAPODS: 1.6.1

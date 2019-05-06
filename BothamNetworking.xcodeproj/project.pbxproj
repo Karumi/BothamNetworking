@@ -45,7 +45,6 @@
 		6BC01D1B1C6E4CD100D08E72 /* RetryResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB90F5EF1C4798E800DA5E3C /* RetryResponseInterceptor.swift */; };
 		6BC01D1C1C6E4CD100D08E72 /* NocillaTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF359391BFF8EF700AD47C4 /* NocillaTestCase.swift */; };
 		6BC01D3C1C6E5CAF00D08E72 /* BothamNetworkingCocoa.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BC01CE91C6E4BE700D08E72 /* BothamNetworkingCocoa.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B0E4F16C938493424EEE70E /* Pods_BothamNetworkingCocoaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604F064EDDBA7FC270CA7983 /* Pods_BothamNetworkingCocoaTests.framework */; };
 		E5545E61DFFC956CEC87027E /* Pods_BothamNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DFF96FC7D1F052D35A2405E /* Pods_BothamNetworking.framework */; };
 		EB196FDD1C47E31C0080EDB9 /* BothamAPIClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB196FDC1C47E31C0080EDB9 /* BothamAPIClientError.swift */; };
 		EB355DC81C33FD80003411DA /* HTTPEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB355DC71C33FD80003411DA /* HTTPEncoder.swift */; };
@@ -97,11 +96,8 @@
 
 /* Begin PBXFileReference section */
 		04EAF36F4E4A63916E414371 /* Pods-BothamNetworkingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests.release.xcconfig"; sourceTree = "<group>"; };
-		05E0C0ED08FE27C18558BB9D /* Pods-BothamNetworkingCocoaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingCocoaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1DFF96FC7D1F052D35A2405E /* Pods_BothamNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F772FB0D4A30ADAB37A46F0 /* Pods_BothamNetworkingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		27D08256BA40B4897399A245 /* Pods-BothamNetworkingCocoaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BothamNetworkingCocoaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests.release.xcconfig"; sourceTree = "<group>"; };
-		604F064EDDBA7FC270CA7983 /* Pods_BothamNetworkingCocoaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BothamNetworkingCocoaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B29E71C1C37048000427CA4 /* CaseInsensitiveDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseInsensitiveDictionary.swift; sourceTree = "<group>"; };
 		6B58B9C01C4573DE00C37F02 /* Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Playground.playground; path = BothamNetworking/Playground.playground; sourceTree = "<group>"; };
 		6B7BCEFD1C35402400147FBD /* BasicAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAuthentication.swift; sourceTree = "<group>"; };
@@ -164,7 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BC01CF11C6E4BE800D08E72 /* BothamNetworking.framework in Frameworks */,
-				8B0E4F16C938493424EEE70E /* Pods_BothamNetworkingCocoaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +189,6 @@
 				6BD616B22278A854005FDC81 /* XCTest.framework */,
 				A18346BC8A4CC5BD56E0F20B /* Pods.framework */,
 				1DFF96FC7D1F052D35A2405E /* Pods_BothamNetworking.framework */,
-				604F064EDDBA7FC270CA7983 /* Pods_BothamNetworkingCocoaTests.framework */,
 				1F772FB0D4A30ADAB37A46F0 /* Pods_BothamNetworkingTests.framework */,
 			);
 			name = Frameworks;
@@ -205,8 +199,6 @@
 			children = (
 				72AABE860F7A8830DF0F2775 /* Pods-BothamNetworking.debug.xcconfig */,
 				7D41723C7DCE0AD8A2882A32 /* Pods-BothamNetworking.release.xcconfig */,
-				05E0C0ED08FE27C18558BB9D /* Pods-BothamNetworkingCocoaTests.debug.xcconfig */,
-				27D08256BA40B4897399A245 /* Pods-BothamNetworkingCocoaTests.release.xcconfig */,
 				A74138C223874B530D98156E /* Pods-BothamNetworkingTests.debug.xcconfig */,
 				04EAF36F4E4A63916E414371 /* Pods-BothamNetworkingTests.release.xcconfig */,
 			);
@@ -435,11 +427,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6BC01CFD1C6E4BE800D08E72 /* Build configuration list for PBXNativeTarget "BothamNetworkingCocoaTests" */;
 			buildPhases = (
-				B74A0289546E64911FAB767F /* [CP] Check Pods Manifest.lock */,
 				6BC01CEC1C6E4BE800D08E72 /* Sources */,
 				6BC01CED1C6E4BE800D08E72 /* Frameworks */,
 				6BC01CEE1C6E4BE800D08E72 /* Resources */,
-				07EF9FD89D43124FAE958B93 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -571,26 +561,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07EF9FD89D43124FAE958B93 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble-macOS/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs-macOS/OHHTTPStubs.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingCocoaTests/Pods-BothamNetworkingCocoaTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1CDBFCBB440376131C4B2858 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -616,13 +586,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-BothamNetworkingTests/Pods-BothamNetworkingTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Nimble-iOS/Nimble.framework",
-				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs-iOS/OHHTTPStubs.framework",
+				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
+				"${BUILT_PRODUCTS_DIR}/Nocilla/Nocilla.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nocilla.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -641,24 +611,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-BothamNetworkingTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B74A0289546E64911FAB767F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BothamNetworkingCocoaTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -820,7 +772,6 @@
 		};
 		6BC01CFA1C6E4BE800D08E72 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 05E0C0ED08FE27C18558BB9D /* Pods-BothamNetworkingCocoaTests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -836,7 +787,6 @@
 		};
 		6BC01CFB1C6E4BE800D08E72 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27D08256BA40B4897399A245 /* Pods-BothamNetworkingCocoaTests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;

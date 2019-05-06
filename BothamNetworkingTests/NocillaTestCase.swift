@@ -8,46 +8,25 @@
 
 import Foundation
 import XCTest
-import OHHTTPStubs
+import Nocilla
 
 class NocillaTestCase: XCTestCase {
 
-    private var currentStub: OHHTTPStubsDescriptor?
+    let nocilla: LSNocilla = LSNocilla.sharedInstance()
+
+    override func setUp() {
+        super.setUp()
+        nocilla.start()
+    }
 
     override func tearDown() {
-        OHHTTPStubs.removeAllStubs()
+        nocilla.clearStubs()
+        nocilla.stop()
         super.tearDown()
     }
 
-    private func isMethod(_ method: String) -> OHHTTPStubsTestBlock {
-        switch method {
-        case "GET":
-            return isMethodGET()
-        case "POST":
-            return isMethodPOST()
-        case "PUT":
-            return isMethodPUT()
-        case "HEAD":
-            return isMethodHEAD()
-        case "PATCH":
-            return isMethodPATCH()
-        case "DELETE":
-            return isMethodDELETE()
-        default:
-            return isMethodGET()
-        }
-    }
-
-    @discardableResult func stubRequest(_ method: String, _ url: String, withHeader: (String, String)? = nil, andReturn: Int = 200) -> Self {
-        var condition = isMethod(method) && isAbsoluteURLString(url)
-        if let withHeader = withHeader {
-            condition = condition && hasHeaderNamed(withHeader.0, value: withHeader.1)
-        }
-        self.currentStub = stub(condition: condition) { _ in
-            let stubData = "".data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data: stubData!, statusCode:Int32(andReturn), headers:nil)
-        }
-        return self
+    @discardableResult func stubRequest(_ method: String, _ url: String) -> LSStubRequestDSL {
+        return Nocilla.stubRequest(method, (url as NSString) as LSMatcheable)
     }
 
     func fromJsonFile(_ fileName: String) -> String {
