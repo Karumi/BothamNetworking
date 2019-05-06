@@ -20,8 +20,3 @@ target 'BothamNetworkingTests' do
   platform :ios, '8.0'
   testing_pods
 end
-
-target 'BothamNetworkingCocoaTests' do
-	platform :osx, '10.10'
-	testing_pods
-end

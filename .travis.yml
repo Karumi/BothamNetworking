@@ -2,11 +2,10 @@ language: objective-c
 osx_image: xcode10.2
 
 before_install:
-  - gem install cocoapods --version 1.5.0
-  - pod _1.5.0_ repo update
+  - gem install cocoapods --version 1.6.1
+  - pod _1.6.1_ repo update
   - gem install xcpretty
 
 script:
   - swiftlint
   - set -o pipefail && xcodebuild -workspace BothamNetworking.xcworkspace -scheme 'BothamNetworking' -destination 'platform=iOS Simulator,name=iPhone 6s Plus' build test CODE_SIGN_IDENTITY=- | xcpretty -c
-  - set -o pipefail && xcodebuild -workspace BothamNetworking.xcworkspace -scheme 'BothamNetworkingCocoa' build test | xcpretty -c
