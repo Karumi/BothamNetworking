@@ -10,7 +10,6 @@ import Foundation
 import XCTest
 import Nocilla
 import Nimble
-import Result
 @testable import BothamNetworking
 
 class NSHTTPClientTests: NocillaTestCase {

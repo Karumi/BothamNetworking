@@ -9,7 +9,6 @@
 import Foundation
 import XCTest
 import Nimble
-import Result
 import BothamNetworking
 @testable import BothamNetworking
 
@@ -25,7 +24,8 @@ class ResultTypeTests: XCTestCase {
 
         let jsonMappingError: Result<Empty, BothamAPIClientError> = result.mapJSON()
 
-        expect(jsonMappingError.error).to(equal(BothamAPIClientError.parsingError(error: NSError.anyError())))
+        expect { try jsonMappingError.get() }
+            .to(throwError(BothamAPIClientError.parsingError(error: NSError.anyError())))
     }
 
     struct Box: Decodable {
@@ -39,7 +39,7 @@ class ResultTypeTests: XCTestCase {
 
         let parsedValue: Result<Box, BothamAPIClientError> = result.mapJSON()
 
-        expect(parsedValue.value?.a).to(equal("b"))
+        expect { try parsedValue.get().a }.to(equal("b"))
     }
 
 }

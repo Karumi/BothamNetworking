@@ -8,7 +8,6 @@
 
 import Foundation
 import Nimble
-import Result
 import Nocilla
 @testable import BothamNetworking
 
@@ -258,9 +257,9 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response?.value?.headers?["Content-Type"]).toEventually(equal("application/json"))
-        expect(response?.value?.headers?["Server"]).toEventually(equal("KarumiServer"))
-        expect(response?.value?.headers?.count).toEventually(equal(2))
+        expect { try? response?.get().headers?["Content-Type"] }.toEventually(equal("application/json"))
+        expect { try? response?.get().headers?["Server"] }.toEventually(equal("KarumiServer"))
+        expect { try? response?.get().headers?.count }.toEventually(equal(2))
     }
 
     func testShouldReturnUnsupportedSchemeErrorIfTheRequestDoesNotUseHttp() {
@@ -271,7 +270,7 @@ class BothamAPIClientTests: BothamNetworkingTestCase {
             response = result
         }
 
-        expect(response?.error).toEventually(equal(BothamAPIClientError.unsupportedURLScheme))
+        expect { try response?.get() }.to(throwError(BothamAPIClientError.unsupportedURLScheme))
     }
 
     func testEncodesEmptyParameterValuesProperly() {

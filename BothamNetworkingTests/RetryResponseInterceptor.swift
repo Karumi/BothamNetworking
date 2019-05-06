@@ -8,7 +8,6 @@
 
 import Foundation
 import BothamNetworking
-import Result
 
 class RetryResponseInterceptor: BothamResponseInterceptor {
 

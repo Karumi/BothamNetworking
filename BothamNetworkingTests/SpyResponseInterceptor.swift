@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 @testable import BothamNetworking
 
 class SpyResponseInterceptor: BothamResponseInterceptor {

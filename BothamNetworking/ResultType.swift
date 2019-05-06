@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import Result
 
-public extension Result where Value == HTTPResponse, Error == BothamAPIClientError {
+public extension Result where Success == HTTPResponse, Failure == BothamAPIClientError {
 
     var iso8601JSONDecoder: JSONDecoder {
         let decoder = JSONDecoder()
@@ -19,7 +18,7 @@ public extension Result where Value == HTTPResponse, Error == BothamAPIClientErr
         return decoder
     }
 
-    public func mapJSON<T: Decodable>() -> Result<T, BothamAPIClientError> {
+    func mapJSON<T: Decodable>() -> Result<T, BothamAPIClientError> {
         return flatMap {
             return dataToJSONResult($0.body)
         }

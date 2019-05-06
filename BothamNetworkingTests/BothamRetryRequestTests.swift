@@ -8,7 +8,6 @@
 
 import Foundation
 import Nimble
-import Result
 import Nocilla
 import BothamNetworking
 
