@@ -1,3 +1,6 @@
+
+# ⚠️ Archived - Use [Alamofire](https://github.com/Alamofire/Alamofire) 5 or later instead
+
 # ![Karumi logo][karumilogo] BothamNetworking [![Build Status](https://travis-ci.org/Karumi/BothamNetworking.svg?branch=master)](https://travis-ci.org/Karumi/BothamNetworking) ![CocoaPods](https://img.shields.io/cocoapods/v/BothamNetworking.svg)
 
 BothamNetworking is a networking framework written in Swift.
